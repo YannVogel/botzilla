@@ -18,6 +18,11 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
     console.log('botZilla is ready to go!');
+    if(process.env.token) {
+        console.log('Listening from heroku server');
+    }else {
+        console.log('Listening from local PC');
+    }
 });
 
 
