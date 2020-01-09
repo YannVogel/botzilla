@@ -24,8 +24,14 @@ module.exports = {
             });
 
             if(!generatedError) {
-                return message.reply(`${amount - 1} message supprimés !`)
-                            .then(sentMessage => {sentMessage.delete(3000)});
+                if(amount - 1 > 1) {
+                    return message.reply(`${amount - 1} messages supprimés !`)
+                        .then(sentMessage => {sentMessage.delete(3000)});
+                }else {
+                    return message.reply(`${amount - 1} message supprimé !`)
+                        .then(sentMessage => {sentMessage.delete(3000)});
+                }
+
             }
 
 
