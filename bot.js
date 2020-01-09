@@ -1,8 +1,16 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const {prefix} = require('./config.json');
-const {token} = require('./token.json') || false;
 
+function setToken() {
+    if(!process.env.BOT_TOKEN){
+        return require('./token.json');
+    }else {
+        return null;
+    }
+}
+
+const {token} = setToken();
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -19,7 +27,7 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
     console.log('botZilla is ready to go!');
-    if(process.env.token) {
+    if(process.env.BOT_TOKEN) {
         console.log('Listening from heroku server.');
     }else {
         console.log('Listening from local PC.');
@@ -94,4 +102,4 @@ client.on('message', message => {
         }
 });
 
-client.login(process.env.token || token);
+client.login(process.env.BOT_TOKEN || token);

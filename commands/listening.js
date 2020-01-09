@@ -6,7 +6,7 @@ module.exports = {
     guildOnly: false,
     cooldown: 60,
     execute(message, args) {
-        if(process.env.token) {
+        if(process.env.BOT_TOKEN) {
             message.channel.send('Listening from heroku server.');
         }else {
             message.channel.send('Listening from local PC.');
