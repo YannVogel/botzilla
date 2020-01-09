@@ -28,7 +28,7 @@ client.on('guildMemberAdd', member => {
     // Do nothing if the channel wasn't found on this server
     if (!channel) return;
     // Send the message, mentioning the member
-    channel.send(`Bienvenue sur le serveur de ${member.guild.owner}, ${member} !`);
+    channel.send(`Bienvenue sur le serveur de la Bobzilla Family, ${member} !`);
 });
 
 
