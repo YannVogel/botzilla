@@ -2,6 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const {prefix} = require('./config.json');
 console.log('Token :' + process.env.token);
+
 function setToken() {
     if(!process.env.token){
         return require('./token.json');
