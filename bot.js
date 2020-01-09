@@ -1,15 +1,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const {prefix} = require('./config.json');
-console.log('Token :' + process.env.token);
-function setToken() {
-    if(!process.env.token){
-        return require('./token.json');
-    }else
-        return null;
-}
-
-const {token} = setToken();
+const {token} = require('./token.json') || false;
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
