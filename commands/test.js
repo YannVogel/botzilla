@@ -8,6 +8,6 @@ module.exports = {
     execute(message, args) {
 
         console.log(`Commande de test réclamée par ${message.author.username}!`)
-        message.channel.send(`Commande de test réclamée par ${message.author}!`);
+        return message.channel.send(`Commande de test réclamée par ${message.author}!`);
     }
 };
