@@ -13,13 +13,13 @@ module.exports = {
         let url = '';
         let research = '';
         if (args[0] !== "dlc") {
-            console.log('Recherche d\'un jeu');
             research = args.join('+');
+            if(!research) { return message.reply('Vous devez préciser un jeu à chercher !');}
             url = `https://www.allkeyshop.com/blog/catalogue/category-pc-games-all/search-${research}/`;
         }else {
-            console.log('Recherche d\'un contenu digital');
             args[0] = '';
             research = args.join('+');
+            if(!research) { return message.reply('Vous devez préciser un jeu à chercher !');}
             url = `https://www.allkeyshop.com/blog/catalogue/category-pc-digital-all/search-${research}/`;
         }
 
