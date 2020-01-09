@@ -87,8 +87,10 @@ client.on('message', message => {
 
         try {
             command.execute(message, args);
+            console.log(`Commande "${command.name}" réclamée par ${message.author.username}.`);
         } catch (error) {
             console.error(error);
+            console.log(`Commande ${command} réclamée par ${message.author.username}.`);
             return message.reply('Une erreur s\'est produite lors de l\'exécution de cette commande');
         }
 });
