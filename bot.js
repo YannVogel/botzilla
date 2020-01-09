@@ -17,12 +17,21 @@ for (const file of commandFiles) {
 }
 
 client.once('ready', () => {
+
+    client.user.setStatus('online')
+        .then()
+        .catch( error => {console.log('Erreur lors de l\'attribution du statut du bot : '+error)});
+    client.user.setPresence({
+        game: {
+            name: 'conquérir le monde',
+            type: "STREAMING",
+            url: "https://www.Twitch.tv/bobzilla4tv" }})
+                    .then()
+                    .catch( error => {console.log('Erreur lors de l\'attribution de l\' activité du bot : '+error)});
+
     console.log('botZilla is ready to go!');
-    if(process.env.BOT_TOKEN) {
-        console.log('Listening from heroku server.');
-    }else {
-        console.log('Listening from local PC.');
-    }
+    if(process.env.BOT_TOKEN) { console.log('Listening from heroku server.'); }
+    else { console.log('Listening from local PC.'); }
 });
 
 
