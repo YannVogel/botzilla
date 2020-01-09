@@ -15,12 +15,19 @@ module.exports = {
                 return message.reply('Il faut préciser un nombre entre 1 et 99');
             }
 
-            message.channel.bulkDelete(amount, true).catch(err => {
+            let generatedError = false;
+            message.channel.bulkDelete(amount, true)
+                .catch(err => {
+                generatedError = true;
                 console.error(err);
                 message.channel.send('J\'ai rencontré une erreur en essayant de supprimer des messages sur ce chan...');
             });
 
-            message.reply(`${amount - 1} message supprimés !`)
+            if(!generatedError) {
+                return message.reply(`${amount - 1} message supprimés !`)
+                            .then(sentMessage => {sentMessage.delete(3000)});
+            }
+
 
         }else return message.reply('Désolé mais je n\'obéis qu\' à mon maître !');
     }
