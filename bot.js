@@ -84,7 +84,7 @@ client.on('message', message => {
             command.execute(message, args);
         } catch (error) {
             console.error(error);
-            message.reply('Une erreur s\'est produite lors de l\'exécution de cette commande');
+            return message.reply('Une erreur s\'est produite lors de l\'exécution de cette commande');
         }
 });
 
