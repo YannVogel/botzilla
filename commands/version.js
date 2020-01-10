@@ -1,12 +1,14 @@
+const {version} = require('../package');
+
 module.exports = {
     name: 'version',
     description: 'Affiche la version du bot',
     args: false,
     usage: '',
-    guildOnly: true,
+    guildOnly: false,
+    adminOnly: true,
     cooldown: 60,
     execute(message, args) {
-        const {version} = require('../package');
-        return message.channel.send("`Version actuelle de botZilla : " +version+ "`");
+        return message.channel.send("`Version actuelle de botZilla : " + version + "`");
     }
 };

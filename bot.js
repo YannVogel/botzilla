@@ -1,7 +1,9 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const {prefix} = require('./config.json');
-const {token} = process.env.BOT_TOKEN || require('./token.json');
+
+const {token} = process.env.BOT_TOKEN || require('./auth.json');
+const {adminID} = require('./auth.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -23,11 +25,9 @@ client.once('ready', () => {
         .catch( error => {console.log('Erreur lors de l\'attribution du statut du bot : '+error)});
     client.user.setPresence({
         game: {
-            name: 'conquérir le monde',
-            type: "STREAMING",
-            url: "https://www.Twitch.tv/bobzilla4tv" }})
-                    .then()
-                    .catch( error => {console.log('Erreur lors de l\'attribution de l\' activité du bot : '+error)});
+            name: 'conquérir le monde' }})
+                .then()
+                .catch( error => {console.log('Erreur lors de l\'attribution de l\' activité du bot : '+error)});
 
     console.log('botZilla is ready to go!');
     if(process.env.BOT_TOKEN) { console.log('Listening from heroku server.'); }
@@ -61,6 +61,10 @@ client.on('message', message => {
 
     if (command.guildOnly && message.channel.type !== 'text') {
         return message.reply('Je ne peux pas utiliser cette commande dans les messages privés !');
+    }
+
+    if (command.adminOnly && message.author.id !== adminID) {
+        return message.reply('Désolé mais cette commande est réservée à l\'administration du bot.');
     }
 
     if (command.args && !args.length) {
