@@ -63,6 +63,7 @@ client.on('message', message => {
     }
 
     if (command.adminOnly && message.author.id !== adminID) {
+        console.log(`Commande "${command.name}" a été bloquée : réclamée par ${message.author.username} sur le serveur ${message.guild}.`);
         return message.reply('Désolé mais cette commande est réservée à l\'administration du bot.');
     }
 
@@ -99,10 +100,10 @@ client.on('message', message => {
 
         try {
             command.execute(message, args);
-            console.log(`Commande "${command.name}" réclamée par ${message.author.username} sur le serveur ${message.guild}.`);
+            console.log(`Commande "${command.name}" a réussi : réclamée par ${message.author.username} sur le serveur ${message.guild}.`);
         } catch (error) {
             console.error(error);
-            console.log(`Commande "${command.name}" réclamée par ${message.author.username} sur le serveur ${message.guild}.`);
+            console.log(`Commande "${command.name}" a renvoyé une erreur : réclamée par ${message.author.username} sur le serveur ${message.guild}.`);
             return message.reply('Une erreur s\'est produite lors de l\'exécution de cette commande');
         }
 });
