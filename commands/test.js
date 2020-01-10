@@ -4,10 +4,10 @@ module.exports = {
     args: false,
     usage: '',
     guildOnly: true,
+    adminOnly: true,
     cooldown: 60,
     execute(message, args) {
 
-        console.log(`Commande de test réclamée par ${message.author.username}!`)
         return message.channel.send(`Commande de test réclamée par ${message.author}!`);
     }
 };

@@ -8,6 +8,7 @@ module.exports = {
     args: true,
     usage: '[dlc] <game>',
     guildOnly: false,
+    adminOnly: false,
     cooldown: 0,
     execute(message, args) {
         let url = '';
