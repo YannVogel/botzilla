@@ -1,13 +1,10 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const {prefix, adminID} = require('./config.json');
-
-const {token} = process.env.BOT_TOKEN || require('./auth.json');
-
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-
 const cooldowns = new Discord.Collection();
+const {token} = process.env.BOT_TOKEN || require('./auth.json');
 
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
