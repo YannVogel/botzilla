@@ -1,6 +1,6 @@
 {
   "name": "botzilla",
-  "version": "0.3.0",
+  "version": "0.4.1",
   "description": "Discord bot for Bobzilla4tv server",
   "main": "bot.js",
   "scripts": {
@@ -30,6 +30,7 @@
     "nodemon": "^2.0.2",
     "puppeteer": "^2.0.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "twitch": "^3.5.6"
   }
 }
