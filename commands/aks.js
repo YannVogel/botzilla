@@ -36,6 +36,7 @@ module.exports = {
                 let gamePrice = [];
                 let gameLink = [];
                 let response = [];
+
                 for (let i = 0; i < $('.search-results-row a', html).length; i++) {
                     gamePrice.push($('.search-results-row-price', html).eq(i).text());
                     gameLink.push($('.search-results-row a', html).eq(i).attr('href').slice(12));
@@ -43,13 +44,15 @@ module.exports = {
                     response.push(gameTitle[i] +" **"+gamePrice[i] +"**\n`"+ gameLink[i]+"`\n__________");
                 }
                 response = response.toString();
+
                 let formattedResponse = '';
                 for(let resp of response) {
                     formattedResponse += resp.replace(/,/, '\n');
                 }
 
-                return message.reply(formattedResponse+ "\nPage des résultats : "+ url);
-
+                formattedResponse.length > 1999 ?
+                    message.reply('Il y a trop de résultats pour les afficher sur Discord... Merci d\'être plus précis dans ta recherche !\n' + 'Page des résultats : '+ url)
+                    : message.reply(formattedResponse+ "\nPage des résultats : "+ url);
             })
             .catch(err =>{
                 //handle error
