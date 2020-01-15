@@ -1,10 +1,11 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const {prefix, adminID} = require('./config.json');
+const {prefix} = require('./config.json');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const cooldowns = new Discord.Collection();
 const {token} = process.env.BOT_TOKEN || require('./auth.json');
+const {adminID} = process.env.ADMIN_ID || require('./auth.json');
 
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -26,8 +27,9 @@ client.once('ready', () => {
                 .catch( error => {console.log('Erreur lors de l\'attribution de l\' activité du bot : '+error)});
 
     console.log('botZilla is ready to go!');
-    if(process.env.BOT_TOKEN) { console.log('Listening from heroku server.'); }
-    else { console.log('Listening from local PC.'); }
+    process.env.BOT_TOKEN ?
+        console.log('Currently listening from heroku server!') :
+        console.log('Currently listening from local host!');
 });
 
 
@@ -59,7 +61,7 @@ client.on('message', message => {
         return message.reply('Je ne peux pas utiliser cette commande dans les messages privés !');
     }
 
-    if (command.adminOnly && message.author.id !== adminID) {
+    if (command.adminOnly && message.author.id !== (process.env.ADMIN_ID || adminID)) {
         console.log(`Commande "${command.name}" a été bloquée : réclamée par ${message.author.username} sur le serveur ${message.guild}.`);
         return message.reply('Désolé mais cette commande est réservée à l\'administration du bot.');
     }
