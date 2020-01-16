@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 const {prefix} = require('../config');
 const rp = require('request-promise');
 const cheerio = require('cheerio');
@@ -18,13 +20,19 @@ module.exports = {
             .then(html => {
                 //success!
                 const $ = cheerio.load(html);
-                const newsTab = $('h3._eYtD2XCVieq6emjKBH3m', html).text().split(/\[Epic Games Store\] /);
-                const lastNew = newsTab.shift();
+                const lastNew = $('h3._eYtD2XCVieq6emjKBH3m', html).eq(0).text().split(/^\[[\w*\s?]*] /).join('');
+                const newLink = 'https://www.reddit.com'+$('a.SQnoC3ObvgnGjWt90zD9Z._2INHSNB8V5eaWp4P0rY_mE', html).eq(0)[0].attribs.href;
+                const imgThumb = $('div._2c1ElNxHftd8W_nZtcG9zf._33Pa96SGhFVpZeI6a7Y_Pl._2e9Lv1I3dOmICVO9fg3uTG', html).eq(0)[0].attribs.style.split('url(')[1].split(');')[0];
+                const gameLink = $('a._13svhQIUZqD9PVzFcLwOKT.styled-outbound-link', html)[0].attribs.href.split('en-US').join('fr');
 
-                return message.reply("```" +
-                    newsTab[0]
-                    + "```\n <https://www.epicgames.com/store/fr/free-games>");
+                const response = new Discord.RichEmbed()
+                    .setTitle(lastNew)
+                    .setURL(gameLink)
+                    .setDescription('Chaque semaine, Epic offre un nouveau jeu aux utilisateurs de son client Epic Games Store.')
+                    .addField('Source :', newLink)
+                    .setImage(imgThumb);
 
+                return message.reply(response);
             })
             .catch(err =>{
                 //handle error
