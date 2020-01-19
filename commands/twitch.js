@@ -1,7 +1,9 @@
 const TwitchClient  = require('twitch').default;
-const clientId = 'jqbsd8vxhjy2cgeyd4le9w19syobgp';
-const clientSecret  = 'ny33x86oxolgclzzvfzz8fhgjdhynr';
-const twitch = TwitchClient.withClientCredentials(clientId, clientSecret);
+const {twitchClientID}  = process.env.TWITCH_ID || require('../auth.json');
+const {twitchClientSecret} = process.env.TWITCH_SECRET || require('../auth.json');
+
+const twitch = TwitchClient.withClientCredentials(process.env.TWITCH_ID || twitchClientID,
+    process.env.TWITCH_SECRET || twitchClientSecret);
 
 async function isStreamLive(userName) {
     const user = await twitch.helix.users.getUserByName(userName);
