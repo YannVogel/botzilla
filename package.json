@@ -1,6 +1,6 @@
 {
   "name": "botzilla",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Discord bot for Bobzilla4tv server",
   "main": "bot.js",
   "scripts": {
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Flawxy/botzilla#readme",
   "dependencies": {
+    "axios": "^0.19.1",
     "cheerio": "^1.0.0-rc.3",
     "discord.js": "^11.5.1",
     "nodemon": "^2.0.2",
@@ -33,7 +34,5 @@
     "request-promise": "^4.2.5",
     "twitch": "^3.7.0"
   },
-  "devDependencies": {
-    "axios": "^0.19.1"
-  }
+  "devDependencies": {}
 }
