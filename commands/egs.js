@@ -28,7 +28,7 @@ module.exports = {
                 const response = new Discord.RichEmbed()
                     .setTitle(lastNew)
                     .setURL(gameLink)
-                    .setDescription('Chaque semaine, Epic offre un nouveau jeu aux utilisateurs de son client Epic Games Store.')
+                    .setDescription("Epic propose régulièrement des promotions sur son client EGS, ainsi qu'un jeu offert tous les jeudis !")
                     .addField('Source :', newLink)
                     .setImage(imgThumb);
 

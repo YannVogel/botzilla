@@ -10,13 +10,17 @@ module.exports = {
     cooldown: 60,
     execute(message, args) {
 
-        axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
-            .then(response => {
-                message.channel.send(response.data.url);
-                message.channel.send(response.data.explanation);
-            })
-            .catch(error => {
-                console.log(error);
+        /*const AuthStr = 'Authorization: OAuth '.concat(USER_TOKEN);
+        const URL = '';
+
+        axios.get(URL, { headers: { Authorization: AuthStr } }).then(response => {
+            // If request is good...
+            console.log(response.data);
+        })
+            .catch((error) => {
+                console.log('error 3 ' + error);
             });
+    }*/
+        return message.channel.send("Commande non disponible actuellement...");
     }
 };
