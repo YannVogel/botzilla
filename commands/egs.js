@@ -7,15 +7,16 @@ const cheerio = require('cheerio');
 
 module.exports = {
     name: 'egs',
-    description: 'Affiche le(s) jeu(x) gratuit(s) de la semaine sur l\'Epic Game Store',
+    description: "Affiche la/les dernière(s) promotion(s) de l'Epic Game Store",
     args: false,
-    usage: '',
+    usage: '[nombre de deals souhaités]',
     guildOnly: false,
     adminOnly: false,
     cooldown: 0,
     execute(message, args) {
         const url = 'https://www.reddit.com/r/GameDeals/search?q=site:epicgames.com+OR+title:epicgamestore+OR+title:%22epic+game+store%22+OR+title:%22EGS%22+OR+title:%22epic+games%22&restrict_sr=on&sort=new&include_over_18=on&feature=legacy_search';
-
+        const dealNumbers = (args[0] ? args[0] : 1) ;
+        if(dealNumbers > 5){ return message.reply("Par souci de lisibilité, je ne peux afficher que les 5 derniers deals...") }
         rp(url)
             .then(html => {
                 //success!
@@ -32,7 +33,22 @@ module.exports = {
                     .addField('Source :', newLink)
                     .setImage(imgThumb);
 
-                return message.reply(response);
+                message.channel.send(response);
+
+                for(let i = 1; i < dealNumbers; i++)
+                {
+                    const lastNew = $('h3._eYtD2XCVieq6emjKBH3m', html).eq(i).text().split(/^\[[\w*\s?]*] /).join('');
+                    const newLink = 'https://www.reddit.com'+$('a.SQnoC3ObvgnGjWt90zD9Z._2INHSNB8V5eaWp4P0rY_mE', html).eq(i)[0].attribs.href;
+                    const gameLink = $('a._13svhQIUZqD9PVzFcLwOKT.styled-outbound-link', html)[i].attribs.href.split('en-US').join('fr');
+
+                    const response = new Discord.RichEmbed()
+                        .setTitle(lastNew)
+                        .setURL(gameLink);
+
+                    message.channel.send(response);
+                }
+
+                return message.reply("Voici les derniers deals de l'Epic Games Store que j'ai trouvés !");
             })
             .catch(err =>{
                 //handle error
