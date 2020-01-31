@@ -44,7 +44,7 @@ module.exports = {
         if (command.description) data.push(`**Description:** ${command.description}`);
         if (command.usage) data.push(`**Utilisation :** ${prefix}${command.name} ${command.usage}`);
 
-        data.push(`**Cooldown :** ${command.cooldown || 3} seconde(s)`);
+        data.push(`**Cooldown :** ${command.cooldown || 1} seconde(s)`);
 
         message.channel.send(data, { split: true });
     },
