@@ -8,7 +8,7 @@ function getRandomInt(max) {
 module.exports = {
     name: 'quote',
     aliases: ['qo'],
-    description: '',
+    description: 'Affiche une citation du stream de Bob choisie au hasard.',
     args: false,
     guildOnly: false,
     adminOnly: false,
