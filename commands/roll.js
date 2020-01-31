@@ -1,6 +1,4 @@
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
+const random = require('./dependencies/_getRandomInt.js');
 
 module.exports = {
     name: 'roll',
@@ -17,6 +15,6 @@ module.exports = {
         }
         if(!args[0]) { args[0] = 6}
 
-        return message.reply(`jette un dé ${args[0]} et obtient \`${getRandomInt(args[0]) + 1}\``);
+        return message.reply(`jette un dé ${args[0]} et obtient \`${random.getRandomInt(args[0]) + 1}\``);
     }
 };

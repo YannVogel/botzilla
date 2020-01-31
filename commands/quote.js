@@ -1,9 +1,6 @@
 const rp = require('request-promise');
 const $ = require('cheerio');
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
+const random = require('./dependencies/_getRandomInt.js');
 
 module.exports = {
     name: 'quote',
@@ -23,7 +20,7 @@ module.exports = {
                     const quoteTable = html.split('\n');
                     const regex1 = /\d+. /;
                     const regex2 = /'?"?/g;
-                    const randomNumber = getRandomInt(quoteTable.length);
+                    const randomNumber = random.getRandomInt(quoteTable.length);
 
                     for(let i = 0; i < quoteTable.length; i++) {
                         quoteTable[i] = quoteTable[i].replace(regex1,'');
