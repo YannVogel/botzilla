@@ -1,6 +1,6 @@
 {
   "name": "botzilla",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Discord bot for Bobzilla4tv server",
   "main": "bot.js",
   "scripts": {
@@ -28,6 +28,8 @@
     "axios": "^0.19.1",
     "cheerio": "^1.0.0-rc.3",
     "discord.js": "^11.5.1",
+    "mongoose": "^5.8.11",
+    "mongoose-unique-validator": "^2.0.3",
     "nodemon": "^2.0.2",
     "puppeteer": "^2.0.0",
     "request": "^2.88.0",
