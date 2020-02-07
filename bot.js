@@ -78,10 +78,50 @@ bot.setInterval( () => {
                     });
                 });
         });
-},1000*600);
+},1000*600); // Toutes les 10 minutes
 
 /* ------------------------------ 🢁 AUTOMATISATION DE L'AFFICHAGE DES PROMOS EGS 🢁 ------------------------------ */
 
+/* ------------------------------ 🢃 AUTOMATISATION DE LA NOTIFICATION DU DÉBUT DE STREAM 🢃 ------------------------------ */
+const TwitchClient  = require('twitch').default;
+const {twitchClientID}  = process.env.TWITCH_ID || require('./auth.json');
+const {twitchClientSecret} = process.env.TWITCH_SECRET || require('./auth.json');
+const twitch = TwitchClient.withClientCredentials(process.env.TWITCH_ID || twitchClientID,
+    process.env.TWITCH_SECRET || twitchClientSecret);
+const streamer = 'bobzill4tv';
+const streamLink = 'https://www.twitch.tv/' + streamer;
+// Permet de ne pas spammer un chan quand un streamer est en live, le but étant de n'avetir qu'une seule fois
+let firstNotification = true;
+const streamNotificationChannel = 'annonces';
+
+async function isStreamLive(userName) {
+    const user = await twitch.helix.users.getUserByName(userName);
+    if (!user) {
+        return false;
+    }
+    return await twitch.helix.streams.getStreamByUserId(user.id) !== null;
+}
+
+bot.setInterval( () => {
+    isStreamLive(streamer)
+        .then((isLive) => {
+            if (isLive) {
+                if(firstNotification) {
+                    bot.guilds.forEach(guild => {
+                        const channel = guild.channels.find(ch => ch.name === streamNotificationChannel);
+                        firstNotification = false;
+
+                        if (!channel) return;
+                        return channel.send(`@here ${streamer} a commencé son live ! Rendez-vous sur sa chaîne : ${streamLink} !`);
+                    });
+                }
+            }else {
+                firstNotification = true;
+            }
+        });
+},1000*60); // Toutes les minutes
+
+/* ------------------------------ 🢁 AUTOMATISATION DE LA NOTIFICATION DU DÉBUT DE STREAM 🢁 ------------------------------ */
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
