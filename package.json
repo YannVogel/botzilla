@@ -1,6 +1,6 @@
 {
   "name": "botzilla",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Discord bot for Bobzilla4tv server",
   "main": "bot.js",
   "scripts": {

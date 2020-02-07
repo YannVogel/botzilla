@@ -22,7 +22,7 @@ module.exports = {
     adminOnly: false,
     cooldown: 5,
     execute(message, args) {
-        let research = args.join('_');
+        const research = args.join('_');
         isStreamLive(research)
             .then((isLive) => {
                 if (isLive) {
