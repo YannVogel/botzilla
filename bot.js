@@ -10,7 +10,7 @@ const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('
 const mongoose = require('mongoose');
 const {dbLogin} = process.env.DB_LOGIN || require('./auth.json');
 const {dbPassword} = process.env.DB_PASSWORD || require('./auth.json');
-
+const botZillaChannel = 'botzilla';
 
 mongoose.connect(`mongodb+srv://${process.env.DB_LOGIN || dbLogin}:${process.env.DB_PASSWORD || dbPassword}@botzilla-cluster-dtt3l.mongodb.net/test?retryWrites=true&w=majority`,
     { useNewUrlParser: true,
@@ -23,8 +23,6 @@ mongoose.connect(`mongodb+srv://${process.env.DB_LOGIN || dbLogin}:${process.env
 const rp = require('request-promise');
 const cheerio = require('cheerio');
 const EgsProms = require('./models/egsProms');
-const egsPromsChannel = 'egs-promo';
-
 
 bot.setInterval( () => {
     const url = 'https://www.reddit.com/r/GameDeals/search?q=site:epicgames.com+OR+title:epicgamestore+OR+title:%22epic+game+store%22+OR+title:%22EGS%22+OR+title:%22epic+games%22&restrict_sr=on&sort=new&include_over_18=on&feature=legacy_search';
@@ -53,16 +51,16 @@ bot.setInterval( () => {
                     newEgsProms.save();
 
                     bot.guilds.forEach(guild => {
-                        const channel = guild.channels.find(ch => ch.name === egsPromsChannel);
+                        const channel = guild.channels.find(ch => ch.name === botZillaChannel);
                         // Si le channel n'existe pas on contacte en DM le propriétaire du Discord
                         if(!channel) {
                             return guild.owner.user.send("Désolé de t'importuner mais il me semble que tu es " +
                                 "le propriétaire du Discord **" + guild.name + "** et je n'ai pas réussi à y " +
-                                "envoyer un message car ce Discord ne dispose pas de salon textuel nommé \"**" + egsPromsChannel + "**\"." +
-                                "\nCe salon me permet de prévenir ta communauté quand une nouvelle promo sur l'Epic Games Store est disponible" +
-                                "\nTu peux remédier à ce problème en créant un salon textuel \"**" + egsPromsChannel + "**\" et " +
+                                "envoyer un message car ce Discord ne dispose pas de salon textuel nommé \"**" + botZillaChannel + "**\"." +
+                                "\nCe salon me permet de prévenir ta communauté de toute sorte d'infos intéressants" +
+                                "\nTu peux remédier à ce problème en créant un salon textuel \"**" + botZillaChannel + "**\" et " +
                                 "m'y donner les droits d'écriture. Où tu peux ignorer ce message si tu ne désires pas " +
-                                "être informé de ces promos." +
+                                "diffuser ces informations." +
                                 "\n Bonne journée et merci encore d'utiliser botZilla !");
                         }
                         // Si le channel existe on prépare un embed message à envoyer
@@ -92,7 +90,6 @@ const streamer = 'bobzill4tv';
 const streamLink = 'https://www.twitch.tv/' + streamer;
 // Permet de ne pas spammer un chan quand un streamer est en live, le but étant de n'avetir qu'une seule fois
 let firstNotification = true;
-const streamNotificationChannel = 'annonces';
 
 async function isStreamLive(userName) {
     const user = await twitch.helix.users.getUserByName(userName);
@@ -108,7 +105,7 @@ bot.setInterval( () => {
             if (isLive) {
                 if(firstNotification) {
                     bot.guilds.forEach(guild => {
-                        const channel = guild.channels.find(ch => ch.name === streamNotificationChannel);
+                        const channel = guild.channels.find(ch => ch.name === botZillaChannel);
                         firstNotification = false;
 
                         if (!channel) return;
