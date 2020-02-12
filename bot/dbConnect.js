@@ -10,4 +10,4 @@ module.exports = () => {
         })
         .then(() => console.log('Connexion à MongoDB réussie !'))
         .catch(error => console.error("Impossible de se connecter à la BDD : " + error));
-}
+};

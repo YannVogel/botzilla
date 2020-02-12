@@ -25,7 +25,6 @@ module.exports = {
             url = `https://www.allkeyshop.com/blog/catalogue/category-pc-digital-all/search-${research}/`;
         }
 
-
         rp(url)
             .then(html => {
                 //success!
