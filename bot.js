@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const welcomeMessageAndStreamNotificationChannel = 'discussion';
 const salesChannel = 'botzilla';
+const adminChannelName = 'botzilla-admin';
 
 // Bot connexion
 const login = require('./bot/login');
@@ -28,4 +29,4 @@ const egsFetcher = require('./bot/automated/egsFetcher');
 egsFetcher(bot, 30, salesChannel);
 // Displays @everyone message when new Steam deals are available
 const steamFetcher = require('./bot/automated/steamFetcher');
-steamFetcher(bot, 30, salesChannel);
+steamFetcher(bot, 30, salesChannel, adminChannelName);
