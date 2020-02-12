@@ -7,7 +7,8 @@ module.exports = {
     args: false,
     usage: '<nombre de faces>',
     guildOnly: false,
-    adminOnly: false,
+    moderatorOnly: false,
+    creatorOnly: false,
     cooldown: 0,
     execute(message, args) {
         if(args[0] && isNaN(args[0])) {

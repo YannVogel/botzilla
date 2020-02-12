@@ -6,7 +6,8 @@ module.exports = {
     args: false,
     usage: '[command name]',
     guildOnly: false,
-    adminOnly: false,
+    moderatorOnly: false,
+    creatorOnly: false,
     cooldown: 5,
     execute(message, args) {
         const data = [];
@@ -14,7 +15,7 @@ module.exports = {
         if (!args.length) {
             data.push('Voici une liste des commandes de botZilla :');
             data.push('\n`');
-            data.push(commands.map(command => command.adminOnly ? '' : command.name).join(' - '));
+            data.push(commands.map(command => command.creatorOnly ? '' : command.name).join(' - '));
             data.push('`\n');
             data.push(`Tu peux utiliser \`${prefix}help [command name]\` pour avoir plus d'informations sur une commande !`);
             const answer = data.toString().replace(/,/g,' ')

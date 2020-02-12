@@ -44,7 +44,8 @@ module.exports = {
     args: false,
     usage: 'bz!server',
     guildOnly: true,
-    adminOnly: false,
+    moderatorOnly: false,
+    creatorOnly: false,
     cooldown: 60,
     execute(message, args) {
         const dateRaw = message.guild.createdAt;
