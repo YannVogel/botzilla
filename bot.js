@@ -76,9 +76,145 @@ bot.setInterval( () => {
                     });
                 });
         });
-},1000*600); // Toutes les 10 minutes
+},1000*60*30); // Toutes les 30 minutes
 
 /* ------------------------------ 🢁 AUTOMATISATION DE L'AFFICHAGE DES PROMOS EGS 🢁 ------------------------------ */
+
+/* ------------------------------ 🢃 AUTOMATISATION DE L'AFFICHAGE DES PROMOS STEAM 🢃 ------------------------------ */
+const {botAvatar} = require('./config');
+const SteamSales = require('./models/steamSales');
+
+function embedMessage(data) {
+    return new Discord.RichEmbed()
+        .setColor('#cfbb72')
+        .setTitle(`${data.gameName}`)
+        .setURL(data.frenchOfferLink)
+        .setAuthor(data.offerInformations,
+            data.gameIcon,
+            data.frenchOfferLink)
+        .setDescription(data.gameDescription)
+        .setThumbnail(botAvatar)
+        .addField('Réduction', `~~${data.regularPrice}~~ :point_right: **${data.discountPrice}** 
+        \`\`\`JavaScript
+        ${data.discountPourcentage} de réduction\`\`\``)
+        .addField('Évaluations récentes', `${data.recentEvaluation} (${data.recentEvaluationNumber} avis)`)
+        .addField('Évaluation globale', `${data.globalEvaluation} (${data.globalEvaluationNumber} avis)`)
+        .setImage(data.offerImage)
+        .setFooter(`Tags populaires : ${data.gameTags}`, data.gameIcon);
+}
+
+function getGameData(html, frenchOfferLink, offerImage) {
+    const $ = cheerio.load(html);
+
+    const gameName = $('div.apphub_AppName', html).text();
+    const gameIcon = $('div.apphub_AppIcon>img', html).attr('src');
+    const offerInformations = $('p.game_purchase_discount_countdown', html).text();
+    const gameDescriptionRaw = $('div.game_description_snippet', html).text();
+    const gameDescription =  gameDescriptionRaw.replace(/\t?\n?/g, '');
+    const discountPrice = $('div.discount_final_price', html).eq(0).text();
+    const regularPrice = $('div.discount_original_price', html).eq(0).text();
+    const discountPourcentage = $('div.discount_pct', html).eq(0).text();
+    const recentEvaluation = $('div.summary>span.game_review_summary', html).eq(0).text();
+    const recentEvaluationNumberRaw = $('div.summary>span.responsive_hidden', html).eq(0).text();
+    const recentEvaluationNumber = recentEvaluationNumberRaw.replace(/\t?\n?\(?\)?/g, '');
+    const globalEvaluation = $('div.summary>span.game_review_summary', html).eq(1).text();
+    const globalEvaluationNumberRaw = $('div.summary>span.responsive_hidden', html).eq(1).text();
+    const globalEvaluationNumber = globalEvaluationNumberRaw.replace(/\t?\n?\(?\)?/g, '');
+
+    let gameTags = '';
+    const desiredTags = 3;
+    for(let i = 0; i < desiredTags; i++) {
+        gameTags += $('div.glance_tags.popular_tags>a', html).eq(i).text().replace(/\t?\n?/g, '');
+        i + 1 === desiredTags ? gameTags += '' : gameTags += ' - ';
+    }
+
+    return {frenchOfferLink, offerImage, gameName, gameIcon, gameDescription, offerInformations, regularPrice,
+        discountPrice, discountPourcentage, recentEvaluation,globalEvaluation, recentEvaluationNumber,
+        globalEvaluationNumber, gameTags};
+}
+
+function dbManagement(offerLink, frenchOfferLink, offerImage){
+    SteamSales.findOne({gameLink: offerLink})
+        .then(steamSales => {
+            // Si la promo existe déjà, on arrête tout
+            if(steamSales) return;
+
+            const newSteamSales = new SteamSales({
+                gameLink: offerLink
+            });
+
+            // On ajoute la promo en nouvelle entrée de BDD
+            newSteamSales.save();
+
+            rp(frenchOfferLink)
+                .then(html => {
+
+                    const data = getGameData(html, frenchOfferLink, offerImage);
+
+                    bot.guilds.forEach(guild => {
+                        const channel = guild.channels.find(ch => ch.name === botZillaChannel);
+                        // Si le channel n'existe pas on contacte en DM le propriétaire du Discord
+                        if (!channel) {
+                            return guild.owner.user.send("Désolé de t'importuner mais il me semble que tu es " +
+                                "le propriétaire du Discord **" + guild.name + "** et je n'ai pas réussi à y " +
+                                "envoyer un message car ce Discord ne dispose pas de salon textuel nommé \"**" + botZillaChannel + "**\"." +
+                                "\nCe salon me permet de prévenir ta communauté de toute sorte d'infos intéressants" +
+                                "\nTu peux remédier à ce problème en créant un salon textuel \"**" + botZillaChannel + "**\" et " +
+                                "m'y donner les droits d'écriture. Où tu peux ignorer ce message si tu ne désires pas " +
+                                "diffuser ces informations." +
+                                "\n Bonne journée et merci encore d'utiliser botZilla !");
+                        }
+
+                        channel.send("@everyone J'ai trouvé une nouvelle promo intéressante sur Steam !");
+                        return channel.send(embedMessage(data));
+                    });
+
+                }).catch(err =>{ console.log(err); });
+        })
+}
+
+bot.setInterval( () => {
+    const url = `https://store.steampowered.com/?l=french`;
+
+    const today = new Date().getDay();
+    // If it's wednesday (= steam midweek madness day)
+    if (today === 3) {
+        rp(url)
+            .then(html => {
+                const $ = cheerio.load(html);
+                const divOffers = $('div.home_area_spotlight', html);
+                const totalOffers = divOffers.length;
+                for (let i = 0; i < totalOffers; i++) {
+                    const divImgOffer = 'div.spotlight_img';
+                    const offerLink = $(`${divImgOffer}>a`, html)[i].attribs.href;
+                    const frenchOfferLink = `${offerLink.split('/?')[0]}/?l=french`;
+                    const offerImage = $(`${divImgOffer}>a>img`, html)[i].attribs.src;
+
+                    dbManagement(offerLink, frenchOfferLink, offerImage);
+                }
+            }).catch(err => {
+            console.log(err);
+        });
+    }
+    // Fetch the today's deals
+    rp(url)
+        .then(html => {
+            const $ = cheerio.load(html);
+            const divOffers = $('a.daily_deal', html);
+            const totalOffers = divOffers.length;
+
+            for (let i = 0; i < totalOffers; i++) {
+                const offerLink = $('a.daily_deal', html)[i].attribs.href;
+                const frenchOfferLink = `${offerLink.split('/?')[0]}/?l=french`;
+                const offerImage = $('a.daily_deal>div.capsule>img', html)[i].attribs.src;
+
+                dbManagement(offerLink, frenchOfferLink, offerImage);
+            }
+        }).catch(err => {
+        console.log(err);
+    });
+},1000*60*30); // Toutes les 30 minutes
+/* ------------------------------ 🢁 AUTOMATISATION DE L'AFFICHAGE DES PROMOS STEAM 🢁 ------------------------------ */
 
 /* ------------------------------ 🢃 AUTOMATISATION DE LA NOTIFICATION DU DÉBUT DE STREAM 🢃 ------------------------------ */
 const TwitchClient  = require('twitch').default;

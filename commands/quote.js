@@ -1,5 +1,4 @@
 const rp = require('request-promise');
-const $ = require('cheerio');
 const random = require('./dependencies/_getRandomInt.js');
 
 module.exports = {
@@ -16,7 +15,6 @@ module.exports = {
             rp(url)
                 .then(html => {
                     //success!
-                    const myLoader = $.load(html);
                     const quoteTable = html.split('\n');
                     const regex1 = /\d+. /;
                     const regex2 = /'?"?/g;
@@ -28,7 +26,7 @@ module.exports = {
                     }
 
                     return message.channel.send(
-                        `Citation n°${randomNumber + 1} :\n > ${quoteTable[randomNumber]}`);
+                        `> Citation n°${randomNumber + 1} : **${quoteTable[randomNumber]}**`);
 
                 }).catch(err =>{ console.log(err); });
     }

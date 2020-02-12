@@ -28,7 +28,7 @@ const monthsFr = [
 
 function embedMessage(message, creationDate){
     return new Discord.RichEmbed()
-        .setColor('#0099ff')
+        .setColor('#cfbb72')
         .setTitle(message.guild.name)
         .setAuthor(`Propriétaire : ${message.guild.owner.user.username}`, message.guild.owner.user.avatarURL)
         .setDescription(`Serveur créé le ${creationDate}`)
