@@ -140,7 +140,8 @@ function dbManagement(offerLink, frenchOfferLink, offerImage){
             if(steamSales) return;
 
             const newSteamSales = new SteamSales({
-                gameLink: offerLink
+                gameLink: offerLink,
+                createdAt: new Date()
             });
 
             // On ajoute la promo en nouvelle entrée de BDD
@@ -177,30 +178,30 @@ bot.setInterval( () => {
     const url = `https://store.steampowered.com/?l=french`;
 
     const today = new Date().getDay();
-    // If it's wednesday (= steam midweek madness day)
-    if (today === 3) {
-        rp(url)
-            .then(html => {
-                const $ = cheerio.load(html);
-                const divOffers = $('div.home_area_spotlight', html);
-                const totalOffers = divOffers.length;
-                for (let i = 0; i < totalOffers; i++) {
-                    const divImgOffer = 'div.spotlight_img';
-                    const offerLink = $(`${divImgOffer}>a`, html)[i].attribs.href;
-                    const frenchOfferLink = `${offerLink.split('/?')[0]}/?l=french`;
-                    const offerImage = $(`${divImgOffer}>a>img`, html)[i].attribs.src;
+    // Fetch the midweek madness deals
+    rp(url)
+        .then(html => {
+            const $ = cheerio.load(html);
+            const divOffers = $('div.home_area_spotlight', html);
+            if(!divOffers) return console.error("Je n'ai trouvé aucune offre de mi-semaine sur Steam...");
+            const totalOffers = divOffers.length;
+            for (let i = 0; i < totalOffers; i++) {
+                const divImgOffer = 'div.spotlight_img';
+                const offerLink = $(`${divImgOffer}>a`, html)[i].attribs.href;
+                const frenchOfferLink = `${offerLink.split('/?')[0]}/?l=french`;
+                const offerImage = $(`${divImgOffer}>a>img`, html)[i].attribs.src;
 
-                    dbManagement(offerLink, frenchOfferLink, offerImage);
-                }
-            }).catch(err => {
-            console.log(err);
-        });
-    }
+                dbManagement(offerLink, frenchOfferLink, offerImage);
+            }
+        }).catch(err => {
+        console.log(err);
+    });
     // Fetch the today's deals
     rp(url)
         .then(html => {
             const $ = cheerio.load(html);
             const divOffers = $('a.daily_deal', html);
+            if(!divOffers) return console.error("Je n'ai trouvé aucune offre du jour sur Steam...");
             const totalOffers = divOffers.length;
 
             for (let i = 0; i < totalOffers; i++) {
