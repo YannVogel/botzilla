@@ -38,7 +38,7 @@ module.exports = {
         if (!command) {
             return message.reply('Ce n\'est pas une commande valide !');
         }
-        if(command.adminOnly) { return; }
+        if(command.creatorOnly) { return; }
 
         data.push(`**Nom :** ${command.name}`);
 
