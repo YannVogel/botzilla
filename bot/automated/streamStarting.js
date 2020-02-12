@@ -3,6 +3,7 @@ const {twitchClientID}  = process.env.TWITCH_ID || require('../../auth.json');
 const {twitchClientSecret} = process.env.TWITCH_SECRET || require('../../auth.json');
 const twitch = TwitchClient.withClientCredentials(process.env.TWITCH_ID || twitchClientID,
     process.env.TWITCH_SECRET || twitchClientSecret);
+const missingChannelMessage = require('../_missingChannelMessage');
 const streamer = 'bobzill4tv';
 const streamLink = 'https://www.twitch.tv/' + streamer;
 // Permet de ne pas spammer un chan quand un streamer est en live, le but étant de n'avetir qu'une seule fois
@@ -26,7 +27,10 @@ module.exports = (botClient, timeInSeconds, channelName) => {
                             const channel = guild.channels.find(ch => ch.name === channelName);
                             firstNotification = false;
 
-                            if (!channel) return;
+                            // If the channel doesn't exist, contacts the server owner
+                            if(!channel) {
+                                return guild.owner.user.send(missingChannelMessage(guild.name, channelName));
+                            }
                             return channel.send(`@here ${streamer} a commencé son live ! Rendez-vous sur sa chaîne : ${streamLink} !`);
                         });
                     }
