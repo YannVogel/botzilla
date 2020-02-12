@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const rp = require('request-promise');
 const {botAvatar} = require('../../config');
 const SteamSales = require('../../models/steamSales');
-const missingChannelMessage = require('./_missingChannelMessage');
+const missingChannelMessage = require('../_missingChannelMessage');
 const dayToRefreshDB = 10;  // Every x days, the DB will delete the old content
 const desiredTags = 3;      // Number of game tags to display
 

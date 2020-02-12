@@ -3,7 +3,7 @@ const rp = require('request-promise');
 const cheerio = require('cheerio');
 const {botAvatar} = require('../../config');
 const EgsProms = require('../../models/egsProms');
-const missingChannelMessage = require('./_missingChannelMessage');
+const missingChannelMessage = require('../_missingChannelMessage');
 
 
 module.exports = (botClient, timeInMinutes, channelName) => {
