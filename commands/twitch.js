@@ -19,7 +19,8 @@ module.exports = {
     args: true,
     usage: '[streamer_name]',
     guildOnly: false,
-    adminOnly: false,
+    moderatorOnly: false,
+    creatorOnly: false,
     cooldown: 5,
     execute(message, args) {
         const research = args.join('_');
