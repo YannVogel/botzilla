@@ -5,7 +5,6 @@ const {botAvatar} = require('../../config');
 const EgsProms = require('../../models/egsProms');
 const missingChannelMessage = require('../_missingChannelMessage');
 
-
 module.exports = (botClient, timeInMinutes, channelName) => {
     botClient.setInterval(() => {
         const url = 'https://www.reddit.com/r/GameDeals/search?q=site:epicgames.com+OR+title:epicgamestore+OR+title:%22epic+game+store%22+OR+title:%22EGS%22+OR+title:%22epic+games%22&restrict_sr=on&sort=new&include_over_18=on&feature=legacy_search';
@@ -54,4 +53,4 @@ module.exports = (botClient, timeInMinutes, channelName) => {
                     });
             });
     }, 1000 * 60 * timeInMinutes);
-}
+};
