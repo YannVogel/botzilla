@@ -111,8 +111,8 @@ module.exports = (botClient, timeInMinutes, channelName) => {
                 const totalOffers = divOffers.length;
                 for (let i = 0; i < totalOffers; i++) {
                     const divImgOffer = 'div.spotlight_img';
-                    const offerLink = $(`${divImgOffer}>a`, html)[i].attribs.href;
-                    const frenchOfferLink = `${offerLink.split('/?')[0]}/?l=french`;
+                    const offerLink = $(`${divImgOffer}>a`, html)[i].attribs.href.split('/?')[0];
+                    const frenchOfferLink = `${offerLink}/?l=french`;
                     const offerImage = $(`${divImgOffer}>a>img`, html)[i].attribs.src;
 
                     dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName);
@@ -129,8 +129,8 @@ module.exports = (botClient, timeInMinutes, channelName) => {
                 const totalOffers = divOffers.length;
 
                 for (let i = 0; i < totalOffers; i++) {
-                    const offerLink = $('a.daily_deal', html)[i].attribs.href;
-                    const frenchOfferLink = `${offerLink.split('/?')[0]}/?l=french`;
+                    const offerLink = $('a.daily_deal', html)[i].attribs.href.split('/?')[0];
+                    const frenchOfferLink = `${offerLink}/?l=french`;
                     const offerImage = $('a.daily_deal>div.capsule>img', html)[i].attribs.src;
 
                     dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName);
