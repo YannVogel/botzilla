@@ -7,6 +7,23 @@ const missingChannelMessage = require('../_missingChannelMessage');
 const dayToRefreshDB = 10;  // Every x days, the DB will delete the old content
 const desiredTags = 3;      // Number of game tags to display
 
+function isAnElementUnexpected(botClient, array, adminChannelName) {
+    for(let i = 0; i < array.length; i++) {
+        if(typeof array[i][1] !== 'string') {
+            botClient.guilds.forEach(guild => {
+                const channel = guild.channels.find(ch => ch.name === adminChannelName);
+                // If the channel doesn't exist, contacts the server owner
+                if (!channel) return;
+
+                channel.send(`${guild.owner}J'ai abandonné la fonction steamFetcher car ${array[i][0]} n'était pas un string mais un ${typeof array[i][1]}`);
+            });
+            // Return true if an element is not a "string"
+            return true;
+        }
+    }
+    return false;
+}
+
 function embedMessage(data) {
     return new Discord.RichEmbed()
         .setColor('#cfbb72')
@@ -55,7 +72,7 @@ function getGameData(html, frenchOfferLink, offerImage) {
         globalEvaluationNumber, gameTags};
 }
 
-function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName){
+function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName, adminChannelName){
     SteamSales.findOne({gameLink: offerLink})
         .then(steamSales => {
             // Si la promo existe déjà...
@@ -66,6 +83,7 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                     // ... on la supprime de la BDD
                     steamSales.delete();
                 }else {
+                    // ... on arrête la fonction
                     return;
                 }
             }
@@ -83,6 +101,12 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
 
                     const data = getGameData(html, frenchOfferLink, offerImage);
 
+                    const entries = Object.entries(data);
+                    // Si une entrée dans data n'est pas sous la forme de "string", on arrête la fonction
+                    if(isAnElementUnexpected(botClient, entries, adminChannelName)) {
+                        return console.error("Il m'a manqué un élément pour afficher correctement la promo Steam...");
+                    }
+
                     botClient.guilds.forEach(guild => {
                         const channel = guild.channels.find(ch => ch.name === channelName);
                         // If the channel doesn't exist, contacts the server owner
@@ -98,7 +122,7 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
         })
 }
 
-module.exports = (botClient, timeInMinutes, channelName) => {
+module.exports = (botClient, timeInMinutes, channelName, adminChannelName) => {
     botClient.setInterval(() => {
         const url = `https://store.steampowered.com/?l=french`;
 
@@ -133,7 +157,7 @@ module.exports = (botClient, timeInMinutes, channelName) => {
                     const frenchOfferLink = `${offerLink}/?l=french`;
                     const offerImage = $('a.daily_deal>div.capsule>img', html)[i].attribs.src;
 
-                    dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName);
+                    dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName, adminChannelName);
                 }
             }).catch(err => {
             console.log(err);
