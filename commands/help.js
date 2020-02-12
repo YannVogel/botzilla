@@ -17,7 +17,7 @@ module.exports = {
             data.push('\n`');
             data.push(commands.map(command => command.creatorOnly ? '' : command.name).join(' - '));
             data.push('`\n');
-            data.push(`Tu peux utiliser \`${prefix}help [command name]\` pour avoir plus d'informations sur une commande !`);
+            data.push(`Tu peux utiliser \`${prefix}help [nom d'une commande]\` pour avoir plus d'informations sur une commande !`);
             const answer = data.toString().replace(/,/g,' ')
                                             .replace(/` /g, '`')
                                                 .replace(/- {2}-/g,'-')
