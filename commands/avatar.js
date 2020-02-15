@@ -1,6 +1,6 @@
 module.exports = {
     name: 'avatar',
-    description: 'Affiche l\'avatar des utilisateurs précisés, sinon affiche son propre avatar',
+    description: 'Affiche l\'avatar des utilisateurs précisés, sinon affiche son propre avatar.',
     args: false,
     usage: '',
     guildOnly: false,

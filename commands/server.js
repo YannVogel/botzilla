@@ -40,9 +40,9 @@ function embedMessage(message, creationDate){
 
 module.exports = {
     name: 'server',
-    description: 'Affiche le nom du serveur et le nombre de membres',
+    description: 'Affiche des informations sur le serveur',
     args: false,
-    usage: 'bz!server',
+    usage: '',
     guildOnly: true,
     moderatorOnly: false,
     creatorOnly: false,

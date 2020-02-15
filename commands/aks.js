@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 
 module.exports = {
     name: 'aks',
-    description: 'Recherche sur le site allkeyshop',
+    description: 'Recherche un jeu ou un DLC sur le site allkeyshop.',
     args: true,
     usage: '[dlc] <game>',
     guildOnly: false,

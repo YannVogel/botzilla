@@ -7,7 +7,7 @@ const cheerio = require('cheerio');
 
 module.exports = {
     name: 'egs',
-    description: "Affiche la/les dernière(s) promotion(s) de l'Epic Game Store",
+    description: "Affiche la/les dernière(s) promotion(s) de l'Epic Game Store.",
     args: false,
     usage: '[nombre de deals souhaités]',
     guildOnly: false,

@@ -1,6 +1,6 @@
 module.exports = {
     name: 'kick',
-    description: 'Kick un membre',
+    description: 'Kick un membre.',
     args: true,
     usage: '<user>',
     guildOnly: true,

@@ -12,7 +12,7 @@ function isAnElementUnexpected(botClient, array, adminChannelName) {
         if(typeof array[i][1] !== 'string') {
             botClient.guilds.forEach(guild => {
                 const channel = guild.channels.find(ch => ch.name === adminChannelName);
-                // If the channel doesn't exist, contacts the server owner
+
                 if (!channel) return;
 
                 channel.send(`${guild.owner}J'ai abandonné la fonction steamFetcher car ${array[i][0]} n'était pas un string mais un ${typeof array[i][1]}`);
@@ -83,7 +83,7 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                     // ... on la supprime de la BDD
                     steamSales.delete();
                 }else {
-                    // ... on arrête la fonction
+                    // ... sinon on arrête la fonction
                     return;
                 }
             }

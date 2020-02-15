@@ -3,7 +3,7 @@ const random = require('./dependencies/_getRandomInt.js');
 module.exports = {
     name: 'roll',
     aliases: ['rl'],
-    description: 'Jette un dé du nombre de faces demandées (ou un dé 6 par défaut)',
+    description: 'Jette un dé du nombre de faces demandées (ou un dé 6 par défaut).',
     args: false,
     usage: '<nombre de faces>',
     guildOnly: false,
