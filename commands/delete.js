@@ -1,6 +1,6 @@
 module.exports = {
     name: 'delete',
-    description: 'Supprime le nombre précisé de commentaires',
+    description: 'Supprime le nombre précisé de commentaires.',
     args: true,
     usage: '<nombre>',
     guildOnly: false,

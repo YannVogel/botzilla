@@ -5,7 +5,7 @@ const {botAvatar} = require('../../config');
 const EgsProms = require('../../models/egsProms');
 const missingChannelMessage = require('../_missingChannelMessage');
 
-module.exports = (botClient, timeInMinutes, channelName) => {
+module.exports = (botClient, timeInMinutes, channelName, roleToMention) => {
     botClient.setInterval(() => {
         const url = 'https://www.reddit.com/r/GameDeals/search?q=site:epicgames.com+OR+title:epicgamestore+OR+title:%22epic+game+store%22+OR+title:%22EGS%22+OR+title:%22epic+games%22&restrict_sr=on&sort=new&include_over_18=on&feature=legacy_search';
         rp(url)
@@ -47,7 +47,13 @@ module.exports = (botClient, timeInMinutes, channelName) => {
                                 .addField('Source :', newLink)
                                 .setImage(imgThumb);
 
-                            channel.send("@everyone J'ai trouvé une nouvelle promo intéressante sur l'Epic Games Store !");
+                            const role = guild.roles.find(role => role.name === roleToMention);
+                            if(!role) {
+                                console.error(`Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
+                                return;
+                            }
+
+                            channel.send(`<@&${role.id}> J'ai trouvé une nouvelle promo intéressante sur l'Epic Games Store !`);
                             return channel.send(response);
                         });
                     });

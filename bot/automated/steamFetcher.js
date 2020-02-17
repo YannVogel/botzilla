@@ -12,7 +12,7 @@ function isAnElementUnexpected(botClient, array, adminChannelName) {
         if(typeof array[i][1] !== 'string') {
             botClient.guilds.forEach(guild => {
                 const channel = guild.channels.find(ch => ch.name === adminChannelName);
-                // If the channel doesn't exist, contacts the server owner
+
                 if (!channel) return;
 
                 channel.send(`${guild.owner}J'ai abandonné la fonction steamFetcher car ${array[i][0]} n'était pas un string mais un ${typeof array[i][1]}`);
@@ -72,7 +72,7 @@ function getGameData(html, frenchOfferLink, offerImage) {
         globalEvaluationNumber, gameTags};
 }
 
-function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName, adminChannelName){
+function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName, adminChannelName, roleToMention){
     SteamSales.findOne({gameLink: offerLink})
         .then(steamSales => {
             // Si la promo existe déjà...
@@ -83,7 +83,7 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                     // ... on la supprime de la BDD
                     steamSales.delete();
                 }else {
-                    // ... on arrête la fonction
+                    // ... sinon on arrête la fonction
                     return;
                 }
             }
@@ -114,7 +114,13 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                             return guild.owner.user.send(missingChannelMessage(guild.name, channelName));
                         }
 
-                        channel.send("@everyone J'ai trouvé une nouvelle promo intéressante sur Steam !");
+                        const role = guild.roles.find(role => role.name === roleToMention);
+                        if(!role) {
+                            console.error(`Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
+                            return;
+                        }
+
+                        channel.send(`<@&${role.id}> J'ai trouvé une nouvelle promo intéressante sur Steam !`);
                         return channel.send(embedMessage(data));
                     });
 
@@ -122,7 +128,7 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
         })
 }
 
-module.exports = (botClient, timeInMinutes, channelName, adminChannelName) => {
+module.exports = (botClient, timeInMinutes, channelName, adminChannelName, roleToMention) => {
     botClient.setInterval(() => {
         const url = `https://store.steampowered.com/?l=french`;
 
@@ -139,7 +145,7 @@ module.exports = (botClient, timeInMinutes, channelName, adminChannelName) => {
                     const frenchOfferLink = `${offerLink}/?l=french`;
                     const offerImage = $(`${divImgOffer}>a>img`, html)[i].attribs.src;
 
-                    dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName);
+                    dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName, roleToMention);
                 }
             }).catch(err => {
             console.log(err);
