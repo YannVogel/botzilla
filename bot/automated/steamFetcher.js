@@ -114,9 +114,10 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                             return guild.owner.user.send(missingChannelMessage(guild.name, channelName));
                         }
 
+                        // Seeks for the role to mention
                         const role = guild.roles.find(role => role.name === roleToMention);
                         if(!role) {
-                            console.error(`Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
+                            console.error(`steamFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
                             return;
                         }
 
@@ -145,7 +146,7 @@ module.exports = (botClient, timeInMinutes, channelName, adminChannelName, roleT
                     const frenchOfferLink = `${offerLink}/?l=french`;
                     const offerImage = $(`${divImgOffer}>a>img`, html)[i].attribs.src;
 
-                    dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName, roleToMention);
+                    dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName, adminChannelName, roleToMention);
                 }
             }).catch(err => {
             console.log(err);
@@ -163,7 +164,7 @@ module.exports = (botClient, timeInMinutes, channelName, adminChannelName, roleT
                     const frenchOfferLink = `${offerLink}/?l=french`;
                     const offerImage = $('a.daily_deal>div.capsule>img', html)[i].attribs.src;
 
-                    dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName, adminChannelName);
+                    dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channelName, adminChannelName, roleToMention);
                 }
             }).catch(err => {
             console.log(err);

@@ -47,9 +47,10 @@ module.exports = (botClient, timeInMinutes, channelName, roleToMention) => {
                                 .addField('Source :', newLink)
                                 .setImage(imgThumb);
 
+                            // Seeks for the role to mention
                             const role = guild.roles.find(role => role.name === roleToMention);
                             if(!role) {
-                                console.error(`Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
+                                console.error(`egsFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
                                 return;
                             }
 
