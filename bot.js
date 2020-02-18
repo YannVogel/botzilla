@@ -3,7 +3,7 @@ const bot = new Discord.Client();
 const welcomeMessageAndStreamNotificationChannel = 'discussion';
 const salesChannel = 'botzilla';
 const adminChannelName = 'botzilla-admin';
-const roleToMentionForGamesSales = 'Infos';
+const roleToMentionForGamesSales = 'DealSeeker';
 const roleToMentionForWolcenNews = 'wolcen';
 
 // Bot connexion
