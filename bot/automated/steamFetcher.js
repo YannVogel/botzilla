@@ -25,6 +25,12 @@ function isAnElementUnexpected(botClient, array, adminChannelName) {
 }
 
 function embedMessage(data) {
+    // If an offer is an "offer of the day" (= no timer)
+    if(data.offerInformations.includes("OFFRE DU JOUR")) {
+        // Clean the timer part of the offerInformations
+        data.offerInformations = "OFFRE DU JOUR !"
+    }
+
     return new Discord.RichEmbed()
         .setColor('#cfbb72')
         .setTitle(`${data.gameName}`)
@@ -117,12 +123,17 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                         // Seeks for the role to mention
                         const role = guild.roles.find(role => role.name === roleToMention);
                         if(!role) {
-                            console.error(`steamFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
-                            return;
+                            console.error(`egsFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
+                            channel.send(`J'ai trouvé une nouvelle promo intéressante sur l'Epic Games Store !`)
+                                .then(() => {
+                                    return channel.send(embedMessage(data));
+                                });
                         }
 
-                        channel.send(`<@&${role.id}> J'ai trouvé une nouvelle promo intéressante sur Steam !`);
-                        return channel.send(embedMessage(data));
+                        channel.send(`<@&${role.id}> J'ai trouvé une nouvelle promo intéressante sur Steam !`)
+                            .then(() => {
+                                return channel.send(embedMessage(data));
+                            });
                     });
 
                 }).catch(err =>{ console.log(err); });
