@@ -51,12 +51,16 @@ module.exports = (botClient, timeInMinutes, channelName, roleToMention) => {
                             const role = guild.roles.find(role => role.name === roleToMention);
                             if(!role) {
                                 console.error(`egsFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
-                                channel.send(`J'ai trouvé une nouvelle promo intéressante sur l'Epic Games Store !`);
-                                return channel.send(response);
+                                channel.send(`J'ai trouvé une nouvelle promo intéressante sur l'Epic Games Store !`)
+                                    .then(() => {
+                                        return channel.send(response)
+                                    });
                             }
 
-                            channel.send(`<@&${role.id}> J'ai trouvé une nouvelle promo intéressante sur l'Epic Games Store !`);
-                            return channel.send(response);
+                            channel.send(`<@&${role.id}> J'ai trouvé une nouvelle promo intéressante sur l'Epic Games Store !`)
+                                .then(() => {
+                                    return channel.send(response);
+                                });
                         });
                     });
             });
