@@ -117,8 +117,9 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                         // Seeks for the role to mention
                         const role = guild.roles.find(role => role.name === roleToMention);
                         if(!role) {
-                            console.error(`steamFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
-                            return;
+                            console.error(`egsFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
+                            channel.send(`J'ai trouvé une nouvelle promo intéressante sur l'Epic Games Store !`);
+                            return channel.send(embedMessage(data));
                         }
 
                         channel.send(`<@&${role.id}> J'ai trouvé une nouvelle promo intéressante sur Steam !`);
