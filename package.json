@@ -1,6 +1,6 @@
 {
   "name": "botzilla",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Discord bot for Bobzilla4tv server",
   "main": "bot.js",
   "scripts": {
@@ -27,15 +27,15 @@
   "dependencies": {
     "axios": "^0.19.1",
     "cheerio": "^1.0.0-rc.3",
-    "discord.js": "^11.5.1",
+    "discord.js": "github:discordjs/discord.js",
     "mongoose": "^5.8.11",
     "mongoose-unique-validator": "^2.0.3",
+    "node-fetch": "latest",
     "nodemon": "^2.0.2",
     "puppeteer": "^2.0.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
-    "twitch": "^3.7.0",
-    "node-fetch": "latest"
+    "twitch": "^3.7.0"
   },
   "devDependencies": {}
 }

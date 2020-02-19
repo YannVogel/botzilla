@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const bot = new Discord.Client();
+const bot = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 const welcomeMessageAndStreamNotificationChannel = 'discussion';
 const salesChannel = 'botzilla';
 const adminChannelName = 'botzilla-admin';
@@ -24,6 +24,8 @@ newMember(bot, welcomeMessageAndStreamNotificationChannel);
 const onMessage = require('./bot/events/onMessage');
 onMessage(bot);
 
+const onMessageReactionAdd = require('./bot/events/onMessageReactionAdd');
+onMessageReactionAdd(bot);
 /* -------------------- 🢃 AUTOMATED FUNCTIONS 🢃 -------------------- */
 // Displays a @here message when Bobz starts streaming
 const streamStarting = require('./bot/automated/streamStarting');
