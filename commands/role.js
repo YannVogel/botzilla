@@ -4,7 +4,7 @@ module.exports = {
     args: true,
     usage: '<\`nom du rôle\`> <\`emoji de réaction\`>',
     guildOnly: true,
-    moderatorOnly: true,
+    roleManagerOnly: true,
     creatorOnly: false,
     cooldown: 0,
     execute(message, args) {

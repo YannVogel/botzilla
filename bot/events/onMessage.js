@@ -33,6 +33,10 @@ module.exports = botClient => {
         if (command.moderatorOnly && !message.member.hasPermission('MANAGE_CHANNELS')) {
             return message.reply('**Permissions insuffisantes !**');
         }
+        // Blocks a role manager only command if used by a user with not enough permission
+        if (command.roleManagerOnly && !message.member.hasPermission('MANAGE_ROLES')) {
+            return message.reply('**Permissions insuffisantes !**');
+        }
         // Blocks a creator only command if used by a non-creator user
         if (command.creatorOnly && message.author.id !== (process.env.ADMIN_ID || adminID)) {
             console.log(`Commande "${command.name}" a été bloquée : réclamée par ${message.author.username} sur le serveur ${message.guild}.`);
