@@ -20,7 +20,7 @@ module.exports = (botClient) => {
                 const role = reaction.message.guild.roles.cache.find(role => role.id === messageToReact.roleId);
                 if (!role) return;
                 member.roles.add(role).catch(console.error);
-                console.log(`${member} a réagi sur le serveur ${messageToReact.guildName} et a maintenant le rôle ${messageToReact.roleName}`);
+                console.log(`${user.username} a réagi sur le serveur ${messageToReact.guildName} et a maintenant le rôle ${messageToReact.roleName}`);
             });
         // We can also check if the reaction is partial or not
         if (reaction.partial) {
