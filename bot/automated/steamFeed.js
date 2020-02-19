@@ -47,14 +47,14 @@ module.exports = (botClient, timeInMinutes, gameId, channelName, roleToMention) 
                                     newGamesFeed.save();
                                 }
 
-                                botClient.guilds.forEach(guild => {
-                                    const channel = guild.channels.find(ch => ch.name === channelName);
+                                botClient.guilds.cache.forEach(guild => {
+                                    const channel = guild.channels.cache.find(ch => ch.name === channelName);
                                     // If the channel doesn't exist, stops everything
                                     if(!channel) {
                                         return;
                                     }
                                     // Si le channel existe on prépare un embed message à envoyer
-                                    const response = new Discord.RichEmbed()
+                                    const response = new Discord.MessageEmbed()
                                         .setTitle(title)
                                         .setURL(urlSource)
                                         .setThumbnail(botAvatar)
@@ -62,7 +62,7 @@ module.exports = (botClient, timeInMinutes, gameId, channelName, roleToMention) 
                                         .setImage(image);
 
                                     // Seeks for the role to mention
-                                    const role = guild.roles.find(role => role.name === roleToMention);
+                                    const role = guild.roles.cache.find(role => role.name === roleToMention);
                                     if(!role) {
                                         console.error(`steamFeed : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
                                         channel.send(`Une nouvelle mise à jour de ${gameName} a été publiée !`);

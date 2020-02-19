@@ -10,8 +10,8 @@ const desiredTags = 3;      // Number of game tags to display
 function isAnElementUnexpected(botClient, array, adminChannelName) {
     for(let i = 0; i < array.length; i++) {
         if(typeof array[i][1] !== 'string') {
-            botClient.guilds.forEach(guild => {
-                const channel = guild.channels.find(ch => ch.name === adminChannelName);
+            botClient.guilds.cache.forEach(guild => {
+                const channel = guild.channels.cache.find(ch => ch.name === adminChannelName);
 
                 if (!channel) return;
 
@@ -31,7 +31,7 @@ function embedMessage(data) {
         data.offerInformations = "OFFRE DU JOUR !"
     }
 
-    return new Discord.RichEmbed()
+    return new Discord.MessageEmbed()
         .setColor('#cfbb72')
         .setTitle(`${data.gameName}`)
         .setURL(data.frenchOfferLink)
@@ -113,15 +113,15 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                         return console.error("Il m'a manqué un élément pour afficher correctement la promo Steam...");
                     }
 
-                    botClient.guilds.forEach(guild => {
-                        const channel = guild.channels.find(ch => ch.name === channelName);
+                    botClient.guilds.cache.forEach(guild => {
+                        const channel = guild.channels.cache.find(ch => ch.name === channelName);
                         // If the channel doesn't exist, contacts the server owner
                         if(!channel) {
                             return guild.owner.user.send(missingChannelMessage(guild.name, channelName));
                         }
 
                         // Seeks for the role to mention
-                        const role = guild.roles.find(role => role.name === roleToMention);
+                        const role = guild.roles.cache.find(role => role.name === roleToMention);
                         if(!role) {
                             console.error(`egsFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
                             channel.send(`J'ai trouvé une nouvelle promo intéressante sur l'Epic Games Store !`)

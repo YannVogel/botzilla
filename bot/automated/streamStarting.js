@@ -4,7 +4,7 @@ const {twitchClientSecret} = process.env.TWITCH_SECRET || require('../../auth.js
 const twitch = TwitchClient.withClientCredentials(process.env.TWITCH_ID || twitchClientID,
     process.env.TWITCH_SECRET || twitchClientSecret);
 const missingChannelMessage = require('../_missingChannelMessage');
-const streamer = 'bobzill4tv';
+const streamer = 'bobzilla4tv';
 const streamLink = 'https://www.twitch.tv/' + streamer;
 // Permet de ne pas spammer un chan quand un streamer est en live, le but étant de n'avetir qu'une seule fois
 let firstNotification = true;
@@ -23,8 +23,8 @@ module.exports = (botClient, timeInSeconds, channelName) => {
             .then((isLive) => {
                 if (isLive) {
                     if (firstNotification) {
-                        botClient.guilds.forEach(guild => {
-                            const channel = guild.channels.find(ch => ch.name === channelName);
+                        botClient.guilds.cache.forEach(guild => {
+                            const channel = guild.channels.cache.find(ch => ch.name === channelName);
                             firstNotification = false;
 
                             // If the channel doesn't exist, contacts the server owner

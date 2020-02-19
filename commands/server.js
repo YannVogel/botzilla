@@ -27,15 +27,15 @@ const monthsFr = [
 ];
 
 function embedMessage(message, creationDate){
-    return new Discord.RichEmbed()
+    return new Discord.MessageEmbed()
         .setColor('#cfbb72')
         .setTitle(message.guild.name)
         .setAuthor(`Propriétaire : ${message.guild.owner.user.username}`, message.guild.owner.user.avatarURL)
         .setDescription(`Serveur créé le ${creationDate}`)
         .setThumbnail(botAvatar)
         .addField("Nombre de membres", message.guild.memberCount, true)
-        .addField("Nombre d'emojis", message.guild.emojis.size, true)
-        .setImage(message.guild.iconURL || message.guild.nameAcronym)
+        .addField("Nombre d'emojis", message.guild.emojis.cache.size, true)
+        .setImage(message.guild.iconURL() || message.guild.nameAcronym)
 }
 
 module.exports = {

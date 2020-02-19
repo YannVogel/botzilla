@@ -27,7 +27,7 @@ module.exports = {
                 const imgThumb = $('div._2c1ElNxHftd8W_nZtcG9zf._33Pa96SGhFVpZeI6a7Y_Pl._2e9Lv1I3dOmICVO9fg3uTG', html).eq(0)[0].attribs.style.split('url(')[1].split(');')[0];
                 const gameLink = $('a._13svhQIUZqD9PVzFcLwOKT.styled-outbound-link', html)[0].attribs.href.split('en-US').join('fr');
 
-                const response = new Discord.RichEmbed()
+                const response = new Discord.MessageEmbed()
                     .setTitle(lastNew)
                     .setURL(gameLink)
                     .setDescription("Epic propose régulièrement des promotions sur son client EGS, ainsi qu'un jeu offert tous les jeudis !")
@@ -42,7 +42,7 @@ module.exports = {
                     const newLink = 'https://www.reddit.com'+$('a.SQnoC3ObvgnGjWt90zD9Z._2INHSNB8V5eaWp4P0rY_mE', html).eq(i)[0].attribs.href;
                     const gameLink = $('a._13svhQIUZqD9PVzFcLwOKT.styled-outbound-link', html)[i].attribs.href.split('en-US').join('fr');
 
-                    const response = new Discord.RichEmbed()
+                    const response = new Discord.MessageEmbed()
                         .setTitle(lastNew)
                         .setURL(gameLink);
 
