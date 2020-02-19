@@ -32,14 +32,14 @@ module.exports = (botClient, timeInMinutes, channelName, roleToMention) => {
                         // On ajoute la promo en nouvelle entrée de BDD
                         newEgsProms.save();
 
-                        botClient.guilds.forEach(guild => {
-                            const channel = guild.channels.find(ch => ch.name === channelName);
+                        botClient.guilds.cache.forEach(guild => {
+                            const channel = guild.channels.cache.find(ch => ch.name === channelName);
                             // If the channel doesn't exist, contacts the server owner
                             if(!channel) {
                                 return guild.owner.user.send(missingChannelMessage(guild.name, channelName));
                             }
                             // Si le channel existe on prépare un embed message à envoyer
-                            const response = new Discord.RichEmbed()
+                            const response = new Discord.MessageEmbed()
                                 .setTitle(lastNew)
                                 .setURL(gameLink)
                                 .setDescription("Epic propose régulièrement des promotions sur son client EGS, ainsi qu'un jeu offert tous les jeudis !")
@@ -48,7 +48,7 @@ module.exports = (botClient, timeInMinutes, channelName, roleToMention) => {
                                 .setImage(imgThumb);
 
                             // Seeks for the role to mention
-                            const role = guild.roles.find(role => role.name === roleToMention);
+                            const role = guild.roles.cache.find(role => role.name === roleToMention);
                             if(!role) {
                                 console.error(`egsFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
                                 channel.send(`J'ai trouvé une nouvelle promo intéressante sur l'Epic Games Store !`)

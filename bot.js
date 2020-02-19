@@ -23,7 +23,7 @@ newMember(bot, welcomeMessageAndStreamNotificationChannel);
 // Sets the bot behaviour for specified messages
 const onMessage = require('./bot/events/onMessage');
 onMessage(bot);
-
+// Manages reactions used by an user to obtain a specific role
 const onMessageReactionAdd = require('./bot/events/onMessageReactionAdd');
 onMessageReactionAdd(bot);
 /* -------------------- 🢃 AUTOMATED FUNCTIONS 🢃 -------------------- */

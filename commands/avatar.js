@@ -9,11 +9,11 @@ module.exports = {
     cooldown: 0,
     execute(message, args) {
         if (!message.mentions.users.size) {
-            return message.channel.send(`Ton avatar : <${message.author.avatarURL()}>`);
+            return message.channel.send(`Ton avatar : <${message.author.avatarURL({format: 'png', dynamic: true})}>`);
         }
 
         const avatarList = message.mentions.users.map(user => {
-            return `Avatar de ${user.username} : <${user.avatarURL()}>`;
+            return `Avatar de ${user.username} : <${user.avatarURL({format: 'png', dynamic: true})}>`;
         });
 
         // send the entire array of strings as a message
