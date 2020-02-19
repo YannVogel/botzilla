@@ -48,7 +48,6 @@ module.exports = {
                     roleName: role.name,
                     messageId: message.id,
                 });
-                console.log(roleData);
                 roleData.save()
                     .catch(error =>
                         console.error(`Une erreur est survenue lors de l'engesitrement de ${role.name} sur le serveur ${message.guild.name} : ${error}`)
