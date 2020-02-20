@@ -54,7 +54,7 @@ function getGameData(html, frenchOfferLink, offerImage) {
 
     const gameName = $('div.apphub_AppName', html).text();
     const gameIcon = $('div.apphub_AppIcon>img', html).attr('src');
-    const offerInformations = $('p.game_purchase_discount_countdown', html).text();
+    const offerInformations = $('p.game_purchase_discount_countdown', html).eq(0).text();
     const gameDescriptionRaw = $('div.game_description_snippet', html).text();
     const gameDescription =  gameDescriptionRaw.replace(/\t?\n?/g, '');
     const discountPrice = $('div.discount_final_price', html).eq(0).text();
