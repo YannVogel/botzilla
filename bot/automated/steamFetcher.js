@@ -13,9 +13,9 @@ function isAnElementUnexpected(botClient, array, adminChannelName) {
             botClient.guilds.cache.forEach(guild => {
                 const channel = guild.channels.cache.find(ch => ch.name === adminChannelName);
 
-                if (!channel) return;
+                if (!channel) return true;
 
-                channel.send(`${guild.owner}J'ai abandonné la fonction steamFetcher car ${array[i][0]} n'était pas un string mais un ${typeof array[i][1]}`);
+                channel.send(`${guild.owner}J'ai abandonné la fonction steamFetcher car ${array[i][0]} n'était pas un string mais un ${typeof array[i][1]} pour ${array[1][1]}`);
             });
             // Return true if an element is not a "string"
             return true;
@@ -123,8 +123,8 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                         // Seeks for the role to mention
                         const role = guild.roles.cache.find(role => role.name === roleToMention);
                         if(!role) {
-                            console.error(`egsFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
-                            channel.send(`J'ai trouvé une nouvelle promo intéressante sur l'Epic Games Store !`)
+                            console.error(`steamFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
+                            channel.send(`J'ai trouvé une nouvelle promo intéressante sur Steam !`)
                                 .then(() => {
                                     return channel.send(embedMessage(data));
                                 });
