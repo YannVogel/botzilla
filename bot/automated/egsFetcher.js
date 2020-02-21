@@ -4,6 +4,7 @@ const cheerio = require('cheerio');
 const {botAvatar} = require('../../config');
 const EgsProms = require('../../models/egsProms');
 const missingChannelMessage = require('../_missingChannelMessage');
+const {adminID} = process.env.ADMIN_ID || require('../../auth.json');
 
 module.exports = (botClient, timeInMinutes, channelName, roleToMention) => {
     botClient.setInterval(() => {
@@ -34,9 +35,10 @@ module.exports = (botClient, timeInMinutes, channelName, roleToMention) => {
 
                         botClient.guilds.cache.forEach(guild => {
                             const channel = guild.channels.cache.find(ch => ch.name === channelName);
-                            // If the channel doesn't exist, contacts the server owner
+                            // If the channel doesn't exist, contacts the admin
                             if(!channel) {
-                                return guild.owner.user.send(missingChannelMessage(guild.name, channelName));
+                                const adminMember = guild.members.cache.find(member => member.id === (process.env.ADMIN_ID || adminID));
+                                return adminMember.send(missingChannelMessage(guild.name, channelName));
                             }
                             // Si le channel existe on prépare un embed message à envoyer
                             const response = new Discord.MessageEmbed()

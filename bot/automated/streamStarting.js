@@ -8,6 +8,7 @@ const streamer = 'bobzilla4tv';
 const streamLink = 'https://www.twitch.tv/' + streamer;
 // Permet de ne pas spammer un chan quand un streamer est en live, le but étant de n'avetir qu'une seule fois
 let firstNotification = true;
+const {adminID} = process.env.ADMIN_ID || require('../../auth.json');
 
 async function isStreamLive(userName) {
     const user = await twitch.helix.users.getUserByName(userName);
@@ -29,7 +30,8 @@ module.exports = (botClient, timeInSeconds, channelName) => {
 
                             // If the channel doesn't exist, contacts the server owner
                             if(!channel) {
-                                return guild.owner.user.send(missingChannelMessage(guild.name, channelName));
+                                const adminMember = guild.members.cache.find(member => member.id === (process.env.ADMIN_ID || adminID));
+                                return adminMember.send(missingChannelMessage(guild.name, channelName));
                             }
                             return channel.send(`@here ${streamer} a commencé son live ! Rendez-vous sur sa chaîne : ${streamLink} !`);
                         });

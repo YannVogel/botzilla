@@ -6,6 +6,7 @@ const SteamSales = require('../../models/steamSales');
 const missingChannelMessage = require('../_missingChannelMessage');
 const dayToRefreshDB = 10;  // Every x days, the DB will delete the old content
 const desiredTags = 3;      // Number of game tags to display
+const {adminID} = process.env.ADMIN_ID || require('../../auth.json');
 
 function isAnElementUnexpected(botClient, array, adminChannelName) {
     for(let i = 0; i < array.length; i++) {
@@ -117,7 +118,8 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                         const channel = guild.channels.cache.find(ch => ch.name === channelName);
                         // If the channel doesn't exist, contacts the server owner
                         if(!channel) {
-                            return guild.owner.user.send(missingChannelMessage(guild.name, channelName));
+                            const adminMember = guild.members.cache.find(member => member.id === (process.env.ADMIN_ID || adminID));
+                            return adminMember.send(missingChannelMessage(guild.name, channelName));
                         }
 
                         // Seeks for the role to mention
