@@ -12,11 +12,10 @@ function isAnElementUnexpected(botClient, array, adminChannelName) {
     for(let i = 0; i < array.length; i++) {
         if(typeof array[i][1] !== 'string') {
             botClient.guilds.cache.forEach(guild => {
-                const channel = guild.channels.cache.find(ch => ch.name === adminChannelName);
+                const adminMember = guild.members.cache.find(member => member.id === (process.env.ADMIN_ID || adminID));
 
-                if (!channel) return true;
-
-                channel.send(`${guild.owner}J'ai abandonné la fonction steamFetcher car ${array[i][0]} n'était pas un string mais un ${typeof array[i][1]} pour ${array[1][1]}`);
+                adminMember.send(`${adminMember}J'ai abandonné la fonction steamFetcher car ${array[i][0]} n'était pas un string mais un ${typeof array[i][1]} pour ${array[1][1]}`)
+                    .catch(console.error);
             });
             // Return true if an element is not a "string"
             return true;
