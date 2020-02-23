@@ -6,16 +6,17 @@ const SteamSales = require('../../models/steamSales');
 const missingChannelMessage = require('../_missingChannelMessage');
 const dayToRefreshDB = 10;  // Every x days, the DB will delete the old content
 const desiredTags = 3;      // Number of game tags to display
+const {adminID} = process.env.ADMIN_ID || require('../../auth.json');
+let advertiseOnce = true; // Manages the advertising message sent to @members in order to display only once even if there are multiple results
 
 function isAnElementUnexpected(botClient, array, adminChannelName) {
     for(let i = 0; i < array.length; i++) {
         if(typeof array[i][1] !== 'string') {
             botClient.guilds.cache.forEach(guild => {
-                const channel = guild.channels.cache.find(ch => ch.name === adminChannelName);
+                const adminMember = guild.members.cache.find(member => member.id === (process.env.ADMIN_ID || adminID));
 
-                if (!channel) return true;
-
-                channel.send(`${guild.owner}J'ai abandonné la fonction steamFetcher car ${array[i][0]} n'était pas un string mais un ${typeof array[i][1]} pour ${array[1][1]}`);
+                adminMember.send(`${adminMember}J'ai abandonné la fonction steamFetcher car ${array[i][0]} n'était pas un string mais un ${typeof array[i][1]} pour ${array[1][1]}`)
+                    .catch(console.error);
             });
             // Return true if an element is not a "string"
             return true;
@@ -117,23 +118,25 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                         const channel = guild.channels.cache.find(ch => ch.name === channelName);
                         // If the channel doesn't exist, contacts the server owner
                         if(!channel) {
-                            return guild.owner.user.send(missingChannelMessage(guild.name, channelName));
+                            const adminMember = guild.members.cache.find(member => member.id === (process.env.ADMIN_ID || adminID));
+                            return adminMember.send(missingChannelMessage(guild.name, channelName));
                         }
 
                         // Seeks for the role to mention
                         const role = guild.roles.cache.find(role => role.name === roleToMention);
                         if(!role) {
                             console.error(`steamFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
-                            channel.send(`J'ai trouvé une nouvelle promo intéressante sur Steam !`)
-                                .then(() => {
-                                    return channel.send(embedMessage(data));
-                                });
+                            if(advertiseOnce) {
+                                channel.send(`Il y a du nouveau sur Steam !`);
+                                advertiseOnce = false;
+                            }
+                            return channel.send(embedMessage(data));
                         }
-
-                        channel.send(`<@&${role.id}> J'ai trouvé une nouvelle promo intéressante sur Steam !`)
-                            .then(() => {
-                                return channel.send(embedMessage(data));
-                            });
+                        if(advertiseOnce) {
+                            channel.send(`<@&${role.id}> Il y a du nouveau sur Steam !`);
+                            advertiseOnce = false;
+                        }
+                        return channel.send(embedMessage(data));
                     });
 
                 }).catch(err =>{ console.log(err); });
@@ -143,6 +146,7 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
 module.exports = (botClient, timeInMinutes, channelName, adminChannelName, roleToMention) => {
     botClient.setInterval(() => {
         const url = `https://store.steampowered.com/?l=french`;
+        advertiseOnce = true;
 
         // Fetch the midweek madness deals
         rp(url)

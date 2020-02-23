@@ -41,11 +41,7 @@ function embedMessage(message, creationDate){
 module.exports = {
     name: 'server',
     description: 'Affiche des informations sur le serveur',
-    args: false,
-    usage: '',
     guildOnly: true,
-    moderatorOnly: false,
-    creatorOnly: false,
     cooldown: 60,
     execute(message, args) {
         const dateRaw = message.guild.createdAt;

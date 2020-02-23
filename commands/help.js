@@ -3,11 +3,7 @@ const { prefix } = require('../config.json');
 module.exports = {
     name: 'help',
     description: 'Liste des commandes disponibles.',
-    args: false,
     usage: '[command name]',
-    guildOnly: false,
-    moderatorOnly: false,
-    creatorOnly: false,
     cooldown: 5,
     execute(message, args) {
         let commandName = [];

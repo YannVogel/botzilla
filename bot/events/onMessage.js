@@ -29,8 +29,12 @@ module.exports = botClient => {
         if (command.guildOnly && message.channel.type !== 'text') {
             return message.reply('Je ne peux pas utiliser cette commande dans les messages privés !');
         }
-        // Blocks a moderator only command if used by a user with not enough permission
-        if (command.moderatorOnly && !message.member.hasPermission('MANAGE_CHANNELS')) {
+        // Blocks a message manager only command if used by a user with not enough permission
+        if (command.messageManagerOnly && !message.member.hasPermission('MANAGE_MESSAGES')) {
+            return message.reply('**Permissions insuffisantes !**');
+        }
+        // Blocks a member manager only command if used by a user with not enough permission
+        if (command.memberManagerOnly && !message.member.hasPermission('KICK_MEMBERS')) {
             return message.reply('**Permissions insuffisantes !**');
         }
         // Blocks a role manager only command if used by a user with not enough permission

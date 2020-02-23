@@ -5,10 +5,6 @@ module.exports = {
     name: 'quote',
     aliases: ['qo'],
     description: 'Affiche une citation du stream de Bob choisie au hasard.',
-    args: false,
-    guildOnly: false,
-    moderatorOnly: false,
-    creatorOnly: false,
     cooldown: 0,
     execute(message, args) {
             const url = `https://twitch.center/customapi/quote/list?token=ecd68f5b`;

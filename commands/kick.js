@@ -4,8 +4,7 @@ module.exports = {
     args: true,
     usage: '<user>',
     guildOnly: true,
-    moderatorOnly: true,
-    creatorOnly: false,
+    memberManagerOnly: true,
     cooldown: 0,
     execute(message, args) {
         const user = message.mentions.users.first();

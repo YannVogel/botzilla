@@ -3,9 +3,8 @@ module.exports = {
     description: 'Supprime le nombre précisé de commentaires.',
     args: true,
     usage: '<nombre>',
-    guildOnly: false,
-    moderatorOnly: true,
-    creatorOnly: false,
+    guildOnly: true,
+    messageManagerOnly: true,
     cooldown: 1,
     execute(message, args) {
         const amount = parseInt(args[0]) + 1;
