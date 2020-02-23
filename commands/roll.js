@@ -4,11 +4,7 @@ module.exports = {
     name: 'roll',
     aliases: ['rl'],
     description: 'Jette un dé du nombre de faces demandées (ou un dé 6 par défaut).',
-    args: false,
     usage: '<nombre de faces> ou <xdy> avec x le nombre de dé(s) et y le nombre de face par dé',
-    guildOnly: false,
-    moderatorOnly: false,
-    creatorOnly: false,
     cooldown: 0,
     execute(message, args) {
         if(args[0] && (args[0].includes("d") || args[0].includes("D"))) {

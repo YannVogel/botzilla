@@ -18,9 +18,6 @@ module.exports = {
     description: 'Vérifie si un streamer est en live sur Twitch.',
     args: true,
     usage: '[streamer_name]',
-    guildOnly: false,
-    moderatorOnly: false,
-    creatorOnly: false,
     cooldown: 5,
     execute(message, args) {
         const research = args.join('_');

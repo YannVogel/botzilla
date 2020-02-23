@@ -1,10 +1,6 @@
 module.exports = {
     name: 'listening',
     description: '',
-    args: false,
-    usage: '',
-    guildOnly: false,
-    moderatorOnly: false,
     creatorOnly: true,
     cooldown: 60,
     execute(message, args) {

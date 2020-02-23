@@ -2,10 +2,7 @@ module.exports = {
     name: 'avatar',
     description: 'Affiche l\'avatar des utilisateurs précisés, sinon affiche son propre avatar.',
     args: false,
-    usage: '',
-    guildOnly: false,
-    moderatorOnly: false,
-    creatorOnly: false,
+    usage: '<votre pseudo> <le pseudo des membres désirés>',
     cooldown: 0,
     execute(message, args) {
         if (!message.mentions.users.size) {

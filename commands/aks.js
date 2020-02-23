@@ -7,9 +7,6 @@ module.exports = {
     description: 'Recherche un jeu ou un DLC sur le site allkeyshop.',
     args: true,
     usage: '[dlc] <game>',
-    guildOnly: false,
-    moderatorOnly: false,
-    creatorOnly: false,
     cooldown: 0,
     execute(message, args) {
         let url = '';

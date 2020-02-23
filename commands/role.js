@@ -7,7 +7,6 @@ module.exports = {
     usage: '<\`nom du rôle\`> <\`emoji de réaction\`>',
     guildOnly: true,
     roleManagerOnly: true,
-    creatorOnly: false,
     cooldown: 0,
     execute(message, args) {
         if (args.length !== 2) {
