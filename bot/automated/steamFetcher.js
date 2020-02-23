@@ -7,6 +7,7 @@ const missingChannelMessage = require('../_missingChannelMessage');
 const dayToRefreshDB = 10;  // Every x days, the DB will delete the old content
 const desiredTags = 3;      // Number of game tags to display
 const {adminID} = process.env.ADMIN_ID || require('../../auth.json');
+let advertiseOnce = true; // Manages the advertising message sent to @members in order to display only once even if there are multiple results
 
 function isAnElementUnexpected(botClient, array, adminChannelName) {
     for(let i = 0; i < array.length; i++) {
@@ -125,16 +126,17 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
                         const role = guild.roles.cache.find(role => role.name === roleToMention);
                         if(!role) {
                             console.error(`steamFetcher : Je n'ai pas trouvé le rôle ${roleToMention} sur le serveur ${guild.name}...`);
-                            channel.send(`J'ai trouvé une nouvelle promo intéressante sur Steam !`)
-                                .then(() => {
-                                    return channel.send(embedMessage(data));
-                                });
+                            if(advertiseOnce) {
+                                channel.send(`Il y a du nouveau sur Steam !`);
+                                advertiseOnce = false;
+                            }
+                            return channel.send(embedMessage(data));
                         }
-
-                        channel.send(`<@&${role.id}> J'ai trouvé une nouvelle promo intéressante sur Steam !`)
-                            .then(() => {
-                                return channel.send(embedMessage(data));
-                            });
+                        if(advertiseOnce) {
+                            channel.send(`<@&${role.id}> Il y a du nouveau sur Steam !`);
+                            advertiseOnce = false;
+                        }
+                        return channel.send(embedMessage(data));
                     });
 
                 }).catch(err =>{ console.log(err); });
@@ -144,6 +146,7 @@ function dbManagement(botClient, offerLink, frenchOfferLink, offerImage, channel
 module.exports = (botClient, timeInMinutes, channelName, adminChannelName, roleToMention) => {
     botClient.setInterval(() => {
         const url = `https://store.steampowered.com/?l=french`;
+        advertiseOnce = true;
 
         // Fetch the midweek madness deals
         rp(url)
