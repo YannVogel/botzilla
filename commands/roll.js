@@ -9,8 +9,8 @@ module.exports = {
     execute(message, args) {
         if(args[0] && (args[0].includes("d") || args[0].includes("D"))) {
             const syntax = args[0].includes("d") ? args[0].split("d") : args[0].split("D");
-            const diceNumber = parseInt(syntax[0]);
-            const faceNumber = parseInt(syntax[1]);
+            const diceNumber = parseInt(syntax[0], 10);
+            const faceNumber = parseInt(syntax[1], 10);
             let sum = 0;
 
             if(isNaN(diceNumber) || isNaN(faceNumber) || diceNumber === 0 || faceNumber === 0) {
@@ -27,7 +27,7 @@ module.exports = {
         }else if(args[0] && isNaN(args[0])) {
             return message.channel.send(`Désolé mais "${args[0]}" n'est pas un nombre...`);
         }
-        if(args[0] == 0) return message.channel.send(`Impossible de lancer un dé avec un nombre de face nul !`);
+        if(parseInt(args[0], 10) === 0) return message.channel.send(`Impossible de lancer un dé avec un nombre de face nul !`);
         if(!args[0]) args[0] = 6;
 
         return message.reply(`jette un dé ${args[0]} et obtient \`${random.getRandomInt(args[0]) + 1}\``);
