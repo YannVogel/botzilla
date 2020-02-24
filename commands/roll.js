@@ -13,7 +13,7 @@ module.exports = {
             const faceNumber = parseInt(syntax[1], 10);
             let sum = 0;
 
-            if(isNaN(diceNumber) || isNaN(faceNumber)) {
+            if(isNaN(diceNumber) || isNaN(faceNumber) || diceNumber === 0 || faceNumber === 0) {
                 return message.channel.send(`Désolé mais je n'ai pas reconnu la syntaxe \`${args[0]}\`...`);
             }
             for(let i = 0; i < diceNumber; i++) {
