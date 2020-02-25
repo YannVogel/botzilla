@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const PlayerSheet = require('../../models/playerSheet');
+const currency = 'bobzi$$';
 
 const daysFr = [
     "Dimanche",
@@ -59,7 +60,7 @@ module.exports = {
                             .setDescription(`Fiche créée le ${dateFr}`)
                             .addField("Expérience", player.playerExperience, true)
                             .addField("Inventaire", `${player.playerInventory.length} objet${player.playerInventory.length > 1 ? 's' : ''}`, true)
-                            .addField("Bourse", player.playerPurse, true)
+                            .addField(currency, player.playerPurse, true)
                             .setThumbnail(member.avatarURL())
                     )
                 });
