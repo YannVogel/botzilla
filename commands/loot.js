@@ -8,7 +8,6 @@ module.exports = {
     name: 'loot',
     description: `Essayez de gagner le plus de ${currency} possible !!`,
     guildOnly: true,
-    adminOnly: false,
     cooldown: 60*30,
     execute(message) {
         PlayerSheet.findOne({playerId: message.author.id})
