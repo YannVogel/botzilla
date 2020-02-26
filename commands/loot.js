@@ -2,7 +2,7 @@ const PlayerSheet = require('../models/playerSheet');
 const {prefix} = require('../config');
 const random = require('./dependencies/_getRandomInt');
 const randomMoney = require('./dependencies/_getRandomMoney');
-const currency = 'bobzi$$';
+const {currency} = require('../config');
 
 module.exports = {
     name: 'loot',

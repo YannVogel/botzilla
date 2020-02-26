@@ -1,4 +1,4 @@
-const currency = 'bobzi$$';
+const {currency} = require('../config');
 const getMoney = require('./dependencies/_getPlayerMoney');
 
 module.exports = {

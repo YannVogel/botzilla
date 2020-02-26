@@ -1,6 +1,6 @@
 const PlayerSheet = require('../../models/playerSheet');
 const {prefix} = require('../../config');
-const currency = 'bobzi$$';
+const {currency} = require('../../config');
 
 module.exports = {
     getPlayerMoney: function (message) {

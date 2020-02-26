@@ -8,7 +8,7 @@ const maxCommonProfit = 10;
 const maxRareProfit = 25;
 const maxEpicProfit = 50;
 const maxLegendaryProfit = 100;
-const currency = 'bobzi$$';
+const {currency} = require('../../config');
 
 const bagImages = {
   'common': 'https://i.ibb.co/4TjnvZk/common.png',
