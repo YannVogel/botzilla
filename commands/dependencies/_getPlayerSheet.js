@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const PlayerSheet = require('../../models/playerSheet');
-const currency = 'bobzi$$';
+const {currency} = require('../../config');
 
 const daysFr = [
     "Dimanche",
