@@ -1,37 +1,13 @@
 const Discord = require('discord.js');
 const {botAvatar} = require('../config');
+const frDate = require('./dependencies/_getFrenchDate');
 
-const daysFr = [
-    "Dimanche",
-    "Lundi",
-    "Mardi",
-    "Mercredi",
-    "Jeudi",
-    "Vendredi",
-    "Samedi",
-];
-
-const monthsFr = [
-    "Janvier",
-    "Février",
-    "Mars",
-    "Avril",
-    "Mai",
-    "Juin",
-    "Juillet",
-    "Août",
-    "Septembre",
-    "Octobre",
-    "Novembre",
-    "Décembre"
-];
-
-function embedMessage(message, creationDate){
+function embedMessage(message){
     return new Discord.MessageEmbed()
         .setColor('#cfbb72')
         .setTitle(message.guild.name)
-        .setAuthor(`Propriétaire : ${message.guild.owner.user.username}`, message.guild.owner.user.avatarURL)
-        .setDescription(`Serveur créé le ${creationDate}`)
+        .setAuthor(`Propriétaire : ${message.guild.owner.user.username}`, message.guild.owner.user.avatarURL())
+        .setDescription(`Serveur créé le ${frDate.getFrenchDate(message.guild.createdAt)}`)
         .setThumbnail(botAvatar)
         .addField("Nombre de membres", message.guild.memberCount, true)
         .addField("Nombre d'emojis", message.guild.emojis.cache.size, true)
@@ -44,17 +20,6 @@ module.exports = {
     guildOnly: true,
     cooldown: 60,
     execute(message, args) {
-        const dateRaw = message.guild.createdAt;
-
-        const dayFr = daysFr[dateRaw.getDay()];
-        const dayNumber = dateRaw.getDate();
-        const monthFr = monthsFr[dateRaw.getMonth()];
-        const year = dateRaw.getFullYear();
-
-        const dateFr = `${dayFr} ${dayNumber} ${monthFr} ${year}`;
-
-        const finalMessage = embedMessage(message, dateFr);
-
-        message.channel.send(finalMessage);
+        return message.channel.send(embedMessage(message));
     }
 };
