@@ -3,6 +3,8 @@ const {prefix} = require('../config');
 const random = require('./dependencies/_getRandomInt');
 const randomMoney = require('./dependencies/_getRandomMoney');
 const {currency} = require('../config');
+const Discord = require('discord.js');
+const cooldowns = require('../bot/events/onMessage').cooldowns;
 
 module.exports = {
     name: 'loot',
@@ -13,7 +15,9 @@ module.exports = {
         PlayerSheet.findOne({playerId: message.author.id})
             .then(player => {
                 if(!player) {
-                    this.cooldown = 1;
+                    const timestamps = cooldowns.get(this.name);
+                    // Delete the CD of this command for an user with no sheet created yet
+                    timestamps.delete(message.author.id);
                     return message.reply(`Merci de commencer par créer ta fiche avec la commande ${prefix}fiche !`)
                 }
                 this.cooldown = 60*30;

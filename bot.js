@@ -21,7 +21,7 @@ onceReady(bot);
 const newMember = require('./bot/events/onGuildMemberAdd');
 newMember(bot, welcomeMessageAndStreamNotificationChannel);
 // Sets the bot behaviour for specified messages
-const onMessage = require('./bot/events/onMessage');
+const onMessage = require('./bot/events/onMessage').onMessage;
 onMessage(bot);
 // Manages reactions used by an user to obtain a specific role
 const onMessageReactionAdd = require('./bot/events/onMessageReactionAdd');
