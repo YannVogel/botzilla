@@ -16,7 +16,8 @@ module.exports = {
                             playerExperience: 0,
                             playerPurse: 0,
                             playerInventory: [],
-                            createdAt: new Date()
+                            createdAt: new Date(),
+                            playerRuby: 0
                         });
                         // ...creates the player sheet in the DB
                         player.save().catch(console.error);
@@ -30,6 +31,7 @@ module.exports = {
                             .addField("Expérience", player.playerExperience, true)
                             .addField("Inventaire", `${player.playerInventory.length} objet${player.playerInventory.length > 1 ? 's' : ''}`, true)
                             .addField(currency, player.playerPurse, true)
+                            .addField('Nombre de rubis gagnés', player.playerRuby, true)
                             .setThumbnail(member.avatarURL())
                     )
                 });
