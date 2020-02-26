@@ -2,7 +2,7 @@ const random = require('./_getRandomInt.js');
 const Discord = require('discord.js');
 const {currency} = require('../../config');
 const PlayerSheet = require('../../models/playerSheet');
-const oneChanceInToGetRuby = 50;     // 1 chance in x to get a ruby
+const oneChanceInToGetRuby = 48;     // 1 chance in x to get a ruby
 const minRubyValue = 100;
 const maxRubyValue = minRubyValue + 400;
 
