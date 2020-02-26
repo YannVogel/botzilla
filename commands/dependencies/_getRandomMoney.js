@@ -1,8 +1,8 @@
 const  Discord = require('discord.js');
 const random = require('./_getRandomInt.js');
 const PlayerSheet = require('../../models/playerSheet');
-const maxCommon = 80;       // 1 <= common <= 80
-const maxRare = 90;         // 81 <= rare <= 90
+const maxCommon = 70;       // 1 <= common <= 70
+const maxRare = 90;         // 71 <= rare <= 90
 const maxEpic = 99;         // 91 <= epic <= 99
 const maxCommonProfit = 10;
 const maxRareProfit = 25;
