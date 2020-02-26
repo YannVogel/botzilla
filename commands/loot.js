@@ -13,6 +13,7 @@ module.exports = {
         PlayerSheet.findOne({playerId: message.author.id})
             .then(player => {
                 if(!player) {
+                    this.cooldown = 1;
                     return message.reply(`Merci de commencer par créer ta fiche avec la commande ${prefix}fiche !`)
                 }
 
