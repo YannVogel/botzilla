@@ -16,7 +16,7 @@ module.exports = {
                     this.cooldown = 1;
                     return message.reply(`Merci de commencer par créer ta fiche avec la commande ${prefix}fiche !`)
                 }
-
+                this.cooldown = 60*30;
                 const rng = random.getRandomInt(100) + 1;
 
                 return randomMoney.getRandomMoney(rng, message);
