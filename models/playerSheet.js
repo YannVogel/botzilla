@@ -7,7 +7,8 @@ const playerSheetSchema = mongoose.Schema({
     playerExperience: {type: Number, required: true},
     playerPurse: {type: Number, required: true},
     playerInventory: {type: Array, required: true},
-    createdAt: {type: Date, required: true}
+    createdAt: {type: Date, required: true},
+    playerRuby: {type: Number, required: true}
 });
 
 playerSheetSchema.plugin(uniqueValidator);

@@ -37,6 +37,7 @@ module.exports = {
         PlayerSheet.findOne({playerId: player.id})
             .then(player => {
                 player.playerPurse += rubyValue;
+                player.playerRuby++;
                 player.save();
             });
     }
