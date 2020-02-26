@@ -5,7 +5,10 @@ const {adminID} = process.env.ADMIN_ID || require('../../auth.json');
 const fs = require('fs');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-module.exports = botClient => {
+module.exports =
+        {
+            cooldowns,
+            onMessage: botClient => {
 
     botClient.commands = new Discord.Collection();
     for (const file of commandFiles) {
@@ -24,6 +27,9 @@ module.exports = botClient => {
             || botClient.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
         if (!command) return;
+
+        // If the bot is in dev mode and the author is not the admin
+        if(!process.env.BOT_TOKEN && message.author.id !== adminID) return;
 
         // Blocks a guild only command if used in a private message
         if (command.guildOnly && message.channel.type !== 'text') {
@@ -60,7 +66,6 @@ module.exports = botClient => {
         if (!cooldowns.has(command.name)) {
             cooldowns.set(command.name, new Discord.Collection());
         }
-
         const now = Date.now();
         const timestamps = cooldowns.get(command.name);
         const cooldownAmount = (command.cooldown || 3) * 1000;
@@ -87,4 +92,5 @@ module.exports = botClient => {
             return message.reply('Une erreur s\'est produite lors de l\'exécution de cette commande');
         }
     });
+        }
 };
