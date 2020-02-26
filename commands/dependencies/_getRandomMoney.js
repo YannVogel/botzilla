@@ -9,6 +9,7 @@ const maxRareProfit = 25;
 const maxEpicProfit = 50;
 const maxLegendaryProfit = 100;
 const {currency} = require('../../config');
+const extra = require('./_getExtraRuby');
 
 const bagImages = {
   'common': 'https://i.ibb.co/4TjnvZk/common.png',
@@ -49,25 +50,47 @@ function getMoneyBag (player, maxProfit, quality, multiplier = 1) {
 module.exports = {
     getRandomMoney: function(number, message) {
         const player = message.author;
+
         if(number <= maxCommon)
         {
             return message.reply(`a trouvé un sac ${bagFrName['common']}`)
-                .then(message.channel.send(getMoneyBag(player, maxCommonProfit, 'common')));
+                .then(message.channel.send(getMoneyBag(player, maxCommonProfit, 'common')))
+                .then(() =>{
+                        if(extra.getExtraRuby()) {
+                            extra.rubyManager(player, message)
+                        }
+                });
 
         }else if(number <= maxRare)
         {
             return message.reply(`a trouvé un sac ${bagFrName['rare']}`)
-                .then(message.channel.send(getMoneyBag(player, maxRareProfit, 'rare')));
+                .then(message.channel.send(getMoneyBag(player, maxRareProfit, 'rare')))
+                .then(() =>{
+                    if(extra.getExtraRuby()) {
+                        extra.rubyManager(player, message)
+                    }
+                });
 
         }else if(number <= maxEpic)
         {
             return message.reply(`a trouvé un sac ${bagFrName['epic']}`)
-                .then(message.channel.send(getMoneyBag(player, maxEpicProfit, 'epic', 2)));
+                .then(message.channel.send(getMoneyBag(player, maxEpicProfit, 'epic', 2)))
+                .then(() =>{
+                    if(extra.getExtraRuby()) {
+                        extra.rubyManager(player, message)
+                    }
+                });
 
         }else   // Legendary = 100
         {
             return message.reply(`a trouvé un sac ${bagFrName['legendary']}`)
-                .then(message.channel.send(getMoneyBag(player, maxLegendaryProfit, 'legendary', 4)));
+                .then(message.channel.send(getMoneyBag(player, maxLegendaryProfit, 'legendary', 4)))
+                .then(() =>{
+                    if(extra.getExtraRuby()) {
+                        extra.rubyManager(player, message)
+                    }
+                });
         }
+
     }
 };
