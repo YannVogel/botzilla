@@ -1,7 +1,7 @@
 const PlayerSheet = require('../models/playerSheet');
 const {prefix} = require('../config');
 const random = require('./dependencies/_getRandomInt');
-const randomMoney = require('./dependencies/_getRandomMoney');
+const bagManager = require('./dependencies/_getRandomBag');
 const {currency} = require('../config');
 const Discord = require('discord.js');
 const cooldowns = require('../bot/events/onMessage').cooldowns;
@@ -20,10 +20,9 @@ module.exports = {
                     timestamps.delete(message.author.id);
                     return message.reply(`Merci de commencer par créer ta fiche avec la commande ${prefix}fiche !`)
                 }
-                this.cooldown = 60*30;
                 const rng = random.getRandomInt(100) + 1;
 
-                return randomMoney.getRandomMoney(rng, message);
+                return bagManager.getRandomBag(rng, message);
             })
     }
 };
