@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const PlayerSheet = require('../../models/playerSheet');
 const {currency} = require('../../config');
 const frDate = require('./_getFrenchDate');
+const format = require('./_getFormattedPlayerInventory');
 
 module.exports = {
     getPlayerSheet: function(member) {
@@ -23,18 +24,12 @@ module.exports = {
                         // ...creates the player sheet in the DB
                         player.save().catch(console.error);
                     }
-                    let formatedInventory = '';
-                    if(player.playerInventory.length > 0) {
-                        for(let i = 0; i < player.playerInventory.length; i++) {
-                            formatedInventory += `${player.playerInventory[i]} `;
-                        }
-                    }
                     resolve(
                         new Discord.MessageEmbed()
                             .setColor('#ffffff')
                             .setTitle(player.playerName)
                             .setDescription(`Fiche créée le ${frDate.getFrenchDate(player.createdAt)}`)
-                            .addField("Inventaire", player.playerInventory.length > 0  ? formatedInventory : '0 objet')
+                            .addField("Inventaire", format.getFormattedPlayerInventory(player.playerInventory))
                             .addField("Expérience", player.playerExperience, true)
                             .addField(currency, player.playerPurse, true)
                             .addField('Rubis obtenus', player.playerRuby, true)
