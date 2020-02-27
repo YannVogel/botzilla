@@ -9,7 +9,8 @@ const playerSheetSchema = mongoose.Schema({
     playerInventory: {type: Array, required: true},
     createdAt: {type: Date, required: true},
     playerRuby: {type: Number, required: true},
-    playerCurses: {type: Number, required: true}
+    playerCurses: {type: Number, required: true},
+    playerBuff: {type: Array, default: []}
 });
 
 playerSheetSchema.plugin(uniqueValidator);
