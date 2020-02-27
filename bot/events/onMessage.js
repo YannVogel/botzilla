@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
 const {prefix} = require('../../config');
 const {adminID} = process.env.ADMIN_ID || require('../../auth.json');
+const {devID} = process.env.ADMIN_ID || require('../../auth.json');
 const fs = require('fs');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -28,8 +29,8 @@ module.exports =
 
         if (!command) return;
 
-        // If the bot is in dev mode and the author is not the admin
-        if(!process.env.BOT_TOKEN && message.author.id !== adminID) return;
+        // If the bot is in dev mode and the author is not the admin or Neöphix
+        if(!process.env.BOT_TOKEN && message.author.id !== adminID && message.author.id !== devID) return;
 
         // Blocks a guild only command if used in a private message
         if (command.guildOnly && message.channel.type !== 'text') {
