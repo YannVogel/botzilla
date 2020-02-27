@@ -4,7 +4,7 @@ const {devID} = process.env.DEV_ID || require('../auth');
 
 module.exports = {
     name: 'moneystats',
-    aliases: 'stats',
+    aliases: ['stats'],
     description: 'Affiche les joueurs classés par leurs gains',
     cooldown: 60,
     guildOnly: true,

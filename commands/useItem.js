@@ -14,7 +14,7 @@ function thisPlayerHasThisItem (player, item) {
 
 module.exports = {
     name: 'useitem',
-    aliases: 'use',
+    aliases: ['use'],
     description: "Permet d'utiliser un objet possédé",
     guildOnly: true,
     cooldown: 60 * 60,

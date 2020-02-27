@@ -30,8 +30,8 @@ module.exports =
             || botClient.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
         if (!command) return;
-        // If the bot is in dev mode and the server is not the admin server and the author is not the admin nor Neöphix
-        if(!process.env.BOT_TOKEN && message.guild.id !== devServerID && (message.author.id !== adminID || message.author.id !== devID)) return;
+        // If the bot is in dev mode and the server is not the admin server
+        if(!process.env.BOT_TOKEN && message.guild.id !== devServerID) return;
 
         // Blocks a guild only command if used in a private message
         if (command.guildOnly && message.channel.type !== 'text') {
