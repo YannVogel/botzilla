@@ -1,6 +1,7 @@
 const PlayerSheet = require('../models/playerSheet');
 const use = require('./dependencies/_useSpecificItem');
 const items = require('./dependencies/gameMarket').item;
+const cd = require('./dependencies/_deleteTimer');
 
 function thisPlayerHasThisItem (player, item) {
     for(let i = 0; i < player.playerInventory.length; i++) {
@@ -19,9 +20,11 @@ module.exports = {
     cooldown: 60 * 60,
     execute(message, args) {
         if(!args[0]) {
+            cd.deleteTimer(message.author.id, this.name);
             return message.reply('Tu dois préciser quel objet tu veux utiliser !');
         }
         if(args.length > 1) {
+            cd.deleteTimer(message.author.id, this.name);
             return message.reply("Tu ne peux utiliser qu'un seul objet à la fois !");
         }
 
@@ -41,6 +44,7 @@ module.exports = {
                         player.save();
                         return message.reply(`a utilisé un ${itemToUse.icon} ${itemToUse.name} ! ${itemToUse.whenUsed}`)
                     }else {
+                        cd.deleteTimer(message.author.id, this.name);
                         return message.reply("Tu ne possèdes pas cet objet !");
                     }
                 });
