@@ -39,7 +39,7 @@ module.exports = {
                         use.useSpecificItem(player, itemToUse.name);
                         player.playerInventory.splice( player.playerInventory.indexOf(itemToUse.name), 1);
                         player.save();
-                        return message.reply(`a utilisé un ${itemToUse.name} ! ${itemToUse.whenUsed}`)
+                        return message.reply(`a utilisé un ${itemToUse.icon} ${itemToUse.name} ! ${itemToUse.whenUsed}`)
                     }else {
                         return message.reply("Tu ne possèdes pas cet objet !");
                     }
