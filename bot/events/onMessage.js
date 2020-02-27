@@ -5,6 +5,7 @@ const {adminID} = process.env.ADMIN_ID || require('../../auth.json');
 const {devID} = process.env.DEV_ID || require('../../auth.json');
 const fs = require('fs');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const formated = require('../../commands/dependencies/_getFormatedCooldown');
 
 module.exports =
         {
@@ -77,7 +78,7 @@ module.exports =
 
             if (now < expirationTime) {
                 const timeLeft = (expirationTime - now) / 1000;
-                return message.reply(`Merci d'attendre encore ${timeLeft.toFixed(1)} secondes avant d'utiliser la commande \`${command.name}\` de nouveau.`);
+                return message.reply(`Merci d'attendre encore ${formated.getFormatedCooldown(timeLeft.toFixed(0))} secondes avant d'utiliser la commande \`${command.name}\` de nouveau.`);
             }
         }
 
