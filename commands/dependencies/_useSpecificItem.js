@@ -5,7 +5,7 @@ module.exports = {
         switch(itemName) {
             case 'warp':
                 cd.deleteTimer(player.playerId, 'loot');
-                break;
+            break;
             default:
                 return;
         }
