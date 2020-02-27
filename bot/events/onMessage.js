@@ -3,6 +3,7 @@ const cooldowns = new Discord.Collection();
 const {prefix} = require('../../config');
 const {adminID} = process.env.ADMIN_ID || require('../../auth.json');
 const {devID} = process.env.DEV_ID || require('../../auth.json');
+const {devServerID} = process.env.DEV_SERVER_ID || require('../../auth');
 const fs = require('fs');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 const formatted = require('../../commands/dependencies/_getFormattedCooldown');
@@ -29,9 +30,8 @@ module.exports =
             || botClient.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
         if (!command) return;
-
-        // If the bot is in dev mode and the author is not the admin or Neöphix
-        if(!process.env.BOT_TOKEN && message.author.id !== adminID && message.author.id !== devID) return;
+        // If the bot is in dev mode and the server is not the admin server and the author is not the admin nor Neöphix
+        if(!process.env.BOT_TOKEN && message.guild.id !== devServerID && (message.author.id !== adminID || message.author.id !== devID)) return;
 
         // Blocks a guild only command if used in a private message
         if (command.guildOnly && message.channel.type !== 'text') {
