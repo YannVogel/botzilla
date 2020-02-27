@@ -1,5 +1,6 @@
 const PlayerSheet = require('../models/playerSheet');
 const {currency} = require('../config');
+const {devID} = process.env.DEV_ID || require('../auth');
 
 module.exports = {
     name: 'moneystats',
@@ -11,10 +12,18 @@ module.exports = {
         PlayerSheet.find().sort({playerPurse: 'desc'})
             .then(players => {
                 let i = 0;
+                let devPlace;
                 const playersList = players.map(player => {
-                    i++;
-                    return `${i}) <@${player.playerId}> - ${player.playerPurse} ${currency}`;
+                    // If the player is not the dev account...
+                    if(player.playerId !== devID) {
+                        i++;
+                        return `${i}) <@${player.playerId}> - ${player.playerPurse} ${currency}`;
+                    }else
+                        //...otherwise, stores the dev account's place
+                        devPlace = i;
                 });
+                // Deletes the dev account line of the Object
+                playersList.splice(devPlace, 1);
 
                 return message.channel.send(`Classement des joueurs :`)
                     .then(message.channel.send(playersList));

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
 const {prefix} = require('../../config');
 const {adminID} = process.env.ADMIN_ID || require('../../auth.json');
-const {devID} = process.env.ADMIN_ID || require('../../auth.json');
+const {devID} = process.env.DEV_ID || require('../../auth.json');
 const fs = require('fs');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
