@@ -1,6 +1,8 @@
 const PlayerSheet = require('../models/playerSheet');
 const {currency} = require('../config');
 const {devID} = process.env.DEV_ID || require('../auth');
+const Discord = require('discord.js');
+const {botAvatar} = require('../config');
 
 module.exports = {
     name: 'moneystats',
@@ -12,21 +14,20 @@ module.exports = {
         PlayerSheet.find().sort({playerPurse: 'desc'})
             .then(players => {
                 let i = 0;
-                let devPlace;
+                const messageEmbed = new Discord.MessageEmbed()
+                    .setTitle('Scores actuels')
+                    .setColor('#cfbb72')
+                    .setThumbnail(botAvatar);
                 const playersList = players.map(player => {
                     // If the player is not the dev account...
-                    if(player.playerId !== process.env.DEV_ID || devID) {
+                    if(player.playerId !== (process.env.DEV_ID || devID)) {
                         i++;
-                        return `${i}) <@${player.playerId}> - ${player.playerPurse} ${currency}`;
-                    }else
-                        //...otherwise, stores the dev account's place
-                        devPlace = i;
+                        messageEmbed.addField(`${i}) ${player.playerName}`, `${player.playerPurse} ${currency}`, i > 3);
+                    }
                 });
-                // Deletes the dev account line of the Object
-                playersList.splice(devPlace, 1);
 
                 return message.channel.send(`Classement des joueurs :`)
-                    .then(message.channel.send(playersList));
+                    .then(message.channel.send(messageEmbed));
             });
     }
 };
