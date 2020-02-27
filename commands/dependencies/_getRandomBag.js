@@ -69,7 +69,7 @@ function getMoneyBag (player, maxProfit, quality, multiplier = 1) {
         });
     return new Discord.MessageEmbed()
             .setColor(bagColor[quality])
-            .setTitle(`Sac ${bagFrName[quality]} ${bagEmoji[quality]}`)
+            .setTitle(`${bagEmoji[quality]} Sac ${bagFrName[quality]}`)
             .addField(`Nombre de ${currency}`, loot, true)
             .setThumbnail(bagImages[quality]);
 }
@@ -81,14 +81,14 @@ module.exports = {
 
         // 1 "chance" in 50 to get a cursed bag
         if(random.getRandomInt(50) === 4) {
-            return message.reply(`a trouvé un... Oh non ! C'est un sac ${bagFrName['cursed']} ${bagEmoji['cursed']}`)
+            return message.reply(`a trouvé un... Oh non ! C'est un ${bagEmoji['cursed']} sac ${bagFrName['cursed']}`)
                 .then(message.channel.send(getCursedBag(player)));
         }
 
         if(number <= maxCommon)
         {
             quality = "common";
-            return message.reply(`a trouvé un sac ${bagEmoji[quality]} ${bagFrName[quality]}`)
+            return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]}.`)
                 .then(message.channel.send(getMoneyBag(player, maxCommonProfit, quality)))
                 .then(() =>{
                         if(extra.getExtraRuby()) {
@@ -99,7 +99,7 @@ module.exports = {
         }else if(number <= maxRare)
         {
             quality = "rare";
-            return message.reply(`a trouvé un sac ${bagEmoji[quality]} ${bagFrName[quality]}`)
+            return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]} ! Pas mal !`)
                 .then(message.channel.send(getMoneyBag(player, maxRareProfit, quality)))
                 .then(() =>{
                     if(extra.getExtraRuby()) {
@@ -110,7 +110,7 @@ module.exports = {
         }else if(number <= maxEpic)
         {
             quality = "epic";
-            return message.reply(`a trouvé un sac ${bagEmoji[quality]} ${bagFrName[quality]}`)
+            return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]} ! Super !!`)
                 .then(message.channel.send(getMoneyBag(player, maxEpicProfit, quality, 2)))
                 .then(() =>{
                     if(extra.getExtraRuby()) {
@@ -121,7 +121,7 @@ module.exports = {
         }else   // Legendary = 100
         {
             quality = "legendary";
-            return message.reply(`a trouvé un sac ${bagEmoji[quality]} ${bagFrName[quality]}`)
+            return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]} ! QUELLE CHANCE !!!`)
                 .then(message.channel.send(getMoneyBag(player, maxLegendaryProfit, quality, 4)))
                 .then(() =>{
                     if(extra.getExtraRuby()) {
