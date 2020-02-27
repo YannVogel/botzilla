@@ -8,7 +8,7 @@ const maxCommonProfit = 10;
 const maxRareProfit = 25;
 const maxEpicProfit = 50;
 const maxLegendaryProfit = 100;
-const maxCursedMalus = 10;
+const maxCursedMalus = 25;      // max % to lose when dropping a cursed bag
 const {currency} = require('../../config');
 const extra = require('./_getExtraRuby');
 
@@ -44,18 +44,11 @@ const bagEmoji = {
     'cursed': '💀'
 };
 
-function getCursedBag(player) {
-    const malus = random.getRandomInt(maxCursedMalus) + 1;
-    PlayerSheet.findOne({playerId: player.id})
-        .then(player => {
-            player.playerPurse -= malus;
-            player.playerCurses++;
-            player.save();
-        });
+function getCursedBag(percent, malus) {
     return new Discord.MessageEmbed()
         .setColor(bagColor['cursed'])
-        .setTitle(`Sac ${bagFrName['cursed']} ${bagEmoji['cursed']}`)
-        .addField(`Malus de ${currency}`, `-${malus}`, true)
+        .setTitle(`${bagEmoji['cursed']} Sac ${bagFrName['cursed']} niveau ${percent}`)
+        .addField(`Malus de ${currency}`, `-${malus} (${percent}%)`, true)
         .setThumbnail(bagImages['cursed'])
 }
 
@@ -81,8 +74,18 @@ module.exports = {
 
         // 1 "chance" in 50 to get a cursed bag
         if(random.getRandomInt(50) === 4) {
-            return message.reply(`a trouvé un... Oh non ! C'est un ${bagEmoji['cursed']} sac ${bagFrName['cursed']}`)
-                .then(message.channel.send(getCursedBag(player)));
+            const malusPercent = random.getRandomInt(maxCursedMalus) + 1;
+            let malus;
+            return PlayerSheet.findOne({playerId: player.id})
+                .then(player => {
+                    malus = Math.round(malusPercent*(player.playerPurse/100));
+                    player.playerPurse -= malus;
+                    player.playerCurses++;
+                    player.save();
+
+                    return message.reply(`a trouvé un... Oh non ! C'est un ${bagEmoji['cursed']} sac ${bagFrName['cursed']}`)
+                        .then(message.channel.send(getCursedBag(malusPercent, malus)));
+                });
         }
 
         if(number <= maxCommon)
