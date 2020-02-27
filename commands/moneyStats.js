@@ -15,7 +15,7 @@ module.exports = {
                 let devPlace;
                 const playersList = players.map(player => {
                     // If the player is not the dev account...
-                    if(player.playerId !== devID) {
+                    if(player.playerId !== process.env.DEV_ID || devID) {
                         i++;
                         return `${i}) <@${player.playerId}> - ${player.playerPurse} ${currency}`;
                     }else
