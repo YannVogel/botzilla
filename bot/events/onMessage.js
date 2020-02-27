@@ -78,7 +78,7 @@ module.exports =
 
             if (now < expirationTime) {
                 const timeLeft = (expirationTime - now) / 1000;
-                return message.reply(`Merci d'attendre encore ${formated.getFormatedCooldown(timeLeft.toFixed(0))} secondes avant d'utiliser la commande \`${command.name}\` de nouveau.`);
+                return message.reply(`Merci d'attendre encore ${formated.getFormatedCooldown(timeLeft.toFixed(0))} avant d'utiliser la commande \`${command.name}\` de nouveau.`);
             }
         }
 
