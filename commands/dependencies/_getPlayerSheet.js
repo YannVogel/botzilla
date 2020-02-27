@@ -23,14 +23,13 @@ module.exports = {
                         // ...creates the player sheet in the DB
                         player.save().catch(console.error);
                     }
-
                     resolve(
                         new Discord.MessageEmbed()
                             .setColor('#ffffff')
                             .setTitle(player.playerName)
                             .setDescription(`Fiche créée le ${frDate.getFrenchDate(player.createdAt)}`)
                             .addField("Expérience", player.playerExperience, true)
-                            .addField("Inventaire", `${player.playerInventory.length} objet${player.playerInventory.length > 1 ? 's' : ''}`, true)
+                            .addField("Inventaire", player.playerInventory.length > 0  ? player.playerInventory : '0 objet' , true)
                             .addField(currency, player.playerPurse, true)
                             .addField('Rubis obtenus', player.playerRuby, true)
                             .addField('Malédictions', player.playerCurses, true)

@@ -1,0 +1,13 @@
+{
+  "item":
+  [
+    {
+    "id": "000",
+    "name": "warp",
+    "price": 8,
+    "description": "Permet d'accélérer le temps et d'utiliser instantanément la commande !loot (une utilisation).",
+    "icon": ":cyclone:",
+    "whenUsed": "Tu peux maintenant réutiliser la commande !loot !"
+    }
+  ]
+}
