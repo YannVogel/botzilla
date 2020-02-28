@@ -7,6 +7,9 @@ const roleToMentionForGamesSales = 'DealSeeker';
 const roleToMentionForWolcenFeed = 'wolcen';
 const {wolcenId} = require('./gamesId');
 const wolcenChannel = "wolcen";
+const roleToMentionForAzurLaneFeed = "AzurLane";
+const {azurLaneId} = require('./gamesId');
+const azurLaneChannel = "azur-lane";
 
 // Bot connexion
 const login = require('./bot/login');
@@ -36,6 +39,10 @@ egsFetcher(bot, 5, salesChannel, roleToMentionForGamesSales);
 // Displays @roleToMentionForGamesSales message when new Steam deals are available
 const steamFetcher = require('./bot/automated/steamFetcher');
 steamFetcher(bot, 5, salesChannel, adminChannelName, roleToMentionForGamesSales);
-// Display @roleToMentionForWolcenFeed message when a new about Wolcen is available
+/* ----- 🢃 STEAM FEED 🢃 ----- */
+// Wolcen feed
 const wolcenFeed = require('./bot/automated/steamFeed');
 wolcenFeed(bot, 10, wolcenId, wolcenChannel, roleToMentionForWolcenFeed);
+// Azur Lane feed
+const azurLaneFeed = require('./bot/automated/steamFeed');
+azurLaneFeed(bot, 10, azurLaneId, azurLaneChannel, roleToMentionForAzurLaneFeed);
