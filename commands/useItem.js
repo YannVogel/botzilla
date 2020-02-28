@@ -1,5 +1,5 @@
 const PlayerSheet = require('../models/playerSheet');
-const use = require('./dependencies/_useSpecificItem');
+const use = require('./dependencies/items/_useSpecificItem');
 const items = require('./dependencies/gameMarket').item;
 const cd = require('./dependencies/_deleteTimer');
 
@@ -38,11 +38,10 @@ module.exports = {
                                 itemToUse = item;
                             }
                         });
-
-                        use.useSpecificItem(player, itemToUse.name);
+                        message.reply(`a utilisé un ${itemToUse.icon} \`${itemToUse.name}\` ! ${itemToUse.whenUsed}`);
+                        use.useSpecificItem(player, itemToUse.name, message);
                         player.playerInventory.splice( player.playerInventory.indexOf(itemToUse.name), 1);
                         player.save();
-                        return message.reply(`a utilisé un ${itemToUse.icon} ${itemToUse.name} ! ${itemToUse.whenUsed}`)
                     }else {
                         cd.deleteTimer(message.author.id, this.name);
                         return message.reply("Tu ne possèdes pas cet objet !");

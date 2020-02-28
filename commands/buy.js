@@ -40,7 +40,7 @@ module.exports = {
                 player.playerInventory.push(desiredItem.name);
                 player.playerPurse -= desiredItem.price;
                 player.save();
-                return message.reply(`a acheté un ${desiredItem.icon} ${desiredItem.name} pour ${desiredItem.price} ${currency} !`);
+                return message.reply(`a acheté un ${desiredItem.icon} \`${desiredItem.name}\` pour ${desiredItem.price} ${currency} !`);
             });
 
     }
