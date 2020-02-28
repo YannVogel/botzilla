@@ -14,7 +14,7 @@ module.exports = (botClient, timeInMinutes, gameId, channelName, roleToMention) 
                 //success!
                 const $ = cheerio.load(html);
 
-                const gameName = channelName;
+                const gameName = channelName
                 const category = "news";
                 const title = $('div.apphub_CardContentNewsTitle', html).eq(0).text();
                 const urlSource = $('div.apphub_Card.Announcement_Card.modalContentLink.interactable', html).eq(0).attr('data-modal-content-url');
@@ -27,7 +27,7 @@ module.exports = (botClient, timeInMinutes, gameId, channelName, roleToMention) 
                         if (gamesFeed) return;
 
                         // On vérifie si une new de ce jeu existe déjà
-                        GamesFeed.findOneAndUpdate({gameName: gameName})
+                        GamesFeed.findOne({gameName: gameName})
                             .then(gamesFeed => {
                                 // Si c'est le cas, on remplace par la nouvelle
                                 if(gamesFeed) {
