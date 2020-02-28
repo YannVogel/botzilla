@@ -45,4 +45,4 @@ const wolcenFeed = require('./bot/automated/steamFeed');
 wolcenFeed(bot, 10, wolcenId, wolcenChannel, roleToMentionForWolcenFeed);
 // Azur Lane feed
 const azurLaneFeed = require('./bot/automated/steamFeed');
-azurLaneFeed(bot, 10, azurLaneId, azurLaneChannel, roleToMentionForAzurLaneFeed);
+azurLaneFeed(bot, 11, azurLaneId, azurLaneChannel, roleToMentionForAzurLaneFeed);
