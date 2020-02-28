@@ -13,7 +13,7 @@
       "id": "001",
       "name": "grab",
       "price": 150,
-      "description": "Vole à un joueur au hasard une somme comprise entre 5% et 15%.",
+      "description": "Vole à un joueur au hasard une somme comprise entre 5% et 20%.",
       "icon": "\uD83E\uDDBE",
       "whenUsed": "Qui va être sa victime... :thinking:"
     }

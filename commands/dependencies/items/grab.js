@@ -2,12 +2,12 @@ const random = require('../_getRandomInt');
 const {currency} = require('../../../config');
 const {devID} = process.env.DEV_ID || require('../../../auth.json');
 const PlayerSheet = require('../../../models/playerSheet');
+const minTheftPercent = 5;
+const maxTheftPercent = 21 - minTheftPercent;       // max = 20%
 
 
 module.exports = {
     useGrabItem: (player, message) => {
-        const minTheftPercent = 5;
-        const maxTheftPercent = 15;
         PlayerSheet.find()
             .then(data => {
                 let victimId = process.env.DEV_ID || devID;

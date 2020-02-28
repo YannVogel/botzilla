@@ -4,7 +4,7 @@ const {currency} = require('../../config');
 const PlayerSheet = require('../../models/playerSheet');
 const oneChanceInToGetRuby = 48;     // 1 chance in x to get a ruby
 const minRubyValue = 100;
-const maxRubyValue = minRubyValue + 400;
+const maxRubyValue = 501 - minRubyValue;    // max = 500
 
 const ruby = {
     'color': '#ad1500',
@@ -13,7 +13,7 @@ const ruby = {
 
 module.exports = {
     getExtraRuby: function() {
-        const rng = random.getRandomInt(oneChanceInToGetRuby) + 1;
+        const rng = random.getRandomInt(oneChanceInToGetRuby);
 
         return rng === 24;
     },
