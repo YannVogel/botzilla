@@ -4,10 +4,10 @@ const PlayerSheet = require('../../models/playerSheet');
 const maxCommon = 70;       // 1 <= common <= 70
 const maxRare = 90;         // 71 <= rare <= 90
 const maxEpic = 99;         // 91 <= epic <= 99
-const maxCommonProfit = 10;
-const maxRareProfit = 25;
-const maxEpicProfit = 50;
-const maxLegendaryProfit = 100;
+const maxCommonProfit = 25;
+const maxRareProfit = 50;
+const maxEpicProfit = 100;
+const maxLegendaryProfit = 500;
 const maxCursedMalus = 25;      // max % to lose when dropping a cursed bag
 const {currency} = require('../../config');
 const extra = require('./_getExtraRuby');
@@ -103,7 +103,7 @@ module.exports = {
         {
             quality = "rare";
             return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]} ! Pas mal !`)
-                .then(message.channel.send(getMoneyBag(player, maxRareProfit, quality)))
+                .then(message.channel.send(getMoneyBag(player, maxRareProfit, quality, 2)))
                 .then(() =>{
                     if(extra.getExtraRuby()) {
                         extra.rubyManager(player, message)
@@ -114,7 +114,7 @@ module.exports = {
         {
             quality = "epic";
             return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]} ! Super !!`)
-                .then(message.channel.send(getMoneyBag(player, maxEpicProfit, quality, 2)))
+                .then(message.channel.send(getMoneyBag(player, maxEpicProfit, quality, 3)))
                 .then(() =>{
                     if(extra.getExtraRuby()) {
                         extra.rubyManager(player, message)
