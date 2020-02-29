@@ -34,14 +34,11 @@ module.exports = {
                             .addField(currency, player.playerPurse, true)
                             .addField('Rubis obtenus', player.playerRuby, true)
                             .addField('Malédictions', player.playerCurses, true)
-                            .addField('Défis lancés', player.initiatedChallenge, true)
-                            .addField('Défis acceptés', player.acceptedChallenge, true)
-                            .addField('Défis refusés', player.refusedChallenge, true)
-                            .addField('Défis gagnés', player.wonChallenge, true)
-                            .addField('Défis perdus', player.lostChallenge, true)
+                            .addField('Défis lancés / acceptés / refusés', `${player.initiatedChallenge} :blue_circle: / ${player.acceptedChallenge} :green_circle: / ${player.refusedChallenge} :red_circle:`, true)
+                            .addField('Défis gagnés/perdus', `${player.wonChallenge} :white_check_mark: / ${player.lostChallenge} :x:`, true)
                             .setThumbnail(member.avatarURL())
-                    )
-                });
-        })
+                    );
+                })
+        });
     }
 };

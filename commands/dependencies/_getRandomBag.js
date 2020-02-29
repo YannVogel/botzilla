@@ -70,14 +70,11 @@ function getCursedBag(percent, malus) {
         .setThumbnail(bagImages['cursed'])
 }
 
-function getMoneyBag (player, maxProfit, quality, multiplier) {
-    const loot = (random.getRandomInt(maxProfit) + 1) * multiplier;
+function getMoneyBag (player, quality) {
+    const loot = (random.getRandomInt(maxBagProfit[quality]) + 1) * bagMultiplier[quality];
+    player.playerPurse += loot;
+    player.save();
 
-    PlayerSheet.findOne({playerId: player.id})
-        .then(player => {
-            player.playerPurse += loot;
-            player.save();
-        });
     return new Discord.MessageEmbed()
             .setColor(bagColor[quality])
             .setTitle(`${bagEmoji[quality]} Sac ${bagFrName[quality]}`)
@@ -86,24 +83,21 @@ function getMoneyBag (player, maxProfit, quality, multiplier) {
 }
 
 module.exports = {
-    getRandomBag: function(number, message) {
-        const player = message.author;
+    getRandomBag: (number, message, player) => {
         let quality;
 
         // 1 "chance" in 50 to get a cursed bag
         if(random.getRandomInt(50) === 4) {
             const malusPercent = random.getRandomInt(maxCursedMalus) + 1;
             let malus;
-            return PlayerSheet.findOne({playerId: player.id})
-                .then(player => {
-                    malus = Math.round(malusPercent*(player.playerPurse/100));
-                    player.playerPurse -= malus;
-                    player.playerCurses++;
-                    player.save();
 
-                    return message.reply(`a trouvé un... Oh non ! C'est un ${bagEmoji['cursed']} sac ${bagFrName['cursed']}`)
-                        .then(message.channel.send(getCursedBag(malusPercent, malus)));
-                });
+            malus = Math.round(malusPercent*(player.playerPurse/100));
+            player.playerPurse -= malus;
+            player.playerCurses++;
+            player.save();
+
+            return message.reply(`a trouvé un... Oh non ! C'est un ${bagEmoji['cursed']} sac ${bagFrName['cursed']}`)
+                .then(message.channel.send(getCursedBag(malusPercent, malus)));
         }
         // Not a cursed bag, then set the quality of the regular bag...
         if(number <= maxCommon){ quality = "common"; }
@@ -112,7 +106,7 @@ module.exports = {
         else{ quality = "legendary"; }
 
         return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]} ! ${bagSentence[quality]}`)
-            .then(message.channel.send(getMoneyBag(player, maxBagProfit[quality], quality, bagMultiplier[quality])))
+            .then(message.channel.send(getMoneyBag(player, quality)))
             .then(() => {
                 if(extra.getExtraRuby()) {
                     extra.rubyManager(player, message);
@@ -120,14 +114,14 @@ module.exports = {
             })
             .then(() => {
                 // 1 chance in 10 not to trigger the CD
-                if(random.getRandomInt(10) === 5) {
-                    PlayerSheet.findOne({playerId: player.id})
-                        .then(player => {
-                            cd.deleteTimer(player.playerId, 'loot');
-                            return message.channel.send(`Une distorsion de l'espace-temps a permis à <@${player.playerId}> de ne pas enclencher le CD de sa commande !loot !!`);
-                        });
+                if(random.getRandomInt(10) === 5)
+                {
+                cd.deleteTimer(player.playerId, 'loot');
+                return message.channel.send(`Une distorsion de l'espace-temps a permis à <@${player.playerId}> de ne pas enclencher le CD de sa commande !loot !!`);
                 }
             });
 
-    }
+    },
+    getMoneyBag,
+    getCursedBag
 };
