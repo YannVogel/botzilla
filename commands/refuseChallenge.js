@@ -23,12 +23,10 @@ module.exports = {
             return message.reply(`Mauvaise utilisation de la commande ! Tu peux taper \`${prefix}help ${this.name}\` pour obtenir plus d'informations !`);
         }
 
-        const challengedPlayer = message.author;
-
-        PlayerSheet.findOne({playerId: challengedPlayer.id})
-            .then(player => {
+        PlayerSheet.findOne({playerId: message.author.id})
+            .then(challengedPlayer => {
                 // If the player is not in the DB...
-                if (!player) {
+                if (!challengedPlayer) {
                     return message.reply(`Merci de commencer par créer ta fiche avec la commande ${prefix}fiche !`)
                 }
 
@@ -37,16 +35,16 @@ module.exports = {
                 })[0];
 
 
-                ChallengeLog.findOne({initiatorId: initiatorPlayer.id, opponentId: challengedPlayer.id})
+                ChallengeLog.findOne({initiatorId: initiatorPlayer.id, opponentId: challengedPlayer.playerId})
                     .then(challenge => {
                         if(!challenge) {
                            return message.reply(`Tu n'as pas de défi en cours avec \`${initiatorPlayer.username}\` !`);
                         }
 
                         challenge.delete();
-                        player.refusedChallenge++;
-                        player.save();
-                        return message.channel.send(`<@${player.playerId}> a refusé le défi lancé par <@${initiatorPlayer.id}> ! Huez-le !! 😈`)
+                        challengedPlayer.refusedChallenge++;
+                        challengedPlayer.save();
+                        return message.channel.send(`<@${challengedPlayer.playerId}> a refusé le défi lancé par <@${initiatorPlayer.id}> ! Huez-le !! 😈`)
 
                     })
             });

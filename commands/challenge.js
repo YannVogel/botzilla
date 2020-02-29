@@ -15,7 +15,7 @@ module.exports = {
     description: 'Défi un joueur !',
     args: true,
     usage: '<@le joueur défié> <la somme mise en jeu>',
-    cooldown: 60*60*2,
+    cooldown: 60*60,
     execute(message, args) {
         const price = args[1];
         // If there is no user mentioned...
