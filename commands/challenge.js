@@ -53,6 +53,7 @@ module.exports = {
                 })[0];
                 // If the player tries to challenge himself
                 if(initiatorPlayer.playerId === opponent.id) {
+                    cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Tu ne peux pas te défier toi-même... Ça va la schizophrénie ? :joy:`);
                 }
 
