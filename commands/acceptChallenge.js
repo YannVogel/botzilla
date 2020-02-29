@@ -68,7 +68,11 @@ module.exports = {
                                         loser.playerPurse -= challenge.amount;
                                         loser.lostChallenge++;
                                         loser.save()
-                                            .then(challenge.delete());
+                                            .then(challenge.delete())
+                                            .then(() => {
+                                                challengedPlayer.acceptedChallenge++;
+                                                challengedPlayer.save();
+                                            });
                                     });
                                 return message.channel.send(`<@${winner.playerId}> a remporté le défi face à <@${loser.playerId}> ! Il dépouille son adversaire de \`${challengePrice} ${currency}\` !!`);
                             });
