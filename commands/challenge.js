@@ -72,7 +72,11 @@ module.exports = {
                                     createdAt: new Date()
                                 });
                                 newChallenge.save();
-                                return message.channel.send(`${challengeEmojis['initiator']}<@${newChallenge.initiatorId}> vient de défier ${challengeEmojis['opponent']} <@${newChallenge.opponentId}> ! Somme mise en jeu : \`${newChallenge.amount} ${currency}\` !`);
+                                return message.channel.send(`${challengeEmojis['initiator']}<@${newChallenge.initiatorId}> vient de défier ${challengeEmojis['opponent']} <@${newChallenge.opponentId}> ! Somme mise en jeu : \`${newChallenge.amount} ${currency}\` !`)
+                                    .then(() => {
+                                        initiatorPlayer.initiatedChallenge++;
+                                        initiatorPlayer.save();
+                                    });
                             });
                     })
             });
