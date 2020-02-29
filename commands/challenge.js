@@ -14,7 +14,7 @@ module.exports = {
     name: 'challenge',
     description: 'Défi un joueur !',
     args: true,
-    usage: '<le joueur défié> <la somme mise en jeu>',
+    usage: '<@le joueur défié> <la somme mise en jeu>',
     cooldown: 60*60*2,
     execute(message, args) {
         const price = args[1];
