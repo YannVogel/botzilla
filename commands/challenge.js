@@ -4,6 +4,7 @@ const PlayerSheet = require('../models/playerSheet');
 const ChallengeLog = require('../models/challengeLog');
 const {currency} = require('../config');
 const dateFr = require('./dependencies/_getFrenchDate');
+const {devID} = process.env.DEV_ID || require('../auth.json');
 
 const challengeEmojis = {
     'initiator': '⚔️',
@@ -53,9 +54,9 @@ module.exports = {
 
                 PlayerSheet.findOne({playerId: opponent.id})
                     .then(opponentPlayer => {
-                        if(!opponentPlayer){
+                        if(!opponentPlayer || opponentPlayer.playerId === (process.env.DEV_ID || devID)){
                             cd.deleteTimer(message.author.id, this.name);
-                            return message.reply(`Désolé mais le joueur ${opponent} n'a pas encore créé sa fiche de jeu !`);
+                            return message.reply(`Désolé mais le joueur \`${opponent.username}\` n'a pas encore créé sa fiche de jeu !`);
                         }
                         ChallengeLog.findOne({initiatorId: initiatorPlayer.playerId, opponentId: opponentPlayer.playerId})
                             .then(existingChallenge => {
