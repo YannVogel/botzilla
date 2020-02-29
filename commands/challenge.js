@@ -51,6 +51,10 @@ module.exports = {
                 const opponent = message.mentions.users.map(user => {
                     return user;
                 })[0];
+                // If the player tries to challenge himself
+                if(initiatorPlayer.playerId === opponent.id) {
+                    return message.reply(`Tu ne peux pas te défier toi-même... Ça va la schizophrénie ? :joy:`);
+                }
 
                 PlayerSheet.findOne({playerId: opponent.id})
                     .then(opponentPlayer => {
