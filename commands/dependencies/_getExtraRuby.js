@@ -31,14 +31,12 @@ module.exports = {
 
     rubyManager: function (player, message) {
         const rubyValue = this.getRubyValue();
-        message.channel.send(`Le sac trouvé par <@${player.id}> contenait un rubis !`)
+        message.channel.send(`Le sac trouvé par <@${player.playerId}> contenait un rubis !`)
             .then(message.channel.send(this.getRuby(rubyValue)));
 
-        PlayerSheet.findOne({playerId: player.id})
-            .then(player => {
-                player.playerPurse += rubyValue;
-                player.playerRuby++;
-                player.save();
-            });
+            player.playerPurse += rubyValue;
+            player.playerRuby++;
+            player.save();
+
     }
 };

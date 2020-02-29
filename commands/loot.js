@@ -19,7 +19,7 @@ module.exports = {
                 }
                 const rng = random.getRandomInt(100) + 1;
 
-                return bagManager.getRandomBag(rng, message);
+                return bagManager.getRandomBag(rng, message, player);
             })
     }
 };

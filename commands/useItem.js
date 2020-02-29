@@ -38,10 +38,13 @@ module.exports = {
                                 itemToUse = item;
                             }
                         });
-                        message.reply(`a utilisé un ${itemToUse.icon} \`${itemToUse.name}\` ! ${itemToUse.whenUsed}`);
-                        use.useSpecificItem(player, itemToUse.name, message);
-                        player.playerInventory.splice( player.playerInventory.indexOf(itemToUse.name), 1);
-                        player.save();
+                        message.reply(`a utilisé un ${itemToUse.icon} \`${itemToUse.name}\` ! ${itemToUse.whenUsed}`)
+                            .then(() => {
+                                use.useSpecificItem(player, itemToUse.name, message);
+                            });
+                            player.playerInventory.splice( player.playerInventory.indexOf(itemToUse.name), 1);
+                            player.save();
+
                     }else {
                         cd.deleteTimer(message.author.id, this.name);
                         return message.reply("Tu ne possèdes pas cet objet !");
