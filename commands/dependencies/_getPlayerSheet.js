@@ -34,6 +34,11 @@ module.exports = {
                             .addField(currency, player.playerPurse, true)
                             .addField('Rubis obtenus', player.playerRuby, true)
                             .addField('Malédictions', player.playerCurses, true)
+                            .addField('Défis lancés', player.initiatedChallenge, true)
+                            .addField('Défis acceptés', player.acceptedChallenge, true)
+                            .addField('Défis refusés', player.refusedChallenge, true)
+                            .addField('Défis gagnés', player.wonChallenge, true)
+                            .addField('Défis perdus', player.lostChallenge, true)
                             .setThumbnail(member.avatarURL())
                     )
                 });

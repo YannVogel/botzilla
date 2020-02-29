@@ -10,7 +10,12 @@ const playerSheetSchema = mongoose.Schema({
     createdAt: {type: Date, required: true},
     playerRuby: {type: Number, required: true},
     playerCurses: {type: Number, required: true},
-    playerBuff: {type: Array, default: []}
+    playerBuff: {type: Array, default: []},
+    initiatedChallenge: {type: Number, default: 0},
+    acceptedChallenge: {type: Number, default: 0},
+    refusedChallenge: {type: Number, default: 0},
+    wonChallenge: {type: Number, default: 0},
+    lostChallenge: {type: Number, default: 0}
 });
 
 playerSheetSchema.plugin(uniqueValidator);
