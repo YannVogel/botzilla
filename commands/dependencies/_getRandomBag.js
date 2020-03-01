@@ -71,7 +71,7 @@ function getCursedBag(percent, malus) {
         .setThumbnail(bagImages['cursed'])
 }
 
-function getMoneyBag (player, quality, message = null) {
+function getMoneyBag (player, quality, message) {
     const loot = (random.getRandomInt(maxBagProfit[quality]) + 1) * bagMultiplier[quality];
     player.playerPurse += loot;
     player.save();
