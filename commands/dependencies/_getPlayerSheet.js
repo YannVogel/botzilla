@@ -3,6 +3,7 @@ const PlayerSheet = require('../../models/playerSheet');
 const {currency} = require('../../config');
 const frDate = require('./_getFrenchDate');
 const format = require('./_getFormattedPlayerInventory');
+const {experienceFormat} = require('../../gameConfig');
 
 module.exports = {
     getPlayerSheet: function(member) {
@@ -30,10 +31,10 @@ module.exports = {
                             .setTitle(player.playerName)
                             .setDescription(`Fiche créée le ${frDate.getFrenchDate(player.createdAt)}`)
                             .addField("Inventaire", format.getFormattedPlayerInventory(player.playerInventory))
-                            .addField("Expérience", player.playerExperience, true)
+                            .addField("Expérience", `${player.playerExperience} ${experienceFormat}`, true)
                             .addField(currency, player.playerPurse, true)
-                            .addField('Rubis obtenus', player.playerRuby, true)
-                            .addField('Malédictions', player.playerCurses, true)
+                            .addField('Rubis obtenus', `${player.playerRuby} :gem:`, true)
+                            .addField('Malédictions', `${player.playerCurses} :skull:﻿`, true)
                             .addField('Défis lancés / acceptés / refusés', `${player.initiatedChallenge} :blue_circle: / ${player.acceptedChallenge} :green_circle: / ${player.refusedChallenge} :red_circle:`, true)
                             .addField('Défis gagnés/perdus', `${player.wonChallenge} :white_check_mark: / ${player.lostChallenge} :x:`, true)
                             .setThumbnail(member.avatarURL())
