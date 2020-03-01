@@ -29,7 +29,7 @@
       "id": "003",
       "name": "rarebag",
       "price": 60,
-      "description": "Un sac de qualité rare. Contient une somme entre 1 et 100 bobzi$$.",
+      "description": "Un sac de qualité rare. Contient une somme entre 2 et 100 bobzi$$.",
       "icon": ":blue_circle:",
       "whenUsed": "Il ouvre son sac avec une pointe de curiosité !"
     },
@@ -37,7 +37,7 @@
       "id": "004",
       "name": "epicbag",
       "price": 180,
-      "description": "Un sac de qualité épique. Contient une somme entre 1 et 300 bobzi$$.",
+      "description": "Un sac de qualité épique. Contient une somme entre 3 et 300 bobzi$$.",
       "icon": ":purple_circle:",
       "whenUsed": "Il ouvre son sac avec un grand intérêt !!"
     },
@@ -45,7 +45,7 @@
       "id": "005",
       "name": "legendarybag",
       "price": 1200,
-      "description": "Un sac de qualité légendaire. Contient une somme entre 1 et 2000 bobzi$$.",
+      "description": "Un sac de qualité légendaire. Contient une somme entre 4 et 2000 bobzi$$.",
       "icon": ":orange_circle:",
       "whenUsed": "Il ouvre son sac à toute vitesse, les yeux remplis d'étoiles !!!"
     }
