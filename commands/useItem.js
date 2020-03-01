@@ -2,6 +2,9 @@ const PlayerSheet = require('../models/playerSheet');
 const use = require('./dependencies/items/_useSpecificItem');
 const items = require('./dependencies/gameMarket').item;
 const cd = require('./dependencies/_deleteTimer');
+const expManager = require('./dependencies/_addExperience');
+const maxExperience = 20;
+const {experienceFormat} = require('../gameConfig');
 
 function thisPlayerHasThisItem (player, item) {
     for(let i = 0; i < player.playerInventory.length; i++) {
@@ -38,10 +41,12 @@ module.exports = {
                                 itemToUse = item;
                             }
                         });
-                        message.reply(`a utilisé un ${itemToUse.icon} \`${itemToUse.name}\` ! ${itemToUse.whenUsed}`)
+                        const experience = expManager.addExperience(maxExperience);
+                        message.reply(`a utilisé un ${itemToUse.icon} \`${itemToUse.name}\` (\`+${experience}\` ${experienceFormat}) ! ${itemToUse.whenUsed}`)
                             .then(() => {
                                 use.useSpecificItem(player, itemToUse.name, message);
                             });
+                            player.playerExperience += experience;
                             player.playerInventory.splice( player.playerInventory.indexOf(itemToUse.name), 1);
                             player.save();
 
