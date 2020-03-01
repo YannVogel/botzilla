@@ -8,6 +8,7 @@ const maxCursedMalus = 25;      // max % to lose when looting a cursed bag
 const {currency} = require('../../config');
 const extra = require('./_getExtraRuby');
 const cd = require('./_deleteTimer');
+const gif = require('./_getGif');
 
 const bagImages = {
     'common': 'https://i.ibb.co/HT1SqDg/common.png',
@@ -70,10 +71,12 @@ function getCursedBag(percent, malus) {
         .setThumbnail(bagImages['cursed'])
 }
 
-function getMoneyBag (player, quality) {
+function getMoneyBag (player, quality, message = null) {
     const loot = (random.getRandomInt(maxBagProfit[quality]) + 1) * bagMultiplier[quality];
     player.playerPurse += loot;
     player.save();
+
+    message.channel.send(gif.getMoneyBagGif(loot));
 
     return new Discord.MessageEmbed()
             .setColor(bagColor[quality])
@@ -97,6 +100,7 @@ module.exports = {
             player.save();
 
             return message.reply(`a trouvé un... Oh non ! C'est un ${bagEmoji['cursed']} sac ${bagFrName['cursed']}`)
+                .then(message.channel.send(gif.getCursedBagGif(malusPercent)))
                 .then(message.channel.send(getCursedBag(malusPercent, malus)));
         }
         // Not a cursed bag, then set the quality of the regular bag...
@@ -106,7 +110,7 @@ module.exports = {
         else{ quality = "legendary"; }
 
         return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]} ! ${bagSentence[quality]}`)
-            .then(message.channel.send(getMoneyBag(player, quality)))
+            .then(message.channel.send(getMoneyBag(player, quality, message)))
             .then(() => {
                 if(extra.getExtraRuby()) {
                     extra.rubyManager(player, message);
