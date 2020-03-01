@@ -2,7 +2,9 @@ const items = require('./dependencies/gameMarket').item;
 const PlayerSheet = require('../models/playerSheet');
 const {currency} = require('../config');
 const cd = require('./dependencies/_deleteTimer');
-
+const expManager = require('./dependencies/_addExperience');
+const maxExperience = 25;
+const {experienceFormat} = require('../gameConfig');
 
 module.exports = {
     name: 'buy',
@@ -37,11 +39,12 @@ module.exports = {
                     cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Désolé mais tu n'as pas assez de ${currency}`)
                 }
+                const experience = expManager.addExperience(maxExperience);
                 player.playerInventory.push(desiredItem.name);
                 player.playerPurse -= desiredItem.price;
+                player.playerExperience += experience;
                 player.save();
-                return message.reply(`a acheté un ${desiredItem.icon} \`${desiredItem.name}\` pour ${desiredItem.price} ${currency} !`);
+                return message.reply(`a acheté un ${desiredItem.icon} \`${desiredItem.name}\` pour ${desiredItem.price} ${currency} (\`+${experience}\` ${experienceFormat})!`);
             });
-
     }
 };

@@ -12,7 +12,7 @@ module.exports = {
                     }
                 }
                 if(count) {
-                    formattedInventory+= count > 1 ? ` ${item.name} x${count} - ` : `${item.name} - `;
+                    formattedInventory+= count > 1 ? `${item.icon} ${item.name} x${count} - ` : `${item.icon} ${item.name} - `;
                 }
             });
 

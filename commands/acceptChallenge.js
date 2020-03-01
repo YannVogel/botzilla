@@ -3,6 +3,10 @@ const PlayerSheet = require('../models/playerSheet');
 const ChallengeLog = require('../models/challengeLog');
 const {currency} = require('../config');
 const random = require('./dependencies/_getRandomInt.js');
+const expManager = require('./dependencies/_addExperience');
+const maxExperienceWhenWinning = 50;
+const maxExperienceWhenLosing = 20;
+const {experienceFormat} = require('../gameConfig');
 
 module.exports = {
     name: 'acceptchallenge',
@@ -61,12 +65,17 @@ module.exports = {
                                     winner = challengedPlayer;
                                     loser = initiatorPlayer;
                                 }
+                                const winExperience = expManager.addExperience(maxExperienceWhenWinning);
+                                const loseExperience = expManager.addExperience(maxExperienceWhenLosing);
+
                                 winner.playerPurse += challenge.amount;
                                 winner.wonChallenge++;
+                                winner.playerExperience += winExperience;
                                 winner.save()
                                     .then(() => {
                                         loser.playerPurse -= challenge.amount;
                                         loser.lostChallenge++;
+                                        loser.playerExperience += loseExperience;
                                         loser.save()
                                             .then(challenge.delete())
                                             .then(() => {
@@ -74,7 +83,7 @@ module.exports = {
                                                 challengedPlayer.save();
                                             });
                                     });
-                                return message.channel.send(`<@${winner.playerId}> a remporté le défi face à <@${loser.playerId}> ! Il dépouille son adversaire de \`${challengePrice} ${currency}\` !!`);
+                                return message.channel.send(`<@${winner.playerId}> (\`+${winExperience}\` ${experienceFormat}) a remporté le défi face à <@${loser.playerId}> (\`+${loseExperience}\` ${experienceFormat})! Il dépouille son adversaire de \`${challengePrice} ${currency}\` !!`);
                             });
                     });
             });
