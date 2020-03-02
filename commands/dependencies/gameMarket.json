@@ -64,6 +64,14 @@
       "description": "Une incantation qui enlève toutes les malédictions de son utilisateur.",
       "icon": "\uD83D\uDE4F",
       "whenUsed": "Un énorme poids est enlevé de ses épaules ! \uD83D\uDE4F"
+    },
+    {
+      "id": "008",
+      "name": "coronavirus",
+      "price": 350,
+      "description": "Envoie une malédiction à un joueur au hasard (peut cibler le lanceur).",
+      "icon": "\uD83E\uDD2E",
+      "whenUsed": "Qui va vomir ses entrailles... ?"
     }
   ]
 }
