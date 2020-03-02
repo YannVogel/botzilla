@@ -1,12 +1,14 @@
 const warp = require('./warp');
 const grab = require('./grab');
 const bag = require('./bag');
+const shower = require('./shower');
+const vaderetro = require('./vaderetro');
 
 module.exports = {
     useSpecificItem: (player, itemName, message) => {
         switch(itemName) {
             case 'warp':
-                warp.useWarpItem(player.playerId);
+                warp.useWarpItem(player);
             break;
             case 'grab':
                 grab.useGrabItem(player, message);
@@ -22,6 +24,12 @@ module.exports = {
             break;
             case 'legendarybag':
                 bag.useBagItem(player, message, 'legendary');
+            break;
+            case 'shower':
+                shower.useShowerItem(player);
+            break;
+            case 'vaderetro':
+                vaderetro.useVaderetroItem(player);
             break;
             default:
                 return;

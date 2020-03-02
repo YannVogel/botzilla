@@ -48,6 +48,22 @@
       "description": "Un sac de qualité légendaire. Contient une somme entre 4 et 2000 bobzi$$.",
       "icon": ":orange_circle:",
       "whenUsed": "Il ouvre son sac à toute vitesse, les yeux remplis d'étoiles !!!"
+    },
+    {
+      "id": "006",
+      "name": "shower",
+      "price": 500,
+      "description": "Vous prenez une douche, ce qui vous enlève une malédiction.",
+      "icon": "\uD83D\uDEBF",
+      "whenUsed": "Ça va déjà mieux ! \uD83D\uDE0C (-1 malédiction)"
+    },
+    {
+      "id": "007",
+      "name": "vaderetro",
+      "price": 1500,
+      "description": "Une incantation qui enlève toutes les malédictions de son utilisateur.",
+      "icon": "\uD83D\uDE4F",
+      "whenUsed": "Un énorme poids est enlevé de ses épaules ! \uD83D\uDE4F"
     }
   ]
 }
