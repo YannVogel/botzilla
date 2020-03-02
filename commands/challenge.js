@@ -71,7 +71,7 @@ module.exports = {
                             .then(existingChallenge => {
                                 if(existingChallenge) {
                                     cd.deleteTimer(message.author.id, this.name);
-                                    return message.reply(`Désolé mais tu as déjà un défi en cours avec \`${existingChallenge.opponentName}\` (somme mise en jeu : \`${existingChallenge.amount}${currency}\`) qui date du \`${dateFr.getFrenchDate(existingChallenge.createdAt)}\` !`);
+                                    return message.reply(`Désolé mais tu as déjà un défi en cours avec \`${existingChallenge.opponentName}\` (somme mise en jeu : \`${existingChallenge.amount} ${currency}\`) qui date du \`${dateFr.getFrenchDate(existingChallenge.createdAt)}\` !`);
                                 }
                                 const newChallenge = new ChallengeLog({
                                     initiatorId: initiatorPlayer.playerId,
