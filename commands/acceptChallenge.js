@@ -52,7 +52,7 @@ module.exports = {
                             .then(initiatorPlayer => {
                                 // If the initiator player doesn't have the amount of the challenge
                                 if(initiatorPlayer.playerPurse < challenge.amount) {
-                                    return message.reply(`\`${initiatorPlayer.playerName}\` ne possèdes que ${challengedPlayer.playerPurse} ${currency} et le défi est fixé à ${challenge.amount} ${currency} ! Attends qu'il ait la somme requise avant d'accepter ce défi !`);
+                                    return message.reply(`\`${initiatorPlayer.playerName}\` ne possède que ${initiatorPlayer.playerPurse} ${currency} et le défi est fixé à ${challenge.amount} ${currency} ! Attends qu'il ait la somme requise avant d'accepter ce défi !`);
                                 }
                                 // initiatorPlayer wins
                                 let winner = initiatorPlayer;
