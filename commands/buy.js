@@ -39,7 +39,7 @@ module.exports = {
                     cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Désolé mais tu n'as pas assez de ${currency}`)
                 }
-                const experience = expManager.addExperience(maxExperience);
+                const experience = expManager.addExperience(player, maxExperience, message);
                 player.playerInventory.push(desiredItem.name);
                 player.playerPurse -= desiredItem.price;
                 player.playerExperience += experience;

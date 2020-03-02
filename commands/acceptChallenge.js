@@ -63,8 +63,8 @@ module.exports = {
                                     winner = challengedPlayer;
                                     loser = initiatorPlayer;
                                 }
-                                const winExperience = expManager.addExperience(challenge.amount);
-                                const loseExperience = expManager.addExperience(Math.round(challenge.amount/3));
+                                const winExperience = expManager.addExperience(winner, challenge.amount, message);
+                                const loseExperience = expManager.addExperience(loser, Math.round(challenge.amount/3), message);
 
                                 winner.playerPurse += challenge.amount;
                                 winner.wonChallenge++;
@@ -81,7 +81,7 @@ module.exports = {
                                                 challengedPlayer.save();
                                             });
                                     });
-                                return message.channel.send(`<@${winner.playerId}> (\`+${winExperience}\` ${experienceFormat}) a remporté le défi face à <@${loser.playerId}> (\`+${loseExperience}\` ${experienceFormat})! Il dépouille son adversaire de \`${challengePrice} ${currency}\` !!`);
+                                return message.channel.send(`<@${winner.playerId}> (\`+${winExperience}\` ${experienceFormat}) a remporté le défi face à <@${loser.playerId}> (\`+${loseExperience}\` ${experienceFormat}) ! Il dépouille son adversaire de \`${challengePrice} ${currency}\` !!`);
                             });
                     });
             });

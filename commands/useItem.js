@@ -41,7 +41,7 @@ module.exports = {
                                 itemToUse = item;
                             }
                         });
-                        const experience = expManager.addExperience(maxExperience);
+                        const experience = expManager.addExperience(player, maxExperience, message);
                         message.reply(`a utilisé un ${itemToUse.icon} \`${itemToUse.name}\` (\`+${experience}\` ${experienceFormat}) ! ${itemToUse.whenUsed}`)
                             .then(() => {
                                 use.useSpecificItem(player, itemToUse.name, message);
