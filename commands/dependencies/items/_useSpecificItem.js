@@ -3,6 +3,7 @@ const grab = require('./grab');
 const bag = require('./bag');
 const shower = require('./shower');
 const vaderetro = require('./vaderetro');
+const coronavirus = require('./coronavirus.js');
 
 module.exports = {
     useSpecificItem: (player, itemName, message) => {
@@ -30,6 +31,9 @@ module.exports = {
             break;
             case 'vaderetro':
                 vaderetro.useVaderetroItem(player);
+            break;
+            case 'coronavirus':
+                coronavirus.useCoronavirusItem(player, message);
             break;
             default:
                 return;
