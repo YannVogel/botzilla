@@ -4,8 +4,6 @@ const ChallengeLog = require('../models/challengeLog');
 const {currency} = require('../config');
 const random = require('./dependencies/_getRandomInt.js');
 const expManager = require('./dependencies/_addExperience');
-const maxExperienceWhenWinning = 50;
-const maxExperienceWhenLosing = 20;
 const {experienceFormat} = require('../gameConfig');
 
 module.exports = {
@@ -65,8 +63,8 @@ module.exports = {
                                     winner = challengedPlayer;
                                     loser = initiatorPlayer;
                                 }
-                                const winExperience = expManager.addExperience(maxExperienceWhenWinning);
-                                const loseExperience = expManager.addExperience(maxExperienceWhenLosing);
+                                const winExperience = expManager.addExperience(challenge.amount);
+                                const loseExperience = expManager.addExperience(Math.round(challenge.amount/3));
 
                                 winner.playerPurse += challenge.amount;
                                 winner.wonChallenge++;
