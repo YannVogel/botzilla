@@ -26,6 +26,7 @@ module.exports = {
                         // ...creates the player sheet in the DB
                         player.save().catch(console.error);
                     }
+                    const playerWinRate = ((player.wonChallenge / (player.wonChallenge + player.lostChallenge))*100).toFixed(2);
                     resolve(
                         new Discord.MessageEmbed()
                             .setColor('#ffffff')
@@ -37,7 +38,7 @@ module.exports = {
                             .addField('Rubis obtenus', `${player.playerRuby} :gem:`, true)
                             .addField('Malédictions', `${player.playerCurses} :skull:﻿`, true)
                             .addField('Défis lancés / acceptés / refusés', `${player.initiatedChallenge} :blue_circle: / ${player.acceptedChallenge} :green_circle: / ${player.refusedChallenge} :red_circle:`, true)
-                            .addField('Défis gagnés/perdus', `${player.wonChallenge} :white_check_mark: / ${player.lostChallenge} :x:`, true)
+                            .addField('Défis gagnés/perdus', `${player.wonChallenge} :white_check_mark: / ${player.lostChallenge} :x:\n(wr : ${playerWinRate}%)`, true)
                             .setThumbnail(member.avatarURL())
                     );
                 })

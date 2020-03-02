@@ -73,19 +73,24 @@ function getCursedBag(percent, malus) {
         .setThumbnail(bagImages['cursed'])
 }
 
-function getMoneyBag (player, quality, message, experience = 0) {
-    const loot = (random.getRandomInt(maxBagProfit[quality]) + 1) * bagMultiplier[quality];
+function getMoneyBag (player, quality, message, experience = 0, curseNumber = 0) {
+    if(curseNumber > 10) curseNumber = 10;
+    let loot = (random.getRandomInt(maxBagProfit[quality]) + 1) * bagMultiplier[quality];
+    if(curseNumber) loot = Math.round(loot - (loot*(curseNumber/10)));
     player.playerPurse += loot;
     player.playerExperience += experience;
     player.save();
 
     message.channel.send(gif.getMoneyBagGif(loot));
 
-    return new Discord.MessageEmbed()
-            .setColor(bagColor[quality])
-            .setTitle(`${bagEmoji[quality]} Sac ${bagFrName[quality]}`)
-            .addField(`Valeur du sac`, `${loot} ${currency}`, true)
-            .setThumbnail(bagImages[quality]);
+    const embed = new Discord.MessageEmbed()
+        .setColor(bagColor[quality])
+        .setTitle(`${bagEmoji[quality]} Sac ${bagFrName[quality]}`)
+        .addField(`Valeur du sac`, `${loot} ${currency}`)
+        .setThumbnail(bagImages[quality]);
+    if(curseNumber) embed.addField(`Malus ${bagEmoji['cursed']}`, `-${curseNumber*10}%`);
+
+    return embed;
 }
 
 module.exports = {
@@ -113,7 +118,7 @@ module.exports = {
         else{ quality = "legendary"; }
 
         return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]} ! ${bagSentence[quality]} (\`+${experience}\` ${experienceFormat})`)
-            .then(message.channel.send(getMoneyBag(player, quality, message, experience)))
+            .then(message.channel.send(getMoneyBag(player, quality, message, experience, player.playerCurses)))
             .then(() => {
                 if(extra.getExtraRuby()) {
                     extra.rubyManager(player, message);
