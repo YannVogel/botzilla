@@ -6,7 +6,6 @@ const {currency} = require('../config');
 const dateFr = require('./dependencies/_getFrenchDate');
 const {devID} = process.env.DEV_ID || require('../auth.json');
 const expManager = require('./dependencies/_addExperience');
-const maxExperience = 30;
 const {experienceFormat} = require('../gameConfig');
 
 
@@ -82,7 +81,7 @@ module.exports = {
                                     createdAt: new Date()
                                 });
                                 newChallenge.save();
-                                const experience = expManager.addExperience(maxExperience);
+                                const experience = expManager.addExperience(newChallenge.amount);
 
                                 return message.channel.send(`${challengeEmojis['initiator']}<@${newChallenge.initiatorId}> (\`+${experience}\` ${experienceFormat}) vient de défier ${challengeEmojis['opponent']} <@${newChallenge.opponentId}> ! Somme mise en jeu : \`${newChallenge.amount} ${currency}\` !`)
                                     .then(() => {
