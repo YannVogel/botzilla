@@ -106,7 +106,7 @@ module.exports = {
         }
         // Not a cursed bag, then set the quality of the regular bag...
         let quality;
-        const experience = expManager.addExperience(maxExperience);
+        const experience = expManager.addExperience(player, maxExperience, message);
         if(number <= maxCommon){ quality = "common"; }
         else if(number <= maxRare){ quality = "rare"; }
         else if(number <= maxEpic){ quality = "epic"; }

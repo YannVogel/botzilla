@@ -4,6 +4,7 @@ const {currency} = require('../../config');
 const frDate = require('./_getFrenchDate');
 const format = require('./_getFormattedPlayerInventory');
 const {experienceFormat} = require('../../gameConfig');
+const playerLevelManager = require('./_getPlayerLevel');
 
 module.exports = {
     getPlayerSheet: function(member) {
@@ -28,7 +29,7 @@ module.exports = {
                     resolve(
                         new Discord.MessageEmbed()
                             .setColor('#ffffff')
-                            .setTitle(player.playerName)
+                            .setTitle(`${player.playerName} (niveau ${playerLevelManager.getPlayerLevel(player)})`)
                             .setDescription(`Fiche créée le ${frDate.getFrenchDate(player.createdAt)}`)
                             .addField("Inventaire", format.getFormattedPlayerInventory(player.playerInventory))
                             .addField("Expérience", `${player.playerExperience} ${experienceFormat}`, true)
