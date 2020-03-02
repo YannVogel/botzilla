@@ -3,6 +3,7 @@ const {currency} = require('../config');
 const {devID} = process.env.DEV_ID || require('../auth');
 const Discord = require('discord.js');
 const {botAvatar} = require('../config');
+const lvlManager = require('./dependencies/_getPlayerLevel');
 
 module.exports = {
     name: 'moneystats',
@@ -22,7 +23,7 @@ module.exports = {
                     // If the player is not the dev account...
                     if(player.playerId !== (process.env.DEV_ID || devID)) {
                         i++;
-                        messageEmbed.addField(`${i}) ${player.playerName}`, `${player.playerPurse} ${currency}`, i > 3);
+                        messageEmbed.addField(`${i}) ${player.playerName} (niv. ${lvlManager.getPlayerLevel(player)})`, `${player.playerPurse} ${currency}`, i > 3);
                     }
                 });
 
