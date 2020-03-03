@@ -31,7 +31,7 @@ module.exports = {
                     resolve(
                         new Discord.MessageEmbed()
                             .setColor('#ffffff')
-                            .setTitle(`${player.playerName} (niveau ${playerLevelManager.getPlayerLevel(player)})\n${expBarManager.getExperienceBar(player).fragmentBar} (${expBarManager.getExperienceBar(player).actualPercent}%)`)
+                            .setTitle(`${player.playerName} (niveau ${playerLevelManager.getPlayerLevel(player)})\n${expBarManager.getExperienceBar(player).fragmentBar} \n(${expBarManager.getExperienceBar(player).actualPercent}%)`)
                             .setDescription(`Fiche créée le ${frDate.getFrenchDate(player.createdAt)}`)
                             .addField("Inventaire", format.getFormattedPlayerInventory(player.playerInventory))
                             .addField("Expérience", `${player.playerExperience} ${experienceFormat}`, true)
