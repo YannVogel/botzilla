@@ -157,7 +157,11 @@ module.exports = (botClient, timeInMinutes, channelName, adminChannelName, roleT
                 const totalOffers = divOffers.length;
                 for (let i = 0; i < totalOffers; i++) {
                     const divImgOffer = 'div.spotlight_img';
-                    const offerLink = $(`${divImgOffer}>a`, html)[i].attribs.href.split('/?')[0];
+                    const offerLink = typeof $(`${divImgOffer}>a`, html)[i] !== 'undefined' ? $(`${divImgOffer}>a`, html)[i].attribs.href.split('/?')[0] : '';
+                    if(typeof $(`${divImgOffer}>a`, html)[i] === 'undefined'){
+                        console.error("Une erreur est survenue lors du fetching de steamFetcher ligne 160");
+                        return;
+                    }
                     const frenchOfferLink = `${offerLink}/?l=french`;
                     const offerImage = $(`${divImgOffer}>a>img`, html)[i].attribs.src;
 
@@ -175,7 +179,11 @@ module.exports = (botClient, timeInMinutes, channelName, adminChannelName, roleT
                 const totalOffers = divOffers.length;
 
                 for (let i = 0; i < totalOffers; i++) {
-                    const offerLink = $('a.daily_deal', html)[i].attribs.href.split('/?')[0];
+                    const offerLink = typeof $('a.daily_deal', html)[i] !== 'undefined' ? $('a.daily_deal', html)[i].attribs.href.split('/?')[0] : '';
+                    if(typeof $('a.daily_deal', html)[i] === 'undefined'){
+                        console.error("Une erreur est survenue lors du fetching de steamFetcher ligne 182");
+                        return;
+                    }
                     const frenchOfferLink = `${offerLink}/?l=french`;
                     const offerImage = $('a.daily_deal>div.capsule>img', html)[i].attribs.src;
 
