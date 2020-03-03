@@ -23,5 +23,6 @@ module.exports = {
             }
         }
         return 100;
-    }
+    },
+    requiredExperience
 };
