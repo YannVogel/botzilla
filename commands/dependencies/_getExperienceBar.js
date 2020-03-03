@@ -13,7 +13,7 @@ module.exports = {
             if(actualPercent > (i*10)) {
                 experienceBar += obtainedFragmentBar;
             }else {
-                experienceBar += notObtainedFragmentBar;
+                experienceBar += notObtainedFragmentBar + '|';
             }
         }
 
