@@ -27,10 +27,11 @@ module.exports = {
                             .setThumbnail(shopThumbnail)
                         ;
                         items.map(item => {
-                            return itemList.addField(`${item.icon}\`${item.name}\``, `**${item.price} ${currency}**\n${item.description}`, true);
+                            return itemList.addField(`${item.icon}\`${item.name}\``, (player.playerPurse >= item.price ? `**${item.price} ${currency}**` : `~~${item.price} ${currency}~~`) + `\n${item.description}`, true);
                         });
 
                         return message.channel.send(itemList)
+                            .then(message.channel.send(`Tu possèdes actuellement \`${player.playerPurse} ${currency}\``))
                             .then(message.channel.send(`Tu peux m'acheter un objet avec la commande \`${prefix}buy\` suivi du nom de l'objet !`));
                     });
             });
