@@ -51,7 +51,7 @@ module.exports = {
                             .then(() => {
                                 mapManager.adventureSpecificMap(player, desiredMap, message);
                                 const experience = expManager.addExperience(player, maxExperience, message);
-                                return message.channel.send(`\`+${experience}\` ${experienceFormat}`);
+                                return message.reply(` a gagné \`+${experience}\` ${experienceFormat} en explorant cette map.`);
                             })
                     });
             });

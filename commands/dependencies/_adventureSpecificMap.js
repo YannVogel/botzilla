@@ -35,23 +35,20 @@ module.exports = {
                 if(!wonItems) {
                     return message.channel.send(`Malheureusement <@${player.playerId}> n'a récupéré aucun objet...`);
                 }
-                message.channel.send(`<@${player.playerId}> a récupéré ${wonItems} objet${wonItems > 1 ? 's':''} :`)
-                    .then(() => {
-                        let itemList = '';
-                        for(let i = 0; i < wonItems; i++){
-                            let itemWon = itemsList[map.name][rng.getRandomInt(itemsList[map.name].length)];
-                            items.map(item => {
-                                if(itemWon === item.name) {
-                                    itemWon = item;
-                                }
-                            });
-                            player.playerInventory.push(itemWon.name);
-                            itemList += `${itemWon.icon} ${itemWon.name}\n`;
+
+                let itemList = '';
+                for(let i = 0; i < wonItems; i++){
+                    let itemWon = itemsList[map.name][rng.getRandomInt(itemsList[map.name].length)];
+                    items.map(item => {
+                        if(itemWon === item.name) {
+                            itemWon = item;
                         }
-                        player.save();
-                        itemList.replace(/\n$/, '');
-                        return message.channel.send(itemList);
                     });
-            });
+                    player.playerInventory.push(itemWon.name);
+                    itemList += `${itemWon.icon} ${itemWon.name} `;
+                }
+                player.save();
+                return message.channel.send(`<@${player.playerId}> a récupéré ${wonItems} objet${wonItems > 1 ? 's':''} : ${itemList}`);
+                });
     }
 };
