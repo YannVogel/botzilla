@@ -4,6 +4,7 @@ const bag = require('./bag');
 const shower = require('./shower');
 const vaderetro = require('./vaderetro');
 const coronavirus = require('./coronavirus.js');
+const staminaItems = require('./staminaItems');
 
 module.exports = {
     useSpecificItem: (player, itemName, message) => {
@@ -35,8 +36,20 @@ module.exports = {
             case 'coronavirus':
                 coronavirus.useCoronavirusItem(player, message);
             break;
+            case 'salad':
+                staminaItems.useStaminaItem(player,'salad');
+            break;
+            case 'onigiri':
+                staminaItems.useStaminaItem(player,'onigiri');
+            break;
+            case 'coffee':
+                staminaItems.useStaminaItem(player,'coffee');
+            break;
+            case 'ramen':
+                staminaItems.useStaminaItem(player,'ramen');
+            break;
             default:
-                return;
+            return;
         }
     }
 };

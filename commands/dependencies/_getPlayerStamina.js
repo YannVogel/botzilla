@@ -12,7 +12,11 @@ module.exports = {
             player.playerMaxStamina = getPlayerMaxStamina(player);
             player.playerStamina = player.playerMaxStamina;
             player.save();
+        }else {
+            player.playerMaxStamina = getPlayerMaxStamina(player);
+            player.save();
         }
+        if(player.playerStamina > player.playerMaxStamina) player.playerStamina = player.playerMaxStamina;
         return player.playerStamina;
     },
     getPlayerMaxStamina
