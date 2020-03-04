@@ -31,7 +31,7 @@ module.exports = {
                         });
 
                         return message.channel.send(itemList)
-                            .then(message.channel.send(`Tu possèdes actuellement \`${player.playerPurse} ${currency}\``))
+                            .then(message.channel.send(`Tu possèdes actuellement \`${player.playerPurse} ${currency}\`.`))
                             .then(message.channel.send(`Tu peux m'acheter un objet avec la commande \`${prefix}buy\` suivi du nom de l'objet !`));
                     });
             });
