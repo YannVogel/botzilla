@@ -13,9 +13,7 @@ const ruby = {
 
 module.exports = {
     getExtraRuby: function() {
-        const rng = random.getRandomInt(oneChanceInToGetRuby);
-
-        return rng === 24;
+        return random.getRandomInt(oneChanceInToGetRuby) === 24;
     },
 
     getRubyValue: function () {
@@ -32,11 +30,11 @@ module.exports = {
     rubyManager: function (player, message) {
         const rubyValue = this.getRubyValue();
         message.channel.send(`Le sac trouvé par <@${player.playerId}> contenait un rubis !`)
-            .then(message.channel.send(this.getRuby(rubyValue)));
-
-            player.playerPurse += rubyValue;
-            player.playerRuby++;
-            player.save();
-
+            .then(message.channel.send(this.getRuby(rubyValue)))
+            .then(() => {
+                player.playerPurse += rubyValue;
+                player.playerRuby++;
+                player.save();
+            });
     }
 };
