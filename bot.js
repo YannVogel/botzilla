@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 const welcomeMessageAndStreamNotificationChannel = 'discussion';
-const salesChannel = 'botzilla';
+const salesChannel = 'annonce-botzilla';
 const adminChannelName = 'botzilla-admin';
 const roleToMentionForGamesSales = 'DealSeeker';
 const roleToMentionForWolcenFeed = 'wolcen';

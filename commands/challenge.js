@@ -6,7 +6,7 @@ const {currency} = require('../config');
 const dateFr = require('./dependencies/_getFrenchDate');
 const {devID} = process.env.DEV_ID || require('../auth.json');
 const expManager = require('./dependencies/_addExperience');
-const maxExperience = 30;
+const maxExperience = 300;
 const {experienceFormat} = require('../gameConfig');
 
 

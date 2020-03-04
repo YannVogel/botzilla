@@ -3,7 +3,7 @@ const PlayerSheet = require('../models/playerSheet');
 const {currency, stamina} = require('../config');
 const cd = require('./dependencies/_deleteTimer');
 const expManager = require('./dependencies/_addExperience');
-const maxExperience = 150;
+const maxExperience = 500;
 const {experienceFormat} = require('../gameConfig');
 const mapManager = require('./dependencies/_adventureSpecificMap');
 
@@ -46,7 +46,7 @@ module.exports = {
                 }
                 const experience = expManager.addExperience(player, maxExperience, message);
                 player.playerStamina -= desiredMap.price;
-                return message.reply(`tente de réaliser la map ${desiredMap.icon} \`${desiredMap.name}\`! (-${desiredMap.price} ${stamina})`)
+                return message.reply(`tente de réaliser la map ${desiredMap.icon} \`${desiredMap.name}\`! (-${desiredMap.price} ${stamina}, \`+${experience}\` ${experienceFormat})`)
                     .then(() => {
                         player.save()
                             .then(() => {

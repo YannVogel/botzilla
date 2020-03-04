@@ -3,7 +3,7 @@ const PlayerSheet = require('../models/playerSheet');
 const {currency} = require('../config');
 const cd = require('./dependencies/_deleteTimer');
 const expManager = require('./dependencies/_addExperience');
-const maxExperience = 25;
+const maxExperience = 250;
 const {experienceFormat} = require('../gameConfig');
 
 module.exports = {

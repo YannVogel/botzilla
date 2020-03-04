@@ -3,7 +3,7 @@ const use = require('./dependencies/items/_useSpecificItem');
 const items = require('./dependencies/gameMarket').item;
 const cd = require('./dependencies/_deleteTimer');
 const expManager = require('./dependencies/_addExperience');
-const maxExperience = 20;
+const maxExperience = 200;
 const {experienceFormat} = require('../gameConfig');
 
 function thisPlayerHasThisItem (player, item) {
