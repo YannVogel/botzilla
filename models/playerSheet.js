@@ -16,7 +16,7 @@ const playerSheetSchema = mongoose.Schema({
     refusedChallenge: {type: Number, default: 0},
     wonChallenge: {type: Number, default: 0},
     lostChallenge: {type: Number, default: 0},
-    playerStamina: {type: Number, default: 20},
+    playerStamina: {type: Number, default: 0},
     playerMaxStamina: {type: Number, default: 4444}
 });
 
