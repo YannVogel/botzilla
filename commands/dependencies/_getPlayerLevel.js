@@ -3,7 +3,7 @@ const experienceRequiredForLevel2 = 500;
 const maxLevel = 99;
 
 const requiredExperience = level => {
-    if(level === 1) return experienceRequiredForLevel2 - 1;
+    if(level === 1) return 0;
     let experienceRequired = experienceRequiredForLevel2;
     for(let i = 0; i < (level - 2); i++){
         experienceRequired *= levelMultiplier;

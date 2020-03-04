@@ -72,6 +72,85 @@
       "description": "Envoie une malédiction à un joueur au hasard (peut cibler le lanceur).",
       "icon": "\uD83E\uDD2E",
       "whenUsed": "Qui va vomir ses entrailles... ?"
+    },
+    {
+      "id": "009",
+      "name": "salad",
+      "price": 100,
+      "description": "Restaure 5 points d'endurance à l'utilisateur.",
+      "icon": "\uD83E\uDD57",
+      "whenUsed": "Un faible courant d'énergie traverse son corps ! (+5 pts d'endurance)"
+    },
+    {
+      "id": "010",
+      "name": "onigiri",
+      "price": 250,
+      "description": "Restaure 10 points d'endurance à l'utilisateur.",
+      "icon": "\uD83C\uDF59",
+      "whenUsed": "Un courant d'énergie traverse son corps ! (+10 pts d'endurance)"
+    },
+    {
+      "id": "011",
+      "name": "coffee",
+      "price": 625,
+      "description": "Restaure 20 points d'endurance à l'utilisateur.",
+      "icon": "☕",
+      "whenUsed": "Ses forces reviennent peu à peu ! (+20 pts d'endurance)"
+    },
+    {
+      "id": "012",
+      "name": "ramen",
+      "price": 1560,
+      "description": "Restaure 40 points d'endurance à l'utilisateur.",
+      "icon": "\uD83C\uDF5C",
+      "whenUsed": "C'est le top de la forme !! (+40 pts d'endurance)"
+    }
+  ],
+  "map":
+  [
+    {
+      "id": "000",
+      "name": "forest",
+      "price": 5,
+      "maxItems": 1,
+      "itemList": [
+        "warp", "grab", "commonbag"
+      ],
+      "icon": "\uD83C\uDF32",
+      "percentChanceToSuccess": 80
+    },
+    {
+      "id": "001",
+      "name": "restaurant",
+      "price": 8,
+      "maxItems": 1,
+      "itemList": [
+        "salad", "onigiri", "coffee"
+      ],
+      "icon": ":fork_knife_plate:",
+      "percentChanceToSuccess": 70
+    },
+    {
+      "id": "002",
+      "name": "bank",
+      "price": 10,
+      "maxItems": 2,
+      "itemList": [
+        "commonbag", "rarebag", "epicbag"
+      ],
+      "icon": ":bank:",
+      "percentChanceToSuccess": 60
+    },
+    {
+      "id": "003",
+      "name": "factory",
+      "price": 13,
+      "maxItems": 2,
+      "itemList": [
+        "shower", "vaderetro", "coronavirus"
+      ],
+      "icon": "\uD83C\uDFED",
+      "percentChanceToSuccess": 40
     }
   ]
 }

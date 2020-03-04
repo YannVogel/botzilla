@@ -42,9 +42,10 @@ module.exports = {
                 const experience = expManager.addExperience(player, maxExperience, message);
                 player.playerInventory.push(desiredItem.name);
                 player.playerPurse -= desiredItem.price;
-                player.playerExperience += experience;
-                player.save();
-                return message.reply(`a acheté un ${desiredItem.icon} \`${desiredItem.name}\` pour ${desiredItem.price} ${currency} (\`+${experience}\` ${experienceFormat})!`);
+                return message.reply(`a acheté un ${desiredItem.icon} \`${desiredItem.name}\` pour ${desiredItem.price} ${currency} (\`+${experience}\` ${experienceFormat})!`)
+                    .then(() => {
+                        player.save()
+                    });
             });
     }
 };
