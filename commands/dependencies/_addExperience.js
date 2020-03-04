@@ -8,7 +8,7 @@ module.exports = {
         const newExperience = oldExperience + wonExperience;
         if(levelManager.getPlayerLevel(player, oldExperience) < levelManager.getPlayerLevel(player, newExperience))
         {
-            message.channel.send(`:arrow_double_up: **﻿LEVEL UP** :arrow_double_up:﻿ <@${player.playerId}> est maintenant \`niveau ${levelManager.getPlayerLevel(player) +1}\` !`)
+            message.channel.send(`:arrow_double_up: **﻿LEVEL UP** :arrow_double_up:﻿ <@${player.playerId}> est monté(e) de niveau !`)
         }
         return wonExperience;
     }
