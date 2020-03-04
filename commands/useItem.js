@@ -46,7 +46,6 @@ module.exports = {
                             .then(() => {
                                 use.useSpecificItem(player, itemToUse.name, message);
                             });
-                            player.playerExperience += experience;
                             player.playerInventory.splice( player.playerInventory.indexOf(itemToUse.name), 1);
                             player.save();
 

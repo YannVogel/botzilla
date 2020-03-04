@@ -87,7 +87,6 @@ module.exports = {
                                 return message.channel.send(`${challengeEmojis['initiator']}<@${newChallenge.initiatorId}> (\`+${experience}\` ${experienceFormat}) vient de défier ${challengeEmojis['opponent']} <@${newChallenge.opponentId}> ! Somme mise en jeu : \`${newChallenge.amount} ${currency}\` !`)
                                     .then(() => {
                                         initiatorPlayer.initiatedChallenge++;
-                                        initiatorPlayer.playerExperience += experience;
                                         initiatorPlayer.save();
                                     });
                             });

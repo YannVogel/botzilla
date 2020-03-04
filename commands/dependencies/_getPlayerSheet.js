@@ -6,6 +6,7 @@ const format = require('./_getFormattedPlayerInventory');
 const {experienceFormat} = require('../../gameConfig');
 const playerLevelManager = require('./_getPlayerLevel');
 const expBarManager = require('./_getExperienceBar');
+const staminaManager = require('./_getPlayerStamina');
 
 module.exports = {
     getPlayerSheet: function(member) {
@@ -28,6 +29,8 @@ module.exports = {
                         player.save().catch(console.error);
                     }
                     const playerWinRate = ((player.wonChallenge / (player.wonChallenge + player.lostChallenge))*100).toFixed(2);
+                    const playerStamina = staminaManager.getPlayerStamina(player);
+                    const playerMaxStamina = staminaManager.getPlayerMaxStamina(player);
                     resolve(
                         new Discord.MessageEmbed()
                             .setColor('#ffffff')
@@ -35,6 +38,7 @@ module.exports = {
                             .setDescription(`Fiche créée le ${frDate.getFrenchDate(player.createdAt)}`)
                             .addField("Inventaire", format.getFormattedPlayerInventory(player.playerInventory))
                             .addField("Expérience", `${player.playerExperience} ${experienceFormat}`, true)
+                            .addField("Endurance", (playerStamina === playerMaxStamina ? `**${playerStamina}/${playerMaxStamina}**` : `${playerStamina}/${playerMaxStamina}`), true)
                             .addField(currency, player.playerPurse, true)
                             .addField('Rubis obtenus', `${player.playerRuby} :gem:`, true)
                             .addField('Malédictions', `${player.playerCurses} :skull:﻿`, true)

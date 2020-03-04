@@ -12,11 +12,11 @@ module.exports = {
                     }
                 }
                 if(count) {
-                    formattedInventory+= count > 1 ? `${item.icon} ${item.name} x${count} - ` : `${item.icon} ${item.name} - `;
+                    formattedInventory+= count > 1 ? `${item.icon}${item.name} **x${count}** | ` : `${item.icon}${item.name} | `;
                 }
             });
 
-            return formattedInventory.replace(/ - $/, '');
+            return formattedInventory.replace(/ \| $/, '');
         }else {
             return "0 objet";
         }
