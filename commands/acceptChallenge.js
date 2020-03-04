@@ -76,11 +76,13 @@ module.exports = {
                                                 loser.playerPurse -= challenge.amount;
                                                 loser.lostChallenge++;
                                                 loser.save()
-                                                    .then(challenge.delete())
                                                     .then(() => {
-                                                        challengedPlayer.acceptedChallenge++;
-                                                        challengedPlayer.save();
-                                                    });
+                                                        challenge.delete()
+                                                            .then(() => {
+                                                                challengedPlayer.acceptedChallenge++;
+                                                                challengedPlayer.save();
+                                                            });
+                                                        });
                                             });
                                     });
                             });
