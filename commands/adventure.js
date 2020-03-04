@@ -44,13 +44,14 @@ module.exports = {
                     cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Désolé mais tu n'as pas assez de ${stamina}`)
                 }
-                const experience = expManager.addExperience(player, maxExperience, message);
                 player.playerStamina -= desiredMap.price;
-                return message.reply(`tente de réaliser la map ${desiredMap.icon} \`${desiredMap.name}\`! (-${desiredMap.price} ${stamina}, \`+${experience}\` ${experienceFormat})`)
+                return message.reply(`tente de réaliser la map ${desiredMap.icon} \`${desiredMap.name}\`! (-${desiredMap.price} ${stamina})`)
                     .then(() => {
                         player.save()
                             .then(() => {
-                                return mapManager.adventureSpecificMap(player, desiredMap, message);
+                                mapManager.adventureSpecificMap(player, desiredMap, message);
+                                const experience = expManager.addExperience(player, maxExperience, message);
+                                return message.channel.send(`\`+${experience}\` ${experienceFormat}`);
                             })
                     });
             });
