@@ -28,7 +28,8 @@ module.exports = {
                         // ...creates the player sheet in the DB
                         player.save().catch(console.error);
                     }
-                    const playerWinRate = ((player.wonChallenge / (player.wonChallenge + player.lostChallenge))*100).toFixed(2);
+                    const totalPlayerChallenges = player.wonChallenge + player.lostChallenge;
+                    const playerWinRate = totalPlayerChallenges > 0 ? ((player.wonChallenge / (totalPlayerChallenges))*100).toFixed(2) : '--';
                     const playerStamina = staminaManager.getPlayerStamina(player);
                     const playerMaxStamina = staminaManager.getPlayerMaxStamina(player);
                     resolve(
