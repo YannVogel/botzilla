@@ -1,6 +1,6 @@
 const levelMultiplier = 1.2;
 const experienceRequiredForLevel2 = 500;
-const maxLevel = 99;
+const maxLevel = 999;
 
 const requiredExperience = level => {
     if(level === 1) return 0;
@@ -22,7 +22,7 @@ module.exports = {
                 return i-1 <= 1 ? 1 : i-1;
             }
         }
-        return 100;
+        return maxLevel;
     },
     requiredExperience
 };
