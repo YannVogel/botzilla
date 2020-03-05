@@ -1,5 +1,6 @@
 const maps = require('./dependencies/gameMarket').map;
 const items = require('./dependencies/gameMarket').item;
+const materials = require('./dependencies/materials').materials;
 const {prefix} = require('../config');
 const Discord = require('discord.js');
 const shopThumbnail = 'https://i.ibb.co/vxk3mK0/shop-Thumbnail.png';
@@ -30,11 +31,19 @@ module.exports = {
                         maps.map(map => {
                             let mapItemsList = '';
                              map.itemList.map(mapItem => {
-                                items.map(item => {
-                                    if(mapItem === item.name){
-                                        mapItemsList += `${item.icon} ${item.name} `;
-                                    }
-                                })
+                                 if(!map.materialsMap){
+                                     items.map(item => {
+                                         if(mapItem === item.name){
+                                             mapItemsList += `${item.icon} ${item.name} `;
+                                         }
+                                     })
+                                 }else {
+                                     materials.map(material => {
+                                         if(mapItem === material.name){
+                                             mapItemsList += `${material.icon} ${material.name} `;
+                                         }
+                                     })
+                                 }
                             });
                             const description = `Permet de trouver entre 0 et ${map.maxItems} objet${map.maxItems > 1 ? 's' : ''} compris dans la liste : \n**${mapItemsList}**\nChances de réussite : **${map.percentChanceToSuccess}%**.`;
                             return mapList.addField(`${map.icon}\`${map.name}\``, (player.playerStamina >= map.price ? `**${map.price} ${stamina}**` : `~~${map.price} ${stamina}~~`) + `\n${description}`);

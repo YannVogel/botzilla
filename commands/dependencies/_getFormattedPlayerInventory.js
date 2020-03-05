@@ -1,24 +1,25 @@
 const items = require('./gameMarket').item;
+const materials = require('./materials').materials;
 
 module.exports = {
-    getFormattedPlayerInventory: inventory => {
+    getFormattedPlayerInventory: (inventory, isMaterials = false) => {
         if(inventory.length > 0) {
+            const library = !isMaterials ? items : materials;
             let formattedInventory = '';
-            items.map(item => {
+            library.map(object => {
                 let count = 0;
                 for(let i = 0; i < inventory.length; i++) {
-                    if(inventory[i] === item.name) {
+                    if(inventory[i] === object.name) {
                         count++;
                     }
                 }
                 if(count) {
-                    formattedInventory+= count > 1 ? `${item.icon}${item.name} **x${count}** | ` : `${item.icon}${item.name} | `;
+                    formattedInventory+= count > 1 ? `${object.icon}${object.name} **x${count}** | ` : `${object.icon}${object.name} | `;
                 }
             });
-
             return formattedInventory.replace(/ \| $/, '');
         }else {
-            return "Aucun objet possédé";
+            return `Aucun ${!isMaterials ? 'objet' : 'matériau'} possédé`;
         }
     }
 };

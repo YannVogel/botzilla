@@ -10,7 +10,7 @@ module.exports = {
         player.playerExperience += wonExperience;
         if(levelManager.getPlayerLevel(player, oldExperience) < levelManager.getPlayerLevel(player, newExperience))
         {
-            message.channel.send(`:arrow_double_up: **﻿LEVEL UP** :arrow_double_up:﻿ <@${player.playerId}> est monté(e) de niveau ! Son endurance a été restaurée !`)
+            message.channel.send(`🔼🆙 **﻿LEVEL UP** 🔼🆙﻿ <@${player.playerId}> est monté(e) de niveau ! Son endurance a été restaurée !`)
             player.playerMaxStamina = staminaManager.getPlayerMaxStamina(player);
             player.playerStamina = player.playerMaxStamina;
             player.save();
