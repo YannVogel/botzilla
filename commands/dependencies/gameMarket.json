@@ -161,26 +161,26 @@
               "name": "desert",
               "frenchName": "le désert",
               "materialsMap": true,
-              "price": 20,
+              "price": 10,
               "maxItems": 3,
               "itemList": [
                 "dna", "amulet"
               ],
               "icon": "\uD83C\uDFDC",
-              "percentChanceToSuccess": 60
+              "percentChanceToSuccess": 70
             },
             {
               "id": "005",
               "name": "mountain",
               "frenchName": "la montagne",
               "materialsMap": true,
-              "price": 20,
+              "price": 10,
               "maxItems": 1,
               "itemList": [
                 "stardust"
               ],
               "icon": "⛰",
-              "percentChanceToSuccess": 40
+              "percentChanceToSuccess": 50
             }
           ]
 }
