@@ -2,21 +2,6 @@ const rng = require('./_getRandomInt');
 const items = require('./gameMarket').item;
 const materials = require('./materials').materials;
 
-const itemsList = {
-    "forest": [
-        "warp","grab","commonbag"
-    ],
-    "restaurant": [
-        "salad","onigiri","coffee"
-    ],
-    "bank": [
-        "commonbag","rarebag","epicbag"
-    ],
-    "factory": [
-        "shower","vaderetro","coronavirus"
-    ]
-};
-
 module.exports = {
     adventureSpecificMap: (player, map, message) => {
         // If the map is failed...

@@ -45,7 +45,7 @@ module.exports = {
                                      })
                                  }
                             });
-                            const description = `Permet de trouver entre 0 et ${map.maxItems} objet${map.maxItems > 1 ? 's' : ''} compris dans la liste : \n**${mapItemsList}**\nChances de réussite : **${map.percentChanceToSuccess}%**.`;
+                            const description = `Permet de trouver entre 0 et ${map.maxItems} ${!map.materialsMap ? '**objet' : '**matériau'}${map.maxItems > 1 ? (!map.materialsMap ? 's**' : 'x**') : '**'} compris dans la liste : \n**${mapItemsList}**\nChances de réussite : **${map.percentChanceToSuccess}%**.`;
                             return mapList.addField(`${map.icon}\`${map.name}\``, (player.playerStamina >= map.price ? `**${map.price} ${stamina}**` : `~~${map.price} ${stamina}~~`) + `\n${description}`);
                         });
 
