@@ -18,7 +18,7 @@ module.exports = {
 
             return formattedInventory.replace(/ \| $/, '');
         }else {
-            return "0 objet";
+            return "Aucun objet possédé";
         }
     }
 };
