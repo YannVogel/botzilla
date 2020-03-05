@@ -17,7 +17,8 @@ const playerSheetSchema = mongoose.Schema({
     wonChallenge: {type: Number, default: 0},
     lostChallenge: {type: Number, default: 0},
     playerStamina: {type: Number, default: 0},
-    playerMaxStamina: {type: Number, default: 4444}
+    playerMaxStamina: {type: Number, default: 4444},
+    playerMaterials: {type: Array, default: []}
 });
 
 playerSheetSchema.plugin(uniqueValidator);
