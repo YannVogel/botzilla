@@ -9,7 +9,7 @@ const extra = require('./_getExtraRuby');
 const cd = require('./_deleteTimer');
 const gif = require('./_getGif');
 const expManager = require('./_addExperience');
-const maxExperience = 15;
+const maxExperience = 1000;
 const {experienceFormat} = require('../../gameConfig');
 
 const bagImages = {
