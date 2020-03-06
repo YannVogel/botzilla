@@ -1,14 +1,14 @@
 module.exports = {
-    // This function allows to replace traditional experience number by a "k" for the thousands
-    getFormattedExperience: experience => {
-        if(experience/1000 < 1){
-            return experience;
+    // This function allows to replace traditional number by a "k" for the thousands
+    getFormattedNumber: number => {
+        if(number/1000 < 1){
+            return number;
         }
-        const arrayOfExp = Array.from(experience.toString());
+        const arrayOfExp = Array.from(number.toString());
         let formattedExperience = '';
         for(let i = 0; i < arrayOfExp.length - 2; i++){
             if(i + 3 === arrayOfExp.length){
-                formattedExperience += 'k';
+                formattedExperience += '**K**';
                 if (arrayOfExp[i] === '0') break;
             }
             formattedExperience += arrayOfExp[i];
