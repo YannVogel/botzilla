@@ -1,0 +1,41 @@
+{
+  "mutations":
+          [
+            {
+              "id": 0,
+              "name": "neptune",
+              "icon": "♆",
+              "basicPower": 100,
+              "maxMultiplier": 10,
+              "componentAndQuantityRequired": {
+                "dna": 1,
+                "amulet": 1
+              },
+              "whenCrafted": "La puissance de Neptune envahit son corps !"
+            },
+            {
+              "id": 1,
+              "name": "uranus",
+              "icon": "♅",
+              "basicPower": 150,
+              "maxMultiplier": 10,
+              "componentAndQuantityRequired": {
+                "dna": 2,
+                "amulet": 1
+              },
+              "whenCrafted": "La puissance d'Uranus envahit son corps !"
+            },
+            {
+              "id": 2,
+              "name": "saturn",
+              "icon": "♄",
+              "basicPower": 100,
+              "maxMultiplier": 20,
+              "componentAndQuantityRequired": {
+                "dna": 2,
+                "amulet": 2
+              },
+              "whenCrafted": "La puissance de Saturne envahit son corps !"
+            }
+          ]
+}
