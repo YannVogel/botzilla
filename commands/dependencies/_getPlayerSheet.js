@@ -7,7 +7,7 @@ const {experienceFormat} = require('../../gameConfig');
 const playerLevelManager = require('./_getPlayerLevel');
 const expBarManager = require('./_getExperienceBar');
 const staminaManager = require('./_getPlayerStamina');
-const expManager = require('./_getFormattedPlayerExperience');
+const numberManager = require('./_getFormattedNumber');
 
 module.exports = {
     getPlayerSheet: function(member) {
@@ -40,7 +40,7 @@ module.exports = {
                             .setDescription(`Fiche créée le ${frDate.getFrenchDate(player.createdAt)}`)
                             .addField("Inventaire", format.getFormattedPlayerInventory(player.playerInventory))
                             .addField("Matériaux", format.getFormattedPlayerInventory(player.playerMaterials, true))
-                            .addField("Expérience", `${expManager.getFormattedExperience(player.playerExperience)} ${experienceFormat}`, true)
+                            .addField("Expérience", `${numberManager.getFormattedNumber(player.playerExperience)} ${experienceFormat}`, true)
                             .addField("Endurance", (playerStamina === playerMaxStamina ? `**${playerStamina}/${playerMaxStamina}**` : `${playerStamina}/${playerMaxStamina}`), true)
                             .addField(currency, player.playerPurse, true)
                             .addField('Rubis obtenus', `${player.playerRuby} :gem:`, true)
