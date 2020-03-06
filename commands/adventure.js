@@ -22,7 +22,7 @@ module.exports = {
     name: 'adventure',
     description: "Permet de tenter une map.",
     guildOnly: true,
-    cooldown: 60*15,
+    cooldown: 60*10,
     execute(message, args) {
         if(!args[0]) {
             cd.deleteTimer(message.author.id, this.name);
