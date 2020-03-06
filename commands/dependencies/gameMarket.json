@@ -2,7 +2,7 @@
   "item":
           [
             {
-              "id": "000",
+              "id": 0,
               "name": "warp",
               "price": 20,
               "description": "Permet d'accélérer le temps et d'utiliser instantanément la commande !loot (une utilisation).",
@@ -10,7 +10,7 @@
               "whenUsed": "Tu peux maintenant réutiliser la commande !loot !"
             },
             {
-              "id": "001",
+              "id": 1,
               "name": "grab",
               "price": 150,
               "description": "Vole à un joueur au hasard une somme comprise entre 5% et 20%.",
@@ -18,7 +18,7 @@
               "whenUsed": "Qui va être sa victime... :thinking:"
             },
             {
-              "id": "002",
+              "id": 2,
               "name": "commonbag",
               "price": 15,
               "description": "Un sac de qualité commune. Contient une somme entre 1 et 25 bobzi$$.",
@@ -26,7 +26,7 @@
               "whenUsed": "Il ouvre son sac sans hésitation..."
             },
             {
-              "id": "003",
+              "id": 3,
               "name": "rarebag",
               "price": 60,
               "description": "Un sac de qualité rare. Contient une somme entre 2 et 100 bobzi$$.",
@@ -34,7 +34,7 @@
               "whenUsed": "Il ouvre son sac avec une pointe de curiosité !"
             },
             {
-              "id": "004",
+              "id": 4,
               "name": "epicbag",
               "price": 180,
               "description": "Un sac de qualité épique. Contient une somme entre 3 et 300 bobzi$$.",
@@ -42,7 +42,7 @@
               "whenUsed": "Il ouvre son sac avec un grand intérêt !!"
             },
             {
-              "id": "005",
+              "id": 5,
               "name": "legendarybag",
               "price": 1200,
               "description": "Un sac de qualité légendaire. Contient une somme entre 4 et 2000 bobzi$$.",
@@ -50,7 +50,7 @@
               "whenUsed": "Il ouvre son sac à toute vitesse, les yeux remplis d'étoiles !!!"
             },
             {
-              "id": "006",
+              "id": 6,
               "name": "shower",
               "price": 500,
               "description": "Vous prenez une douche, ce qui vous enlève une malédiction.",
@@ -58,7 +58,7 @@
               "whenUsed": "Ça va déjà mieux ! \uD83D\uDE0C (-1 malédiction)"
             },
             {
-              "id": "007",
+              "id": 7,
               "name": "vaderetro",
               "price": 1500,
               "description": "Une incantation qui enlève toutes les malédictions de son utilisateur.",
@@ -66,7 +66,7 @@
               "whenUsed": "Un énorme poids est enlevé de ses épaules ! \uD83D\uDE4F"
             },
             {
-              "id": "008",
+              "id": 8,
               "name": "coronavirus",
               "price": 350,
               "description": "Envoie une malédiction à un joueur au hasard (peut cibler le lanceur).",
@@ -74,7 +74,7 @@
               "whenUsed": "Qui va vomir ses entrailles... ?"
             },
             {
-              "id": "009",
+              "id": 9,
               "name": "salad",
               "price": 100,
               "description": "Restaure 5 points d'endurance à l'utilisateur.",
@@ -82,7 +82,7 @@
               "whenUsed": "Un faible courant d'énergie traverse son corps ! (+5 pts d'endurance)"
             },
             {
-              "id": "010",
+              "id": 10,
               "name": "onigiri",
               "price": 250,
               "description": "Restaure 10 points d'endurance à l'utilisateur.",
@@ -90,7 +90,7 @@
               "whenUsed": "Un courant d'énergie traverse son corps ! (+10 pts d'endurance)"
             },
             {
-              "id": "011",
+              "id": 11,
               "name": "coffee",
               "price": 625,
               "description": "Restaure 20 points d'endurance à l'utilisateur.",
@@ -98,7 +98,7 @@
               "whenUsed": "Ses forces reviennent peu à peu ! (+20 pts d'endurance)"
             },
             {
-              "id": "012",
+              "id": 12,
               "name": "ramen",
               "price": 1560,
               "description": "Restaure 40 points d'endurance à l'utilisateur.",
@@ -109,7 +109,7 @@
   "map":
           [
             {
-              "id": "000",
+              "id": 0,
               "name": "forest",
               "frenchName": "la forêt",
               "price": 5,
@@ -121,7 +121,7 @@
               "percentChanceToSuccess": 80
             },
             {
-              "id": "001",
+              "id": 1,
               "name": "restaurant",
               "frenchName": "le restaurant",
               "price": 8,
@@ -133,7 +133,7 @@
               "percentChanceToSuccess": 70
             },
             {
-              "id": "002",
+              "id": 2,
               "name": "bank",
               "frenchName": "la banque",
               "price": 10,
@@ -145,7 +145,7 @@
               "percentChanceToSuccess": 60
             },
             {
-              "id": "003",
+              "id": 3,
               "name": "factory",
               "frenchName": "l'usine",
               "price": 13,
@@ -157,7 +157,7 @@
               "percentChanceToSuccess": 40
             },
             {
-              "id": "004",
+              "id": 4,
               "name": "desert",
               "frenchName": "le désert",
               "materialsMap": true,
@@ -170,7 +170,7 @@
               "percentChanceToSuccess": 70
             },
             {
-              "id": "005",
+              "id": 5,
               "name": "mountain",
               "frenchName": "la montagne",
               "materialsMap": true,

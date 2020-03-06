@@ -2,19 +2,19 @@
   "materials":
           [
             {
-              "id": "000",
+              "id": 0,
               "name": "dna",
               "description": "Des fragments d'ADN extra-terrestre qui doivent bien avoir une quelconque utilité...",
               "icon": "\uD83E\uDDEC"
             },
             {
-              "id": "001",
+              "id": 1,
               "name": "amulet",
               "description": "Une amulette étrange qui doit bien avoir une quelconque utilité...",
               "icon": "\uD83E\uDDFF"
             },
             {
-              "id": "002",
+              "id": 2,
               "name": "stardust",
               "description": "Un matériau rare qui doit bien avoir une quelconque utilité...",
               "icon": "\uD83C\uDF1F"

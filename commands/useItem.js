@@ -1,5 +1,14 @@
 const PlayerSheet = require('../models/playerSheet');
 const use = require('./dependencies/items/_useSpecificItem');
+/**
+ * @class
+ * @property {Number} id
+ * @property {String} name
+ * @property {Number} price
+ * @property {String} description
+ * @property {String} icon
+ * @property {String} whenUsed
+ */
 const items = require('./dependencies/gameMarket').item;
 const cd = require('./dependencies/_deleteTimer');
 const expManager = require('./dependencies/_addExperience');
@@ -44,7 +53,7 @@ module.exports = {
                         const experience = expManager.addExperience(player, maxExperience, message);
                         message.reply(`a utilisé un ${itemToUse.icon} \`${itemToUse.name}\` (\`+${experience}\` ${experienceFormat}) ! ${itemToUse.whenUsed}`)
                             .then(() => {
-                                player.playerInventory.splice( player.playerInventory.indexOf(itemToUse.name), 1)
+                                player.playerInventory.splice( player.playerInventory.indexOf(itemToUse.name), 1);
                                 player.save()
                                     .then(() => {
                                         use.useSpecificItem(player, itemToUse.name, message);

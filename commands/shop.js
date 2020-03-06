@@ -1,3 +1,12 @@
+/**
+ * @class
+ * @property {Number} id
+ * @property {String} name
+ * @property {Number} price
+ * @property {String} description
+ * @property {String} icon
+ * @property {String} whenUsed
+ */
 const items = require('./dependencies/gameMarket').item;
 const {currency} = require('../config');
 const {prefix} = require('../config');

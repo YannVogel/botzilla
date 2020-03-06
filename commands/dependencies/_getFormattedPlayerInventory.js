@@ -1,4 +1,20 @@
+/**
+ * @class
+ * @property {Number} id
+ * @property {String} name
+ * @property {Number} price
+ * @property {String} description
+ * @property {String} icon
+ * @property {String} whenUsed
+ */
 const items = require('./gameMarket').item;
+/**
+ * @class
+ * @property {Number} id
+ * @property {String} name
+ * @property {String} description
+ * @property {String} icon
+ */
 const materials = require('./materials').materials;
 
 module.exports = {
