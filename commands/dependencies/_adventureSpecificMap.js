@@ -1,18 +1,36 @@
 const rng = require('./_getRandomInt');
+/**
+ * @class
+ * @property {Number} id
+ * @property {String} name
+ * @property {Number} price
+ * @property {String} description
+ * @property {String} icon
+ * @property {String} whenUsed
+ */
 const items = require('./gameMarket').item;
+/**
+ * @class
+ * @property {Number} id
+ * @property {String} name
+ * @property {String} description
+ * @property {String} icon
+ */
 const materials = require('./materials').materials;
 
 module.exports = {
     adventureSpecificMap: (player, map, message) => {
         // If the map is failed...
         if(rng.getRandomInt(100) + 1 > map.percentChanceToSuccess){
-            return message.channel.send(`Après des heures à errer dans ${map.frenchName}, <@${player.playerId}> se rend compte que l'expédition est un échec cuisant...`);
+            message.channel.send(`Après des heures à errer dans ${map.frenchName}, <@${player.playerId}> se rend compte que l'expédition est un ❌\`échec cuisant\`...`);
+            // Map is not a success...
+            return false;
         }
-        message.channel.send(`L'expédition de <@${player.playerId}> dans ${map.frenchName} est une réussite !`)
+        message.channel.send(`L'expédition de <@${player.playerId}> dans ${map.frenchName} est une ✅\`réussite\` !`)
             .then(() => {
                 const wonItems = rng.getRandomInt(map.maxItems + 1);
                 if(!wonItems) {
-                    return message.channel.send(`Malheureusement <@${player.playerId}> n'a récupéré aucun objet...`);
+                    message.channel.send(`Malheureusement <@${player.playerId}> n'a récupéré aucun objet 😔 ...`);
                 }
 
                 let itemsList = '';
@@ -37,7 +55,9 @@ module.exports = {
                     }
                 }
                 player.save();
-                return message.channel.send(`<@${player.playerId}> a récupéré ${wonItems} objet${wonItems > 1 ? 's':''} : ${itemsList}`);
+                message.channel.send(`<@${player.playerId}> a récupéré ${wonItems} objet${wonItems > 1 ? 's':''} : ${itemsList}`);
                 });
+        // Map is a success...
+        return true;
     }
 };

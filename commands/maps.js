@@ -1,5 +1,32 @@
+/**
+ * @class
+ * @property {String} name
+ * @property {String} frenchName
+ * @property {boolean} materialsMap
+ * @property {Number} price
+ * @property {Number} maxItems
+ * @property {Array} itemList
+ * @property {String} icon
+ * @property {Number} percentChanceToSuccess
+ */
 const maps = require('./dependencies/gameMarket').map;
+/**
+ * @class
+ * @property {Number} id
+ * @property {String} name
+ * @property {Number} price
+ * @property {String} description
+ * @property {String} icon
+ * @property {String} whenUsed
+ */
 const items = require('./dependencies/gameMarket').item;
+/**
+ * @class
+ * @property {Number} id
+ * @property {String} name
+ * @property {String} description
+ * @property {String} icon
+ */
 const materials = require('./dependencies/materials').materials;
 const {prefix} = require('../config');
 const Discord = require('discord.js');

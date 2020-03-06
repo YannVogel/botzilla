@@ -1,9 +1,20 @@
+/**
+ * @class
+ * @property {String} name
+ * @property {String} frenchName
+ * @property {boolean} materialsMap
+ * @property {Number} price
+ * @property {Number} maxItems
+ * @property {Array} itemList
+ * @property {String} icon
+ * @property {Number} percentChanceToSuccess
+ */
 const maps = require('./dependencies/gameMarket').map;
 const PlayerSheet = require('../models/playerSheet');
-const {currency, stamina} = require('../config');
+const {stamina} = require('../config');
 const cd = require('./dependencies/_deleteTimer');
 const expManager = require('./dependencies/_addExperience');
-const maxExperience = 500;
+const maxExperience = 500; //maxExperience if not a success, otherwise maxExperience*2
 const {experienceFormat} = require('../gameConfig');
 const mapManager = require('./dependencies/_adventureSpecificMap');
 
@@ -45,13 +56,13 @@ module.exports = {
                     return message.reply(`Désolé mais tu n'as pas assez de ${stamina}`)
                 }
                 player.playerStamina -= desiredMap.price;
-                return message.reply(`tente de réaliser la map ${desiredMap.icon} \`${desiredMap.name}\`! (-${desiredMap.price} ${stamina})`)
+                return message.reply(`tente de réaliser la map ${desiredMap.icon} \`${desiredMap.name}\`! (\`-${desiredMap.price}\` ${stamina})`)
                     .then(() => {
                         player.save()
                             .then(() => {
-                                mapManager.adventureSpecificMap(player, desiredMap, message);
-                                const experience = expManager.addExperience(player, maxExperience, message);
-                                return message.reply(` a gagné \`+${experience}\` ${experienceFormat} en explorant cette map.`);
+                                const isMapASuccess = mapManager.adventureSpecificMap(player, desiredMap, message);
+                                const experience = expManager.addExperience(player, isMapASuccess ? maxExperience*2 : maxExperience, message);
+                                return message.reply(` a gagné \`+${experience}\` ${experienceFormat} en explorant la map ${desiredMap.icon} \`${desiredMap.name}\`.`);
                             })
                     });
             });
