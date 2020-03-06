@@ -30,7 +30,7 @@ module.exports = {
             .then(() => {
                 const wonItems = rng.getRandomInt(map.maxItems + 1);
                 if(!wonItems) {
-                    message.channel.send(`Malheureusement <@${player.playerId}> n'a récupéré aucun objet 😔 ...`);
+                    return message.channel.send(`Malheureusement <@${player.playerId}> n'a récupéré aucun objet 😔 ...`);
                 }
 
                 let itemsList = '';
@@ -55,7 +55,7 @@ module.exports = {
                     }
                 }
                 player.save();
-                message.channel.send(`<@${player.playerId}> a récupéré ${wonItems} objet${wonItems > 1 ? 's':''} : ${itemsList}`);
+                return message.channel.send(`<@${player.playerId}> a récupéré ${wonItems} objet${wonItems > 1 ? 's':''} : ${itemsList}`);
                 });
         // Map is a success...
         return true;
