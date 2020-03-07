@@ -61,7 +61,6 @@ module.exports = {
                         baseQuality = qualityMap[i];
                     }
                 }
-                console.log(improvedItem);
                 items.map(item => {
                     if (improvedItem === item.name) {
                         improvedItem = item;
@@ -77,7 +76,7 @@ module.exports = {
                         })
                 }
                 const experience = expManager.addExperience(player, maxExperience*multiplierIfItsASuccess, message);
-                return message.reply(`vient d'améliorer son ${itemToImprove.icon}\`${itemToImprove.name}\` en ${improvedItem.icon}\`${improvedItem.name}\` (\`${experience}\` ${experienceFormat}) !`)
+                return message.reply(`vient d'améliorer son ${itemToImprove.icon}\`${itemToImprove.name}\` en ${improvedItem.icon}\`${improvedItem.name}\` (\`+${experience}\` ${experienceFormat}) !`)
                     .then(() => {
                         player.playerInventory.splice(player.playerInventory.indexOf(itemToImprove.name), 1);
                         player.playerInventory.push(improvedItem.name);
