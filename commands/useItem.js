@@ -15,9 +15,10 @@ const expManager = require('./dependencies/_addExperience');
 const maxExperience = 200;
 const {experienceFormat} = require('../gameConfig');
 
-function thisPlayerHasThisItem (player, item) {
-    for(let i = 0; i < player.playerInventory.length; i++) {
-        if(item === player.playerInventory[i]) {
+function thisPlayerHasThisItem (player, item, materials = false) {
+    const inventory = !materials ? player.playerInventory : player.playerMaterials;
+    for(let i = 0; i < inventory.length; i++) {
+        if(item === inventory[i]) {
             return true;
         }
     }
@@ -64,5 +65,6 @@ module.exports = {
                         return message.reply("Tu ne possèdes pas cet objet !");
                     }
                 });
-    }
+    },
+    thisPlayerHasThisItem
 };
