@@ -53,7 +53,7 @@ module.exports = {
                 }
                 if(player.playerStamina < desiredMap.price) {
                     cd.deleteTimer(message.author.id, this.name);
-                    return message.reply(`Désolé mais tu n'as pas assez de ${stamina}`)
+                    return message.reply(`Désolé mais tu n'as pas assez de ${stamina}...`)
                 }
                 player.playerStamina -= desiredMap.price;
                 return message.reply(`tente de réaliser la map ${desiredMap.icon} \`${desiredMap.name}\`! (\`-${desiredMap.price}\` ${stamina})`)
