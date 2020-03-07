@@ -35,9 +35,11 @@ module.exports = {
                 }
                 let itemToImprove = args[0];
                 if (itemToImprove.startsWith('legendary')) {
+                    cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Désolé mais cet objet a déjà atteint sa qualité maximale...`);
                 }
                 if (!(itemToImprove.startsWith('common') || itemToImprove.startsWith('rare') || itemToImprove.startsWith('epic'))) {
+                    cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Désolé mais je ne sais pas améliorer cet objet...`);
                 }
                 if (!thisPlayerHasThisItem(player, itemToImprove)) {
