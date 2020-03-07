@@ -54,7 +54,7 @@ module.exports = {
                         const experience = expManager.addExperience(player, maxExperience, message);
                         message.reply(`a utilisé un ${itemToUse.icon} \`${itemToUse.name}\` (\`+${experience}\` ${experienceFormat}) ! ${itemToUse.whenUsed}`)
                             .then(() => {
-                                player.playerInventory.splice( player.playerInventory.indexOf(itemToUse.name), 1);
+                                player.playerInventory.splice(player.playerInventory.indexOf(itemToUse.name), 1);
                                 player.save()
                                     .then(() => {
                                         use.useSpecificItem(player, itemToUse.name, message);

@@ -82,7 +82,7 @@ module.exports = {
                     .then(() => {
                         player.playerInventory.splice(player.playerInventory.indexOf(itemToImprove.name), 1);
                         player.playerInventory.push(improvedItem.name);
-                        player.playerMaterials.splice(player.playerInventory.indexOf('stardust'), 1);
+                        player.playerMaterials.splice(player.playerMaterials.indexOf('stardust'), 1);
                         player.save();
                     });
             });
