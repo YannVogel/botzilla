@@ -9,9 +9,11 @@
  * @property {String} whenCrafted
  */
 const mutations = require('./mutations').mutations;
+const powerManager = require('./_getPlayerTotalPower');
+const {powerFormat} = require('../../gameConfig');
 
 module.exports = {
-    getFormattedPlayerMutations: mutationsInventory => {
+    getFormattedPlayerMutations: (player, mutationsInventory) => {
         if(mutationsInventory.length === 0) {
             return "Aucune mutation acquise.";
         }
@@ -25,6 +27,6 @@ module.exports = {
                 }
             });
         });
-        return mutationsList.replace(/ \| $/, '');
+        return `possède les mutations suivantes :\n${mutationsList.replace(/ \| $/, '')}.\nPour un total de \`${powerManager.getPlayerTotalPower(player)} ${powerFormat}\`.`;
     }
 };

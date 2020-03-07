@@ -14,7 +14,7 @@ module.exports = {
                     cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Merci de commencer par créer ta fiche avec la commande ${prefix}fiche !`)
                 }
-                return message.reply(`possède les mutations suivantes : ${mutationsManager.getFormattedPlayerMutations(player.playerMutations)}`);
+                return message.reply(`${mutationsManager.getFormattedPlayerMutations(player, player.playerMutations)}`);
             });
     }
 };
