@@ -21,7 +21,7 @@ module.exports = {
     description: "Améliore la qualité d'un objet",
     usage: "<nom de l'objet à améliorer>",
     guildOnly: true,
-    cooldown: 1,
+    cooldown: 60*10,
     execute(message, args) {
         if (!args || args.length > 1) {
             return message.reply(`Mauvaise utilisation de la commande. Tape ${prefix}help ${this.name} pour plus d'informations.`);
