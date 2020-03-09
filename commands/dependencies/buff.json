@@ -1,0 +1,77 @@
+{
+  "buff":
+          [
+            {
+              "id": 0,
+              "name": "cat",
+              "percentBonus": 5,
+              "icon": "\uD83D\uDC31",
+              "image": "https://i.ibb.co/x6yvtvz/cat.png",
+              "rarityLevel": 1,
+              "frenchRarity": "commun"
+            },
+            {
+              "id": 1,
+              "name": "dog",
+              "percentBonus": 10,
+              "icon": "\uD83D\uDC36",
+              "image": "https://i.ibb.co/Xbg46tc/dog.png",
+              "rarityLevel": 1,
+              "frenchRarity": "commun"
+            },
+            {
+              "id": 2,
+              "name": "monkey",
+              "percentBonus": 15,
+              "icon": "\uD83D\uDC35",
+              "image": "https://i.ibb.co/TT33W1y/monkey.png",
+              "rarityLevel": 1,
+              "frenchRarity": "commun"
+            },
+            {
+              "id": 3,
+              "name": "wolf",
+              "percentBonus": 20,
+              "icon": "\uD83D\uDC3A",
+              "image": "https://i.ibb.co/QPKfmV9/wolf.png",
+              "rarityLevel": 2,
+              "frenchRarity": "peu commun"
+            },
+            {
+              "id": 4,
+              "name": "fox",
+              "percentBonus": 25,
+              "icon": "\uD83E\uDD8A",
+              "image": "https://i.ibb.co/GTCTPMM/fox.png",
+              "rarityLevel": 2,
+              "frenchRarity": "peu commun"
+            },
+            {
+              "id": 5,
+              "name": "tiger",
+              "percentBonus": 35,
+              "icon": "\uD83D\uDC2F",
+              "image": "https://i.ibb.co/vZqpJ5b/tiger.png",
+              "rarityLevel": 3,
+              "frenchRarity": "rare"
+            },
+            {
+              "id": 6,
+              "name": "lion",
+              "percentBonus": 45,
+              "icon": "\uD83E\uDD81",
+              "image": "https://i.ibb.co/3Shs34X/lion.png",
+              "rarityLevel": 3,
+              "frenchRarity": "rare"
+            },
+            {
+              "id": 7,
+              "name": "unicorn",
+              "percentBonus": 50,
+              "icon": "\uD83E\uDD84",
+              "image": "https://i.ibb.co/H7pdp2G/unicorn.png",
+              "rarityLevel": 4,
+              "frenchRarity": "très rare"
+            }
+          ]
+}

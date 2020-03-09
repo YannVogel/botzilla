@@ -16,11 +16,12 @@ const items = require('./gameMarket').item;
  * @property {String} icon
  */
 const materials = require('./materials').materials;
+const buff = require('./buff').buff;
 
 module.exports = {
-    getFormattedPlayerInventory: (inventory, isMaterials = false) => {
+    getFormattedPlayerInventory: (inventory, isMaterials = false, isBuff = false) => {
         if(inventory.length > 0) {
-            const library = !isMaterials ? items : materials;
+            const library = !isMaterials ? (!isBuff ? items : buff) : materials;
             let formattedInventory = '';
             library.map(object => {
                 let count = 0;
@@ -35,7 +36,7 @@ module.exports = {
             });
             return formattedInventory.replace(/ \| $/, '');
         }else {
-            return `Aucun ${!isMaterials ? 'objet' : 'matériau'} possédé`;
+            return `Aucun ${!isMaterials ? (!isBuff ? 'objet' : 'bonus') : 'matériau'} possédé`;
         }
     }
 };
