@@ -8,6 +8,7 @@ const playerLevelManager = require('./_getPlayerLevel');
 const expBarManager = require('./_getExperienceBar');
 const staminaManager = require('./_getPlayerStamina');
 const numberManager = require('./_getFormattedNumber');
+const buffManager = require('./_buffManager');
 
 module.exports = {
     getPlayerSheet: function(member) {
@@ -43,6 +44,7 @@ module.exports = {
                             .addField("Expérience", `${numberManager.getFormattedNumber(player.playerExperience)} ${experienceFormat}`, true)
                             .addField("Endurance", (playerStamina === playerMaxStamina ? `**${playerStamina}/${playerMaxStamina}**` : `${playerStamina}/${playerMaxStamina}`), true)
                             .addField(currency, player.playerPurse, true)
+                            .addField(`Bonus (+${buffManager.getPlayerTotalBuff(player)}%)`, format.getFormattedPlayerInventory(player.playerBuff, false, true), true)
                             .addField('Rubis obtenus', `${player.playerRuby} :gem:`, true)
                             .addField('Malédictions', `${player.playerCurses} :skull:﻿`, true)
                             .addField('Défis lancés / acceptés / refusés', `${player.initiatedChallenge} :blue_circle: / ${player.acceptedChallenge} :green_circle: / ${player.refusedChallenge} :red_circle:`, true)

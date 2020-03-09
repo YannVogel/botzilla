@@ -11,6 +11,7 @@ const gif = require('./_getGif');
 const expManager = require('./_addExperience');
 const maxExperience = 1000;
 const {experienceFormat} = require('../../gameConfig');
+const buffManager = require('./_buffManager');
 
 const bagImages = {
     'common': 'https://i.ibb.co/HT1SqDg/common.png',
@@ -73,10 +74,11 @@ function getCursedBag(percent, malus) {
         .setThumbnail(bagImages['cursed'])
 }
 
-function getMoneyBag (player, quality, message, curseNumber = 0) {
+function getMoneyBag (player, quality, message, curseNumber = 0, buffPercent = 0) {
     if(curseNumber > 10) curseNumber = 10;
     let loot = (random.getRandomInt(maxBagProfit[quality]) + 1) * bagMultiplier[quality];
     if(curseNumber) loot = Math.round(loot - (loot*(curseNumber/10)));
+    if(buffPercent) loot += Math.round((loot*buffPercent)/100);
     player.playerPurse += loot;
     player.save();
 
@@ -88,6 +90,7 @@ function getMoneyBag (player, quality, message, curseNumber = 0) {
         .addField(`Valeur du sac`, `${loot} ${currency}`)
         .setThumbnail(bagImages[quality]);
     if(curseNumber) embed.addField(`Malus ${bagEmoji['cursed']}`, `-${curseNumber*10}%`);
+    if(buffPercent) embed.addField('Bonus', `+${buffPercent}%`);
 
     return embed;
 }
@@ -118,21 +121,26 @@ module.exports = {
 
         return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]} ! ${bagSentence[quality]} (\`+${experience}\` ${experienceFormat})`)
             .then(() =>{
-                message.channel.send(getMoneyBag(player, quality, message, player.playerCurses))
+                message.channel.send(getMoneyBag(player, quality, message, player.playerCurses, buffManager.getPlayerTotalBuff(player)))
+                    .then(() => {
+                        if(extra.getExtraRuby()) {
+                            extra.rubyManager(player, message);
+                        }
+                    })
+                    .then(() => {
+                        if(buffManager.getABuff()) {
+                            buffManager.addABuff(player, message);
+                        }
+                    })
+                    .then(() => {
+                        // 1 chance in 10 not to trigger the CD
+                        if(random.getRandomInt(10) === 5)
+                        {
+                            cd.deleteTimer(player.playerId, 'loot');
+                            return message.channel.send(`Une distorsion de l'espace-temps a permis à <@${player.playerId}> de ne pas enclencher le CD de sa commande !loot !!`);
+                        }
+                    });
             })
-            .then(() => {
-                if(extra.getExtraRuby()) {
-                    extra.rubyManager(player, message);
-                }
-            })
-            .then(() => {
-                // 1 chance in 10 not to trigger the CD
-                if(random.getRandomInt(10) === 5)
-                {
-                cd.deleteTimer(player.playerId, 'loot');
-                return message.channel.send(`Une distorsion de l'espace-temps a permis à <@${player.playerId}> de ne pas enclencher le CD de sa commande !loot !!`);
-                }
-            });
     },
     getMoneyBag,
     getCursedBag
