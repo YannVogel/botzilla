@@ -2,6 +2,16 @@ const  Discord = require('discord.js');
 const random = require('./_getRandomInt.js');
 const PlayerSheet = require('../../models/playerSheet');
 const oneChanceInToGetABuff = 24;     // 1 chance in x to get a buff
+/**
+ * @class
+ * @property {Number} id
+ * @property {String} name
+ * @property {Number} percentBonus
+ * @property {String} icon
+ * @property {String} image
+ * @property {Number} rarityLevel
+ * @property {String} frenchRarity
+ */
 const buff = require('./buff').buff;
 const chanceToGetByRarity = [
     60, 85, 95, 100
@@ -32,7 +42,7 @@ module.exports = {
             .addField("Bonus permanent", `+${wonBuff.percentBonus}% d'or trouvé dans les sacs !`)
             .setThumbnail(wonBuff.image);
 
-        message.channel.send(`Fantastique ! Le sac trouvé par <@${player.playerId}> contenait un animal !`)
+        message.channel.send(`Fantastique ! Le sac trouvé par <@${player.playerId}> contenait un animal ${wonBuff.frenchRarity} !`)
             .then(() => {
                 message.reply(embedMessage)
                     .then(() => {
