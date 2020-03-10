@@ -27,8 +27,8 @@ module.exports = {
                             playerRuby: 0,
                             playerCurses: 0
                         });
-                        // ...creates the player sheet in the DB
-                        player.save().catch(console.error);
+                        // save() is unnecessary here since player will be saved line 35 with getPlayerStamina.
+                        /*player.save().catch(console.error);*/
                     }
                     const totalPlayerChallenges = player.wonChallenge + player.lostChallenge;
                     const playerWinRate = totalPlayerChallenges > 0 ? ((player.wonChallenge / (totalPlayerChallenges))*100).toFixed(2) : '--';

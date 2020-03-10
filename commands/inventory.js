@@ -16,7 +16,7 @@ module.exports = {
                     return message.reply(`Merci de commencer par créer ta fiche avec la commande ${prefix}fiche !`)
                 }
 
-                return message.channel.send(`🎒 Inventaire actuel de <@${message.author.id}> : \n**${format.getFormattedPlayerInventory(player.playerInventory)}**`);
+                return message.channel.send(`🎒 Inventaire actuel de <@${message.author.id}> : \n${format.getFormattedPlayerInventory(player.playerInventory)}`);
             })
     }
 };
