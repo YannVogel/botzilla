@@ -2,7 +2,6 @@
   "buff":
           [
             {
-              "id": 0,
               "name": "cat",
               "percentBonus": 5,
               "icon": "\uD83D\uDC31",
@@ -11,7 +10,6 @@
               "frenchRarity": "commun"
             },
             {
-              "id": 1,
               "name": "dog",
               "percentBonus": 10,
               "icon": "\uD83D\uDC36",
@@ -20,7 +18,14 @@
               "frenchRarity": "commun"
             },
             {
-              "id": 2,
+              "name": "rabbit",
+              "percentBonus": 15,
+              "icon": "\uD83D\uDC30",
+              "image": "https://i.ibb.co/QFkbP74/rabbit.png",
+              "rarityLevel": 1,
+              "frenchRarity": "commun"
+            },
+            {
               "name": "monkey",
               "percentBonus": 15,
               "icon": "\uD83D\uDC35",
@@ -29,7 +34,6 @@
               "frenchRarity": "commun"
             },
             {
-              "id": 3,
               "name": "wolf",
               "percentBonus": 20,
               "icon": "\uD83D\uDC3A",
@@ -38,7 +42,6 @@
               "frenchRarity": "peu commun"
             },
             {
-              "id": 4,
               "name": "fox",
               "percentBonus": 25,
               "icon": "\uD83E\uDD8A",
@@ -47,7 +50,6 @@
               "frenchRarity": "peu commun"
             },
             {
-              "id": 5,
               "name": "tiger",
               "percentBonus": 35,
               "icon": "\uD83D\uDC2F",
@@ -56,7 +58,6 @@
               "frenchRarity": "rare"
             },
             {
-              "id": 6,
               "name": "lion",
               "percentBonus": 45,
               "icon": "\uD83E\uDD81",
@@ -65,7 +66,6 @@
               "frenchRarity": "rare"
             },
             {
-              "id": 7,
               "name": "unicorn",
               "percentBonus": 50,
               "icon": "\uD83E\uDD84",

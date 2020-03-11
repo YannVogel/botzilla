@@ -24,10 +24,9 @@ module.exports = {
                     // If the player is not the dev account...
                     if(player.playerId !== (process.env.DEV_ID || devID)) {
                         i++;
-                        messageEmbed.addField(`${i}) ${player.playerName} (niv. ${lvlManager.getPlayerLevel(player)})`, `${numberManager.getFormattedNumber(player.playerPurse)} ${currency}`, i > 3);
+                        messageEmbed.addField(`${i}) ${player.playerName}`, `Niveau ${lvlManager.getPlayerLevel(player)}\n${numberManager.getFormattedNumber(player.playerPurse)} ${currency}`, i > 3);
                     }
                 });
-
                 return message.channel.send(`Classement des joueurs :`)
                     .then(message.channel.send(messageEmbed));
             });
