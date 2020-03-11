@@ -4,7 +4,6 @@ const PlayerSheet = require('../../models/playerSheet');
 const oneChanceInToGetABuff = 24;     // 1 chance in x to get a buff
 /**
  * @class
- * @property {Number} id
  * @property {String} name
  * @property {Number} percentBonus
  * @property {String} icon
