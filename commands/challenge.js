@@ -81,13 +81,14 @@ module.exports = {
                                     amount: price,
                                     createdAt: new Date()
                                 });
-                                newChallenge.save();
-                                const experience = expManager.addExperience(initiatorPlayer, maxExperience, message);
-
-                                return message.channel.send(`${challengeEmojis['initiator']}<@${newChallenge.initiatorId}> (\`+${experience}\` ${experienceFormat}) vient de défier ${challengeEmojis['opponent']} <@${newChallenge.opponentId}> ! Somme mise en jeu : \`${newChallenge.amount} ${currency}\` !`)
+                                newChallenge.save()
                                     .then(() => {
+                                        const experience = expManager.addExperience(initiatorPlayer, maxExperience, message);
                                         initiatorPlayer.initiatedChallenge++;
-                                        initiatorPlayer.save();
+                                        initiatorPlayer.save()
+                                            .then(() => {
+                                                return message.channel.send(`${challengeEmojis['initiator']}<@${newChallenge.initiatorId}> (\`+${experience}\` ${experienceFormat}) vient de défier ${challengeEmojis['opponent']} <@${newChallenge.opponentId}> ! Somme mise en jeu : \`${newChallenge.amount} ${currency}\` !`);
+                                            });
                                     });
                             });
                     })

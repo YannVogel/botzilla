@@ -71,19 +71,22 @@ module.exports = {
 
                 if(rng.getRandomInt(100) + 1 > chanceToSuccess[baseQuality]){
                     const experience = expManager.addExperience(player, maxExperience, message);
-                    return message.channel.send(`Malheureusement, l'amélioration de ${itemToImprove.icon} \`${itemToImprove.name}\` a échoué et l'objet a été perdu...`)
+                    player.playerInventory.splice(player.playerInventory.indexOf(itemToImprove.name), 1);
+                    player.save()
                         .then(() => {
-                            player.playerInventory.splice(player.playerInventory.indexOf(itemToImprove.name), 1);
-                            player.save();
-                        })
+                            return message.channel.send(`Malheureusement, l'amélioration de ${itemToImprove.icon} \`${itemToImprove.name}\` a échoué et l'objet a été perdu...`);
+                        });
                 }
+                player.playerInventory.splice(player.playerInventory.indexOf(itemToImprove.name), 1);
+                player.playerInventory.push(improvedItem.name);
+                player.playerMaterials.splice(player.playerMaterials.indexOf('stardust'), 1);
                 const experience = expManager.addExperience(player, maxExperience*multiplierIfItsASuccess, message);
-                return message.reply(`vient d'améliorer son ${itemToImprove.icon}\`${itemToImprove.name}\` en ${improvedItem.icon}\`${improvedItem.name}\` (\`+${experience}\` ${experienceFormat}) !`)
+                player.save()
                     .then(() => {
-                        player.playerInventory.splice(player.playerInventory.indexOf(itemToImprove.name), 1);
-                        player.playerInventory.push(improvedItem.name);
-                        player.playerMaterials.splice(player.playerMaterials.indexOf('stardust'), 1);
-                        player.save();
+                        return message.channel.send(`L'amélioration effectuée par <@${player.playerId}> est une réussite !!`)
+                            .then(() => {
+                                return message.reply(`vient d'améliorer son ${itemToImprove.icon}\`${itemToImprove.name}\` en ${improvedItem.icon}\`${improvedItem.name}\` (\`+${experience}\` ${experienceFormat}) !`);
+                            });
                     });
             });
     }

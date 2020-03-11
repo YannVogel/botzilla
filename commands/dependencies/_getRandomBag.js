@@ -113,34 +113,36 @@ module.exports = {
         }
         // Not a cursed bag, then set the quality of the regular bag...
         let quality;
-        const experience = expManager.addExperience(player, maxExperience, message);
         if(number <= maxCommon){ quality = "common"; }
         else if(number <= maxRare){ quality = "rare"; }
         else if(number <= maxEpic){ quality = "epic"; }
         else{ quality = "legendary"; }
-
-        return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]} ! ${bagSentence[quality]} (\`+${experience}\` ${experienceFormat})`)
-            .then(() =>{
-                message.channel.send(getMoneyBag(player, quality, message, player.playerCurses, buffManager.getPlayerTotalBuff(player)))
-                    .then(() => {
-                        if(extra.getExtraRuby()) {
-                            extra.rubyManager(player, message);
-                        }
-                    })
-                    .then(() => {
-                        if(buffManager.getABuff()) {
-                            buffManager.addABuff(player, message);
-                        }
-                    })
-                    .then(() => {
-                        // 1 chance in 10 not to trigger the CD
-                        if(random.getRandomInt(10) === 5)
-                        {
-                            cd.deleteTimer(player.playerId, 'loot');
-                            return message.channel.send(`Une distorsion de l'espace-temps a permis à <@${player.playerId}> de ne pas enclencher le CD de sa commande !loot !!`);
-                        }
+        const experience = expManager.addExperience(player, maxExperience, message);
+        player.save()
+            .then(() => {
+                return message.reply(`a trouvé un ${bagEmoji[quality]} sac ${bagFrName[quality]} ! ${bagSentence[quality]} (\`+${experience}\` ${experienceFormat})`)
+                    .then(() =>{
+                        message.reply(getMoneyBag(player, quality, message, player.playerCurses, buffManager.getPlayerTotalBuff(player)))
+                            .then(() => {
+                                if(extra.getExtraRuby()) {
+                                    extra.rubyManager(player, message);
+                                }
+                            })
+                            .then(() => {
+                                if(buffManager.getABuff()) {
+                                    buffManager.addABuff(player, message);
+                                }
+                            })
+                            .then(() => {
+                                // 1 chance in 10 not to trigger the CD
+                                if(random.getRandomInt(10) === 5)
+                                {
+                                    cd.deleteTimer(player.playerId, 'loot');
+                                    return message.channel.send(`Une distorsion de l'espace-temps a permis à <@${player.playerId}> de ne pas enclencher le CD de sa commande !loot !!`);
+                                }
+                            });
                     });
-            })
+            });
     },
     getMoneyBag,
     getCursedBag

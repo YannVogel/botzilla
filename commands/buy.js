@@ -51,9 +51,9 @@ module.exports = {
                 const experience = expManager.addExperience(player, maxExperience, message);
                 player.playerInventory.push(desiredItem.name);
                 player.playerPurse -= desiredItem.price;
-                return message.reply(`a acheté un ${desiredItem.icon} \`${desiredItem.name}\` pour ${desiredItem.price} ${currency} (\`+${experience}\` ${experienceFormat}) !`)
+                player.save()
                     .then(() => {
-                        player.save()
+                        return message.reply(`a acheté un ${desiredItem.icon} \`${desiredItem.name}\` pour ${desiredItem.price} ${currency} (\`+${experience}\` ${experienceFormat}) !`);
                     });
             });
     }
