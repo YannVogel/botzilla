@@ -51,15 +51,15 @@ module.exports = {
                                 itemToUse = item;
                             }
                         });
+                        player.playerInventory.splice(player.playerInventory.indexOf(itemToUse.name), 1);
                         const experience = expManager.addExperience(player, maxExperience, message);
-                        message.reply(`a utilisé un ${itemToUse.icon} \`${itemToUse.name}\` (\`+${experience}\` ${experienceFormat}) ! ${itemToUse.whenUsed}`)
+                        player.save()
                             .then(() => {
-                                player.playerInventory.splice(player.playerInventory.indexOf(itemToUse.name), 1);
-                                player.save()
+                                return message.reply(`a utilisé un ${itemToUse.icon} \`${itemToUse.name}\` (\`+${experience}\` ${experienceFormat}) ! ${itemToUse.whenUsed}`)
                                     .then(() => {
                                         use.useSpecificItem(player, itemToUse.name, message);
                                     });
-                            })
+                            });
                     }else {
                         cd.deleteTimer(message.author.id, this.name);
                         return message.reply("Tu ne possèdes pas cet objet !");

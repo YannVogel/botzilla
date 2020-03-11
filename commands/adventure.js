@@ -58,10 +58,10 @@ module.exports = {
                 player.playerStamina -= desiredMap.price;
                 return message.reply(`tente de réaliser la map ${desiredMap.icon} \`${desiredMap.name}\`! (\`-${desiredMap.price}\` ${stamina})`)
                     .then(() => {
+                        const isMapASuccess = mapManager.adventureSpecificMap(player, desiredMap, message);
+                        const experience = expManager.addExperience(player, isMapASuccess ? maxExperience*2 : maxExperience, message);
                         player.save()
                             .then(() => {
-                                const isMapASuccess = mapManager.adventureSpecificMap(player, desiredMap, message);
-                                const experience = expManager.addExperience(player, isMapASuccess ? maxExperience*2 : maxExperience, message);
                                 return message.reply(` a gagné \`+${experience}\` ${experienceFormat} en explorant la map ${desiredMap.icon} \`${desiredMap.name}\`.`);
                             })
                     });
