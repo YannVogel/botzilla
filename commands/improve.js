@@ -76,6 +76,7 @@ module.exports = {
                         .then(() => {
                             return message.channel.send(`Malheureusement, l'amélioration de ${itemToImprove.icon} \`${itemToImprove.name}\` a échoué et l'objet a été perdu...`);
                         });
+                    return;
                 }
                 player.playerInventory.splice(player.playerInventory.indexOf(itemToImprove.name), 1);
                 player.playerInventory.push(improvedItem.name);
