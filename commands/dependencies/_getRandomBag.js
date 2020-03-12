@@ -90,7 +90,7 @@ function getMoneyBag (player, quality, message, curseNumber = 0, buffPercent = 0
         .addField(`Valeur du sac`, `${loot} ${currency}`)
         .setThumbnail(bagImages[quality]);
     if(curseNumber) embed.addField(`Malus ${bagEmoji['cursed']}`, `-${curseNumber*10}%`);
-    if(buffPercent) embed.addField('Bonus', `+${buffPercent}%`);
+    if(buffPercent) embed.addField('Bonus :feet:', `+${buffPercent}%`);
 
     return embed;
 }

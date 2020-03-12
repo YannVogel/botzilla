@@ -8,6 +8,7 @@ const {devID} = process.env.DEV_ID || require('../auth.json');
 const expManager = require('./dependencies/_addExperience');
 const maxExperience = 300;
 const {experienceFormat} = require('../gameConfig');
+const minimalPercentToBet = 10;
 
 
 const challengeEmojis = {
@@ -50,6 +51,12 @@ module.exports = {
                 if(initiatorPlayer.playerPurse < price) {
                     cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Tu ne possèdes actuellement que \`${initiatorPlayer.playerPurse} ${currency}\`. Tu ne peux donc pas proposer un défi à \`${price} ${currency}\` !!`);
+                }
+                // If the player doesn't bet at least 10% of its purse
+                if(price < Math.round(initiatorPlayer.playerPurse/minimalPercentToBet)) {
+                    cd.deleteTimer(message.author.id, this.name);
+                    return message.reply(`Désolé, mais tu dois miser au moins \`${minimalPercentToBet}%\` de ce que tu possèdes !`)
+                        .then(message.reply(`Comme tu possèdes \`${initiatorPlayer.playerPurse} ${currency}\`, tu dois miser au moins \`${Math.round(initiatorPlayer.playerPurse/minimalPercentToBet)} ${currency}\` !`));
                 }
 
                 const opponent = message.mentions.users.map(user => {
