@@ -53,6 +53,7 @@
               "id": 6,
               "name": "shower",
               "price": 500,
+              "eventPrice": 50,
               "description": "Vous prenez une douche, ce qui vous enlève une malédiction.",
               "icon": "\uD83D\uDEBF",
               "whenUsed": "Ça va déjà mieux ! \uD83D\uDE0C (-1 malédiction)"
@@ -61,6 +62,7 @@
               "id": 7,
               "name": "vaderetro",
               "price": 1500,
+              "eventPrice": 150,
               "description": "Une incantation qui enlève toutes les malédictions de son utilisateur.",
               "icon": "\uD83D\uDE4F",
               "whenUsed": "Un énorme poids est enlevé de ses épaules ! \uD83D\uDE4F"
@@ -69,6 +71,7 @@
               "id": 8,
               "name": "coronavirus",
               "price": 350,
+              "eventPrice": 35,
               "description": "Envoie une malédiction à un joueur au hasard (peut cibler le lanceur).",
               "icon": "\uD83E\uDD2E",
               "whenUsed": "Qui va vomir ses entrailles... ?"
@@ -149,6 +152,7 @@
               "name": "factory",
               "frenchName": "l'usine",
               "price": 13,
+              "eventPrice": 3,
               "maxItems": 2,
               "itemList": [
                 "shower", "vaderetro", "coronavirus"

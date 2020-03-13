@@ -51,12 +51,12 @@ module.exports = {
                     cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Merci de commencer par créer ta fiche avec la commande ${prefix}fiche !`)
                 }
-                if(player.playerStamina < desiredMap.price) {
+                if(player.playerStamina < (desiredMap.eventPrice ? desiredMap.eventPrice : desiredMap.price)) {
                     cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Désolé mais tu n'as pas assez de ${stamina}...`)
                 }
-                player.playerStamina -= desiredMap.price;
-                return message.reply(`tente de réaliser la map ${desiredMap.icon} \`${desiredMap.name}\`! (\`-${desiredMap.price}\` ${stamina})`)
+                player.playerStamina -= desiredMap.eventPrice ? desiredMap.eventPrice : desiredMap.price;
+                return message.reply(`tente de réaliser la map ${desiredMap.icon} \`${desiredMap.name}\`! (\`-${desiredMap.eventPrice ? desiredMap.eventPrice : desiredMap.price}\` ${stamina})`)
                     .then(() => {
                         const isMapASuccess = mapManager.adventureSpecificMap(player, desiredMap, message);
                         const experience = expManager.addExperience(player, isMapASuccess ? maxExperience*2 : maxExperience, message);

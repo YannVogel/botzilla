@@ -3,6 +3,7 @@
  * @property {Number} id
  * @property {String} name
  * @property {Number} price
+ * @property {Number} eventPrice
  * @property {String} description
  * @property {String} icon
  * @property {String} whenUsed
@@ -36,7 +37,7 @@ module.exports = {
                             .setThumbnail(shopThumbnail)
                         ;
                         items.map(item => {
-                            return itemList.addField(`${item.icon}\`${item.name}\``, (player.playerPurse >= item.price ? `**${item.price} ${currency}**` : `~~${item.price} ${currency}~~`) + `\n${item.description}`, true);
+                            return itemList.addField(`${item.icon}\`${item.name}\``, (item.eventPrice ? `~~${item.price}~~ => **${item.eventPrice} ${currency}**` : (player.playerPurse >= item.price ? `**${item.price} ${currency}**` : `~~${item.price} ${currency}~~`)) + `\n${item.description}`, true);
                         });
 
                         return message.channel.send(itemList)
