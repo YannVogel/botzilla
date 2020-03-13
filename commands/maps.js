@@ -4,6 +4,7 @@
  * @property {String} frenchName
  * @property {boolean} materialsMap
  * @property {Number} price
+ * @property {Number} eventPrice
  * @property {Number} maxItems
  * @property {Array} itemList
  * @property {String} icon
@@ -73,7 +74,7 @@ module.exports = {
                                  }
                             });
                             const description = `Permet de trouver entre 0 et ${map.maxItems} ${!map.materialsMap ? '**objet' : '**matériau'}${map.maxItems > 1 ? (!map.materialsMap ? 's**' : 'x**') : '**'} compris dans la liste : \n**${mapItemsList}**\nChances de réussite : **${map.percentChanceToSuccess}%**.`;
-                            return mapList.addField(`${map.icon}\`${map.name}\``, (player.playerStamina >= map.price ? `**${map.price} ${stamina}**` : `~~${map.price} ${stamina}~~`) + `\n${description}`);
+                            return mapList.addField(`${map.icon}\`${map.name}\``, (map.eventPrice ? `~~${map.price}~~ => **${map.eventPrice} ${stamina}**` : (player.playerStamina >= map.price ? `**${map.price} ${stamina}**` : `~~${map.price} ${stamina}~~`)) + `\n${description}`);
                         });
 
                         return message.channel.send(mapList)

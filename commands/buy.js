@@ -3,6 +3,7 @@
  * @property {Number} id
  * @property {String} name
  * @property {Number} price
+ * @property {Number} eventPrice
  * @property {String} description
  * @property {String} icon
  * @property {String} whenUsed
@@ -44,16 +45,16 @@ module.exports = {
 
         PlayerSheet.findOne({playerId: message.author.id})
             .then(player => {
-                if(player.playerPurse < desiredItem.price) {
+                if(player.playerPurse < (desiredItem.eventPrice ? desiredItem.eventPrice : desiredItem.price)) {
                     cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Désolé mais tu n'as pas assez de ${currency}`)
                 }
                 const experience = expManager.addExperience(player, maxExperience, message);
                 player.playerInventory.push(desiredItem.name);
-                player.playerPurse -= desiredItem.price;
+                player.playerPurse -= desiredItem.eventPrice ? desiredItem.eventPrice : desiredItem.price;
                 player.save()
                     .then(() => {
-                        return message.reply(`a acheté un ${desiredItem.icon} \`${desiredItem.name}\` pour ${desiredItem.price} ${currency} (\`+${experience}\` ${experienceFormat}) !`);
+                        return message.reply(`a acheté un ${desiredItem.icon} \`${desiredItem.name}\` pour ${desiredItem.eventPrice ? desiredItem.eventPrice : desiredItem.price} ${currency} (\`+${experience}\` ${experienceFormat}) !`);
                     });
             });
     }
