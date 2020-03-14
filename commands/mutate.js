@@ -27,6 +27,9 @@ const inventoryManager = require('./dependencies/_getFormattedPlayerInventory');
 const {powerFormat} = require('../gameConfig');
 const thisPlayerHasThisMaterial = require('./useItem').thisPlayerHasThisItem;
 const mutationManager = require('./dependencies/_mutationManager');
+const expManager = require('./dependencies/_addExperience');
+const {experienceFormat} = require('../gameConfig');
+const maxExperience = 5000;
 
 module.exports = {
     name: 'mutate',
@@ -80,11 +83,12 @@ module.exports = {
                 }
                 const newMultiplier = mutationManager.getNewMutationMultiplier(desiredMutation);
                 player.playerMutations.push(`${desiredMutation.name}x${newMultiplier}`);
+                const experience = expManager.addExperience(player, maxExperience, message);
                 player.save()
                     .then(message.channel.send(`Après avoir enduré de nombreuses souffrances, l'ADN de <@${player.playerId}> a muté !`))
                     .then(message.reply(desiredMutation.whenCrafted))
                     .then(message.channel.send(`Le corps de <@${player.playerId}> a imprégné la puissance de \`${desiredMutation.icon} ${desiredMutation.name}\` avec un multiplicateur de **${newMultiplier}** (maximum : ${desiredMutation.maxMultiplier}) !`))
-                    .then(message.channel.send(`La puissance de <@${player.playerId}> a été augmentée de **${desiredMutation.basicPower*newMultiplier}** \`${powerFormat}\` !`));
+                    .then(message.channel.send(`La puissance de <@${player.playerId}> a été augmentée de **${desiredMutation.basicPower*newMultiplier}** \`${powerFormat}\` (\`+${experience}\` ${experienceFormat}) !`));
             })
     }
 };
