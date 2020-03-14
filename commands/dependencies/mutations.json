@@ -31,7 +31,7 @@
               "id": 2,
               "name": "saturn",
               "icon": "♄",
-              "basicPower": 100,
+              "basicPower": 150,
               "maxMultiplier": 20,
               "componentAndQuantityRequired": {
                 "dna": 10,
