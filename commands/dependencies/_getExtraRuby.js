@@ -3,8 +3,8 @@ const Discord = require('discord.js');
 const {currency} = require('../../config');
 const PlayerSheet = require('../../models/playerSheet');
 const oneChanceInToGetRuby = 48;     // 1 chance in x to get a ruby
-const minRubyValue = 100;
-const maxRubyValue = 501 - minRubyValue;    // max = 500
+const minRubyValue = 2000;
+const maxRubyValue = 5001 - minRubyValue;    // max = 500
 
 const ruby = {
     'color': '#ad1500',

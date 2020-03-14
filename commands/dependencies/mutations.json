@@ -8,9 +8,10 @@
               "basicPower": 100,
               "maxMultiplier": 10,
               "componentAndQuantityRequired": {
-                "dna": 1,
-                "amulet": 1
+                "dna": 5,
+                "amulet": 5
               },
+              "price": 500,
               "whenCrafted": "La puissance de Neptune envahit son corps !"
             },
             {
@@ -20,21 +21,23 @@
               "basicPower": 150,
               "maxMultiplier": 10,
               "componentAndQuantityRequired": {
-                "dna": 2,
-                "amulet": 1
+                "dna": 8,
+                "amulet": 5
               },
+              "price": 750,
               "whenCrafted": "La puissance d'Uranus envahit son corps !"
             },
             {
               "id": 2,
               "name": "saturn",
               "icon": "♄",
-              "basicPower": 100,
+              "basicPower": 150,
               "maxMultiplier": 20,
               "componentAndQuantityRequired": {
-                "dna": 2,
-                "amulet": 2
+                "dna": 10,
+                "amulet": 10
               },
+              "price": 1000,
               "whenCrafted": "La puissance de Saturne envahit son corps !"
             }
           ]

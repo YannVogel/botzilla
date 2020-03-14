@@ -45,6 +45,10 @@ module.exports = {
 
         PlayerSheet.findOne({playerId: message.author.id})
             .then(player => {
+                if (!player) {
+                    cd.deleteTimer(message.author.id, this.name);
+                    return message.reply(`Merci de commencer par créer ta fiche avec la commande ${prefix}fiche !`)
+                }
                 if(player.playerPurse < (desiredItem.eventPrice ? desiredItem.eventPrice : desiredItem.price)) {
                     cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Désolé mais tu n'as pas assez de ${currency}`)

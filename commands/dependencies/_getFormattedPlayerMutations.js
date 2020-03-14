@@ -13,13 +13,13 @@ const powerManager = require('./_getPlayerTotalPower');
 const {powerFormat} = require('../../gameConfig');
 
 module.exports = {
-    getFormattedPlayerMutations: (player, mutationsInventory) => {
-        if(mutationsInventory.length === 0) {
+    getFormattedPlayerMutations: player => {
+        if(player.playerMutations.length === 0) {
             return "Aucune mutation acquise.";
         }
         let mutationsList = '';
         mutations.map(mappedMutation => {
-            mutationsInventory.forEach(mutation => {
+            player.playerMutations.forEach(mutation => {
                 const mutationName = mutation.split('x')[0];
                 const mutationMultiplier = mutation.split('x')[1];
                 if(mutationName === mappedMutation.name){
@@ -27,6 +27,6 @@ module.exports = {
                 }
             });
         });
-        return `possède les mutations suivantes :\n${mutationsList.replace(/ \| $/, '')}.\nPour un total de \`${powerManager.getPlayerTotalPower(player)} ${powerFormat}\`.`;
+        return mutationsList.replace(/ \| $/, '');
     }
 };
