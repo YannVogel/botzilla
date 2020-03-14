@@ -21,7 +21,7 @@
               "basicPower": 150,
               "maxMultiplier": 10,
               "componentAndQuantityRequired": {
-                "dna": 10,
+                "dna": 8,
                 "amulet": 5
               },
               "price": 750,
