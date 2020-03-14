@@ -11,6 +11,7 @@
                 "dna": 1,
                 "amulet": 1
               },
+              "price": 500,
               "whenCrafted": "La puissance de Neptune envahit son corps !"
             },
             {
@@ -23,6 +24,7 @@
                 "dna": 2,
                 "amulet": 1
               },
+              "price": 750,
               "whenCrafted": "La puissance d'Uranus envahit son corps !"
             },
             {
@@ -35,6 +37,7 @@
                 "dna": 2,
                 "amulet": 2
               },
+              "price": 1000,
               "whenCrafted": "La puissance de Saturne envahit son corps !"
             }
           ]
