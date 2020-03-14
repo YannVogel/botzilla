@@ -15,14 +15,24 @@ const expManager = require('./dependencies/_addExperience');
 const maxExperience = 200;
 const {experienceFormat} = require('../gameConfig');
 
-function thisPlayerHasThisItem (player, item, materials = false) {
+function thisPlayerHasThisItem (player, item, materials = false, numberRequired = 0) {
     const inventory = !materials ? player.playerInventory : player.playerMaterials;
-    for(let i = 0; i < inventory.length; i++) {
-        if(item === inventory[i]) {
-            return true;
+    if(!numberRequired){
+        for(let i = 0; i < inventory.length; i++) {
+            if(item === inventory[i]) {
+                return true;
+            }
         }
+        return false;
+    }else {
+        let arrayOfMatchedElements = [];
+        for(let j = 0; j < inventory.length; j++) {
+            if(item === inventory[j]) {
+                arrayOfMatchedElements.push(item);
+            }
+        }
+        return arrayOfMatchedElements.length >= numberRequired;
     }
-    return false;
 }
 
 module.exports = {

@@ -9,6 +9,9 @@ const expBarManager = require('./_getExperienceBar');
 const staminaManager = require('./_getPlayerStamina');
 const numberManager = require('./_getFormattedNumber');
 const buffManager = require('./_buffManager');
+const {getPlayerTotalPower} = require('./_getPlayerTotalPower');
+const {powerFormat} = require('../../gameConfig');
+const {getFormattedPlayerMutations} = require('./_getFormattedPlayerMutations');
 
 module.exports = {
     getPlayerSheet: function(member) {
@@ -39,6 +42,7 @@ module.exports = {
                             .setColor('#ffffff')
                             .setTitle(`${player.playerName} (niveau ${playerLevelManager.getPlayerLevel(player)})\n${expBarManager.getExperienceBar(player).fragmentBar} \n(${expBarManager.getExperienceBar(player).actualPercent}%)`)
                             .setDescription(`Fiche créée le ${frDate.getFrenchDate(player.createdAt)}`)
+                            .addField(`Puissance (${getPlayerTotalPower(player)} ${powerFormat})`, getFormattedPlayerMutations(player))
                             .addField("Inventaire", format.getFormattedPlayerInventory(player.playerInventory))
                             .addField("Matériaux", format.getFormattedPlayerInventory(player.playerMaterials, true))
                             .addField("Expérience", `${numberManager.getFormattedNumber(player.playerExperience)} ${experienceFormat}`, true)
