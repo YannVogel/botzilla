@@ -7,7 +7,8 @@
               "price": 20,
               "description": "Permet d'accélérer le temps et d'utiliser instantanément la commande !loot (une utilisation).",
               "icon": ":cyclone:",
-              "whenUsed": "Tu peux maintenant réutiliser la commande !loot !"
+              "whenUsed": "Tu peux maintenant réutiliser la commande !loot !",
+              "maxToBuy": 5
             },
             {
               "id": 1,
@@ -15,7 +16,8 @@
               "price": 150,
               "description": "Vole à un joueur au hasard une somme comprise entre 5% et 20%.",
               "icon": "\uD83E\uDDBE",
-              "whenUsed": "Qui va être sa victime... :thinking:"
+              "whenUsed": "Qui va être sa victime... :thinking:",
+              "maxToBuy": 5
             },
             {
               "id": 2,
@@ -23,7 +25,8 @@
               "price": 15,
               "description": "Un sac de qualité commune. Contient une somme entre 1 et 25 bobzi$$.",
               "icon": ":green_circle:",
-              "whenUsed": "Il ouvre son sac sans hésitation..."
+              "whenUsed": "Il ouvre son sac sans hésitation...",
+              "maxToBuy": 10
             },
             {
               "id": 3,
@@ -31,7 +34,8 @@
               "price": 60,
               "description": "Un sac de qualité rare. Contient une somme entre 2 et 100 bobzi$$.",
               "icon": ":blue_circle:",
-              "whenUsed": "Il ouvre son sac avec une pointe de curiosité !"
+              "whenUsed": "Il ouvre son sac avec une pointe de curiosité !",
+              "maxToBuy": 5
             },
             {
               "id": 4,
@@ -39,7 +43,8 @@
               "price": 180,
               "description": "Un sac de qualité épique. Contient une somme entre 3 et 300 bobzi$$.",
               "icon": ":purple_circle:",
-              "whenUsed": "Il ouvre son sac avec un grand intérêt !!"
+              "whenUsed": "Il ouvre son sac avec un grand intérêt !!",
+              "maxToBuy": 3
             },
             {
               "id": 5,
@@ -47,7 +52,8 @@
               "price": 1200,
               "description": "Un sac de qualité légendaire. Contient une somme entre 4 et 2000 bobzi$$.",
               "icon": ":orange_circle:",
-              "whenUsed": "Il ouvre son sac à toute vitesse, les yeux remplis d'étoiles !!!"
+              "whenUsed": "Il ouvre son sac à toute vitesse, les yeux remplis d'étoiles !!!",
+              "maxToBuy": 2
             },
             {
               "id": 6,
@@ -56,7 +62,8 @@
               "eventPrice": 50,
               "description": "Vous prenez une douche, ce qui vous enlève une malédiction.",
               "icon": "\uD83D\uDEBF",
-              "whenUsed": "Ça va déjà mieux ! \uD83D\uDE0C (-1 malédiction)"
+              "whenUsed": "Ça va déjà mieux ! \uD83D\uDE0C (-1 malédiction)",
+              "maxToBuy": 5
             },
             {
               "id": 7,
@@ -65,7 +72,8 @@
               "eventPrice": 150,
               "description": "Une incantation qui enlève toutes les malédictions de son utilisateur.",
               "icon": "\uD83D\uDE4F",
-              "whenUsed": "Un énorme poids est enlevé de ses épaules ! \uD83D\uDE4F"
+              "whenUsed": "Un énorme poids est enlevé de ses épaules ! \uD83D\uDE4F",
+              "maxToBuy": 5
             },
             {
               "id": 8,
@@ -74,7 +82,8 @@
               "eventPrice": 35,
               "description": "Envoie une malédiction à un joueur au hasard (peut cibler le lanceur).",
               "icon": "\uD83E\uDD2E",
-              "whenUsed": "Qui va vomir ses entrailles... ?"
+              "whenUsed": "Qui va vomir ses entrailles... ?",
+              "maxToBuy": 5
             },
             {
               "id": 9,
@@ -82,7 +91,8 @@
               "price": 100,
               "description": "Restaure 5 points d'endurance à l'utilisateur.",
               "icon": "\uD83E\uDD57",
-              "whenUsed": "Un faible courant d'énergie traverse son corps ! (+5 pts d'endurance)"
+              "whenUsed": "Un faible courant d'énergie traverse son corps ! (+5 pts d'endurance)",
+              "maxToBuy": 5
             },
             {
               "id": 10,
@@ -90,7 +100,8 @@
               "price": 250,
               "description": "Restaure 10 points d'endurance à l'utilisateur.",
               "icon": "\uD83C\uDF59",
-              "whenUsed": "Un courant d'énergie traverse son corps ! (+10 pts d'endurance)"
+              "whenUsed": "Un courant d'énergie traverse son corps ! (+10 pts d'endurance)",
+              "maxToBuy": 5
             },
             {
               "id": 11,
@@ -98,7 +109,8 @@
               "price": 625,
               "description": "Restaure 20 points d'endurance à l'utilisateur.",
               "icon": "☕",
-              "whenUsed": "Ses forces reviennent peu à peu ! (+20 pts d'endurance)"
+              "whenUsed": "Ses forces reviennent peu à peu ! (+20 pts d'endurance)",
+              "maxToBuy": 5
             },
             {
               "id": 12,
@@ -106,7 +118,8 @@
               "price": 1560,
               "description": "Restaure 40 points d'endurance à l'utilisateur.",
               "icon": "\uD83C\uDF5C",
-              "whenUsed": "C'est le top de la forme !! (+40 pts d'endurance)"
+              "whenUsed": "C'est le top de la forme !! (+40 pts d'endurance)",
+              "maxToBuy": 5
             }
           ],
   "map":
