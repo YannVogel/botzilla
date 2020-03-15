@@ -63,7 +63,7 @@ module.exports = {
                                     return message.channel.send(`La puissance de <@${attackingPlayer.playerId}> et <@${defendingPlayer.playerId}> est équivalente et s'annule !`);
                                 }
                                 const winPercent = getRandomInt(maxPercentToWin) + minPercentToWin;
-                                const winValue = Math.round(winPercent*(defendingPlayer.playerPurse/100));
+                                const winValue = Math.round(winPercent*(loser.playerPurse/100));
                                 winner.playerPurse += winValue;
                                 loser.playerPurse -= winValue;
                                 loser.save()
