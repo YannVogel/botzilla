@@ -39,7 +39,11 @@ module.exports = {
                     ]
                 })
                     .then(players => {
-                        const defendingPlayer = players[getRandomInt(players.length)];
+                        let defendingPlayer = players[getRandomInt(players.length)];
+                        // Excludes players with no power
+                        while(defendingPlayer.playerMutations.length === 0) {
+                            defendingPlayer = players[getRandomInt(players.length)];
+                        }
                         message.channel.send(`Un combat oppose <@${attackingPlayer.playerId}> ${icon.attacker} vs ${icon.defender} <@${defendingPlayer.playerId}> !`)
                             .then(() => {
                                 let winner;
