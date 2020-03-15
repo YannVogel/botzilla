@@ -7,6 +7,7 @@
  * @property {String} description
  * @property {String} icon
  * @property {String} whenUsed
+ * @property {Number} maxToBuy
  */
 const items = require('./dependencies/gameMarket').item;
 const PlayerSheet = require('../models/playerSheet');
@@ -15,6 +16,7 @@ const cd = require('./dependencies/_deleteTimer');
 const expManager = require('./dependencies/_addExperience');
 const maxExperience = 250;
 const {experienceFormat} = require('../gameConfig');
+const {thisPlayerHasThisItem} = require('./useItem');
 
 module.exports = {
     name: 'buy',
@@ -52,6 +54,11 @@ module.exports = {
                 if(player.playerPurse < (desiredItem.eventPrice ? desiredItem.eventPrice : desiredItem.price)) {
                     cd.deleteTimer(message.author.id, this.name);
                     return message.reply(`Désolé mais tu n'as pas assez de ${currency}`)
+                }
+                // If the player has already bought the maximum of this item
+                if(desiredItem.maxToBuy && thisPlayerHasThisItem(player, desiredItem.name, false, desiredItem.maxToBuy)){
+                    cd.deleteTimer(message.author.id, this.name);
+                    return message.reply(`Désolé mais tu as déjà trop de ${desiredItem.icon}\`${desiredItem.name}\` dans ton inventaire !`);
                 }
                 const experience = expManager.addExperience(player, maxExperience, message);
                 player.playerInventory.push(desiredItem.name);
