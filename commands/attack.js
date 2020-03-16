@@ -6,6 +6,7 @@ const {getPlayerTotalPower} = require('./dependencies/_getPlayerTotalPower');
 const {currency} = require('../config');
 const minPercentToWin = 1;
 const maxPercentToWin = 26 - minPercentToWin;       // max = 25%
+const {powerFormat} = require('../gameConfig');
 const icon = {
     'attacker': '🤜',
     'defender': '🤛'
@@ -13,6 +14,7 @@ const icon = {
 const expManager = require('./dependencies/_addExperience');
 const {experienceFormat} = require('../gameConfig');
 const maxExperience = 1000;
+const {determineWinner} = require('./dependencies/_attackManager');
 
 module.exports = {
     name: 'attack',
@@ -44,19 +46,24 @@ module.exports = {
                         while(defendingPlayer.playerMutations.length === 0) {
                             defendingPlayer = players[getRandomInt(players.length)];
                         }
-                        message.channel.send(`Un combat oppose <@${attackingPlayer.playerId}> ${icon.attacker} vs ${icon.defender} <@${defendingPlayer.playerId}> !`)
+                        message.channel.send(`Un combat oppose (\`${getPlayerTotalPower(attackingPlayer)}\` ${powerFormat}) <@${attackingPlayer.playerId}> ${icon.attacker} vs ${icon.defender} <@${defendingPlayer.playerId}> (\`${getPlayerTotalPower(defendingPlayer)}\` ${powerFormat}) !`)
                             .then(() => {
                                 let winner;
                                 let loser;
+                                let unexpectedResult;
                                 // If the attacker has more power than the victim...
                                 if(getPlayerTotalPower(attackingPlayer) > getPlayerTotalPower(defendingPlayer)) {
-                                    winner = attackingPlayer;
-                                    loser = defendingPlayer;
+                                    const {winnerPlayer,loserPlayer, isResultUnexpected} = determineWinner(defendingPlayer, attackingPlayer);
+                                    winner = winnerPlayer;
+                                    loser = loserPlayer;
+                                    unexpectedResult = isResultUnexpected;
                                 }
                                 // If the attacker has less power than the victim...
                                 if(getPlayerTotalPower(attackingPlayer) < getPlayerTotalPower(defendingPlayer)) {
-                                    winner = defendingPlayer;
-                                    loser = attackingPlayer;
+                                    const {winnerPlayer,loserPlayer, isResultUnexpected} =  determineWinner(attackingPlayer, defendingPlayer);
+                                    winner = winnerPlayer;
+                                    loser = loserPlayer;
+                                    unexpectedResult = isResultUnexpected;
                                 }
                                 // If the attacker has the same power than the victim
                                 if(getPlayerTotalPower(attackingPlayer) === getPlayerTotalPower(defendingPlayer)) {
@@ -68,7 +75,11 @@ module.exports = {
                                 loser.playerPurse -= winValue;
                                 loser.save()
                                     .then(() => {
-                                            message.channel.send(`La puissance de <@${winner.playerId}> (\`${getPlayerTotalPower(winner)}\`) était supérieure à celle de <@${loser.playerId}> (\`${getPlayerTotalPower(loser)}\`) !`);
+                                            if(!unexpectedResult) {
+                                                message.channel.send(`Après un duel acharné, <@${winner.playerId}> inflige le coup de grâce à <@${loser.playerId}> !`);
+                                            }else {
+                                                message.channel.send(`Contre toute attente, <@${winner.playerId}> terrasse <@${loser.playerId}> !`);
+                                            }
                                             const experience = expManager.addExperience(winner, maxExperience, message);
                                             winner.save()
                                                 .then(message.channel.send(`<@${winner.playerId}> a volé \`${winValue} ${currency}\` (\`${winPercent}%\`) à <@${loser.playerId}> et a gagné \`+${experience}\` ${experienceFormat} !`))
