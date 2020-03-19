@@ -74,7 +74,7 @@ module.exports = {
         let element = args[2];
         let elementToAdmin = args[3];
         // The amount is optional and is equal to "1" by default (useful for items/materials)
-        const amount = !isNaN(parseInt(args[3], 10)) ? args[3] : (args[4] ? parseInt(args[4],10) : 1);
+        const amount = !isNaN(parseInt(args[3], 10)) ? parseInt(args[3],10) : (args[4] ? parseInt(args[4],10) : 1);
         // Useful to detect if the command admin an object (item or material) or a value (money, stamina or experience)
         let adminAnObject = true;
         // Useful to detect what kind of non object (money, stamina or experience) has been modified
