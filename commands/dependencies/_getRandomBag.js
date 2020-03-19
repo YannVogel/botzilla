@@ -138,7 +138,7 @@ module.exports = {
                                 if(random.getRandomInt(10) === 5)
                                 {
                                     cd.deleteTimer(player.playerId, 'loot');
-                                    return message.channel.send(`Une distorsion de l'espace-temps a permis à <@${player.playerId}> de ne pas enclencher le CD de sa commande !loot !!`);
+                                    return message.channel.send(`Une distorsion de l'espace-temps a permis à <@${player.playerId}> de ne pas enclencher le CD de sa commande \`!loot\` !!`);
                                 }
                             });
                     });

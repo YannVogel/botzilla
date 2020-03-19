@@ -14,11 +14,16 @@ const {powerFormat} = require('../../gameConfig');
 const {getFormattedPlayerMutations} = require('./_getFormattedPlayerMutations');
 
 module.exports = {
-    getPlayerSheet: function(member) {
+    getPlayerSheet: function(member, isAskedFromAdminCommand = false) {
         return new Promise(resolve =>{
             PlayerSheet.findOne({playerId: member.id})
                 .then(player => {
-                    // If this player doesn't have a sheet in the DB...
+                    // If this member doesn't have a sheet in the DB and the command is asked from the !admin command, stops the function...
+                    // The !admin command is used to view a player sheet, not to create a new one!
+                    if(!player && isAskedFromAdminCommand) {
+                        resolve(`Ce joueur ne fait pas encore partie du jeu !`) ;
+                    }
+                    // If this member doesn't have a sheet in the DB, creates one...
                     if (!player) {
                          player = new PlayerSheet({
                             playerId: member.id,
