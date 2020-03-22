@@ -58,7 +58,7 @@ module.exports = {
     name: 'admin',
     description: "Accède au panneau d'administration",
     usage: "<@joueur> <method:'add','remove','fiche'> <element:'item','material','money','stamina','experience'> <name of the element> <amount>",
-    adminOnly: true,
+    creatorOnly: true,
     cooldown: 1,
     execute(message, args) {
         if (!message.mentions.users.size) {
