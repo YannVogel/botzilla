@@ -53,14 +53,14 @@ module.exports = {
                                 let unexpectedResult;
                                 // If the attacker has more power than the victim...
                                 if(getPlayerTotalPower(attackingPlayer) > getPlayerTotalPower(defendingPlayer)) {
-                                    const {winnerPlayer,loserPlayer, isResultUnexpected} = determineWinner(defendingPlayer, attackingPlayer);
+                                    const {winnerPlayer,loserPlayer, isResultUnexpected} = determineWinner(defendingPlayer, attackingPlayer, message);
                                     winner = winnerPlayer;
                                     loser = loserPlayer;
                                     unexpectedResult = isResultUnexpected;
                                 }
                                 // If the attacker has less power than the victim...
                                 if(getPlayerTotalPower(attackingPlayer) < getPlayerTotalPower(defendingPlayer)) {
-                                    const {winnerPlayer,loserPlayer, isResultUnexpected} =  determineWinner(attackingPlayer, defendingPlayer);
+                                    const {winnerPlayer,loserPlayer, isResultUnexpected} =  determineWinner(attackingPlayer, defendingPlayer, message);
                                     winner = winnerPlayer;
                                     loser = loserPlayer;
                                     unexpectedResult = isResultUnexpected;
