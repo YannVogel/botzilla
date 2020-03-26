@@ -33,7 +33,7 @@ module.exports = (botClient, timeInSeconds, channelName) => {
                                 const adminMember = guild.members.cache.find(member => member.id === (process.env.ADMIN_ID || adminID));
                                 return adminMember.send(missingChannelMessage(guild.name, channelName));
                             }
-                            return channel.send(`@here ${streamer} a commencé son live ! Rendez-vous sur sa chaîne : ${streamLink} !`);
+                            return channel.send(`Hey ! ${streamer} a commencé son live ! Rendez-vous sur sa chaîne : ${streamLink} !`);
                         });
                     }
                 } else {
