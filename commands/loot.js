@@ -4,9 +4,10 @@ const random = require('./dependencies/_getRandomInt');
 const bagManager = require('./dependencies/_getRandomBag');
 const {currency} = require('../config');
 const cd = require('./dependencies/_deleteTimer');
+const {isAprilFoolsDay} = require('./dependencies/_isAprilFoolsDay');
 
 module.exports = {
-    name: 'loot',
+    name: isAprilFoolsDay() ? 'loutre' : 'loot',
     description: `Essayez de gagner le plus de ${currency} possible !!`,
     guildOnly: true,
     cooldown: 60*30,
