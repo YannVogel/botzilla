@@ -12,6 +12,7 @@ const expManager = require('./_addExperience');
 const maxExperience = 1000;
 const {experienceFormat} = require('../../gameConfig');
 const buffManager = require('./_buffManager');
+const {isAprilFoolsDay} = require('./_isAprilFoolsDay');
 
 const bagImages = {
     'common': 'https://i.ibb.co/HT1SqDg/common.png',
@@ -137,8 +138,8 @@ module.exports = {
                                 // 1 chance in 10 not to trigger the CD
                                 if(random.getRandomInt(10) === 5)
                                 {
-                                    cd.deleteTimer(player.playerId, 'loot');
-                                    return message.channel.send(`Une distorsion de l'espace-temps a permis à <@${player.playerId}> de ne pas enclencher le CD de sa commande \`!loot\` !!`);
+                                    cd.deleteTimer(player.playerId, isAprilFoolsDay() ? 'loutre' : 'loot');
+                                    return message.channel.send(`Une distorsion de l'espace-temps a permis à <@${player.playerId}> de ne pas enclencher le CD de sa commande \`${isAprilFoolsDay() ? 'loutre' : 'loot'}\` !!`);
                                 }
                             });
                     });
