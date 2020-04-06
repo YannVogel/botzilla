@@ -57,10 +57,9 @@ const {dictionary} = require('./dependencies/aprilFoolDictionary');
 const {isAprilFoolsDay} = require('./dependencies/_isAprilFoolsDay');
 
 module.exports = {
-    name: isAprilFoolsDay() ? 'loot' : null,
+    name: isAprilFoolsDay() ? 'loot' : 'loutre',
     description: '🐟🐟🐟',
     guildOnly: true,
-    creatorOnly: !isAprilFoolsDay(),
     cooldown: 60,
     execute(message) {
 
