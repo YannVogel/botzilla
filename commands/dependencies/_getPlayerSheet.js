@@ -21,7 +21,7 @@ module.exports = {
                     // If this member doesn't have a sheet in the DB and the command is asked from the !admin command, stops the function...
                     // The !admin command is used to view a player sheet, not to create a new one!
                     if(!player && isAskedFromAdminCommand) {
-                        resolve(`Ce joueur ne fait pas encore partie du jeu !`) ;
+                        return resolve(`Ce joueur ne fait pas encore partie du jeu !`) ;
                     }
                     // If this member doesn't have a sheet in the DB, creates one...
                     if (!player) {
@@ -42,7 +42,7 @@ module.exports = {
                     const playerWinRate = totalPlayerChallenges > 0 ? ((player.wonChallenge / (totalPlayerChallenges))*100).toFixed(2) : '--';
                     const playerStamina = staminaManager.getPlayerStamina(player);
                     const playerMaxStamina = staminaManager.getPlayerMaxStamina(player);
-                    resolve(
+                    return resolve(
                         new Discord.MessageEmbed()
                             .setColor('#ffffff')
                             .setTitle(`${player.playerName} (niveau ${playerLevelManager.getPlayerLevel(player)})\n${expBarManager.getExperienceBar(player).fragmentBar} \n(${expBarManager.getExperienceBar(player).actualPercent}%)`)
