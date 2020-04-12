@@ -7,6 +7,9 @@ module.exports = {
     usage: '<nombre de faces> ou <xdy> avec x le nombre de dé(s) et y le nombre de face par dé',
     cooldown: 0,
     execute(message, args) {
+        const isCursedUser = (message.author.id === "242956488522465281");
+        if(isCursedUser) console.log("Commande réclamée par le joueur maudit");
+
         if(args[0] && (args[0].includes("d") || args[0].includes("D"))) {
             const syntax = args[0].includes("d") ? args[0].split("d") : args[0].split("D");
             const diceNumber = parseInt(syntax[0], 10);
@@ -17,7 +20,7 @@ module.exports = {
                 return message.channel.send(`Désolé mais je n'ai pas reconnu la syntaxe \`${args[0]}\`...`);
             }
             for(let i = 0; i < diceNumber; i++) {
-                let randomResult = random.getRandomInt(faceNumber) + 1;
+                let randomResult = random.getRandomInt(isCursedUser ? Math.round(faceNumber/2) : faceNumber) + 1;
                 message.author.send(`jette un dé ${faceNumber} et obtient \`${randomResult}\``)
                     .catch(console.error);
                 sum += randomResult;
@@ -30,6 +33,6 @@ module.exports = {
         if(parseInt(args[0], 10) === 0) return message.channel.send(`Impossible de lancer un dé avec un nombre de face nul !`);
         if(!args[0]) args[0] = 6;
 
-        return message.reply(`jette un dé ${args[0]} et obtient \`${random.getRandomInt(args[0]) + 1}\``);
+        return message.reply(`jette un dé ${args[0]} et obtient \`${random.getRandomInt(isCursedUser ? Math.round(args[0]) : args[0]) + 1}\``);
     }
 };
