@@ -34,12 +34,12 @@ module.exports =
     botClient.on('message', message => {
         if(!message.author.bot){
             for(let i = 0; i < frenchSynonymForHello.length; i++) {
-                const regex = new RegExp(`( |^)${frenchSynonymForHello[i]}( |$)`, "gi");
+                const regex = new RegExp(`( |^)${frenchSynonymForHello[i]}( |$|!|.)`, "gi");
 
                 if(regex.test(message.toString())) {
-                    let helloArray = frenchSynonymForHello[getRandomInt(frenchSynonymForHello.length)].split('');
-                    helloArray[0] = helloArray[0].toUpperCase();
-                    const stringAnswer = helloArray.join('');
+                    let arrayAnswer = frenchSynonymForHello[getRandomInt(frenchSynonymForHello.length)].split('');
+                    arrayAnswer[0] = arrayAnswer[0].toUpperCase();
+                    const stringAnswer = arrayAnswer.join('');
                     message.channel.send(`${stringAnswer} ${message.author.username} ! ${emojiForHello[getRandomInt(emojiForHello.length)]}`);
                     break;
                 }
