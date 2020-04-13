@@ -29,7 +29,7 @@ module.exports =
     }
 
     botClient.on('message', message => {
-        if(!message.author.bot && message.author.id === (process.env.ADMIN_ID || adminID)){
+        if(!message.author.bot){
             for(let i = 0; i < frenchSynonymForHello.length; i++) {
                 const regex = new RegExp(`( |^)${frenchSynonymForHello[i]}( |$)`, "gi");
 
