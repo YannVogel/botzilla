@@ -40,7 +40,9 @@ module.exports =
                     let arrayAnswer = frenchSynonymForHello[getRandomInt(frenchSynonymForHello.length)].split('');
                     arrayAnswer[0] = arrayAnswer[0].toUpperCase();
                     const stringAnswer = arrayAnswer.join('');
-                    message.channel.send(`${stringAnswer} ${message.author.username} ! ${emojiForHello[getRandomInt(emojiForHello.length)]}`);
+                    const helloEmoji = emojiForHello[getRandomInt(emojiForHello.length)];
+                    message.channel.send(`${stringAnswer} ${message.author.username} ! ${helloEmoji}`);
+                    console.log(`botZilla a dit ${stringAnswer} ${helloEmoji} à ${message.author.username} !`);
                     break;
                 }
             }
