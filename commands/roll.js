@@ -38,6 +38,6 @@ module.exports = {
         if(parseInt(args[0], 10) === 0) return message.channel.send(`Impossible de lancer un dé avec un nombre de face nul !`);
         if(!args[0]) args[0] = 6;
 
-        return message.reply(`jette un dé ${args[0]} et obtient \`${random.getRandomInt(isCursedUser ? Math.round(args[0]) : args[0]) + 1}\``);
+        return message.reply(`jette un dé ${args[0]} et obtient \`${random.getRandomInt(isCursedUser ? Math.round(args[0]/2) : args[0]) + 1}\``);
     }
 };
