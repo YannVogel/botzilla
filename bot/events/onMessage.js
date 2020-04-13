@@ -7,6 +7,15 @@ const {devServerID} = process.env.DEV_SERVER_ID || require('../../auth');
 const fs = require('fs');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 const formatted = require('../../commands/dependencies/_getFormattedCooldown');
+const {getRandomInt} = require('../../commands/dependencies/_getRandomInt');
+
+const frenchSynonymForHello = [
+    'bonjour', 'salut', 'hello', 'yo', 'iop', 'coucou', 'kikou', 'hey', 'bijour', 'io', 'cc'
+];
+
+const emojiForHello = [
+    ':wave:', ':person_raising_hand:', ':yawning_face:', ':kissing:', ':wink:', ':blush:', ':smile:'
+];
 
 module.exports =
         {
@@ -20,6 +29,20 @@ module.exports =
     }
 
     botClient.on('message', message => {
+        if(!message.author.bot){
+            for(let i = 0; i < frenchSynonymForHello.length; i++) {
+                const regex = new RegExp(`( |^)${frenchSynonymForHello[i]}( |$)`, "gi");
+
+                if(regex.test(message.toString())) {
+                    let helloArray = frenchSynonymForHello[i].split('');
+                    helloArray[0] = helloArray[0].toUpperCase();
+                    const stringAnswer = helloArray.join('');
+                    message.channel.send(`${stringAnswer} ${message.author.username} ! ${emojiForHello[getRandomInt(emojiForHello.length)]}`);
+                    break;
+                }
+            }
+        }
+
         // If a message doesn't start by the prefix or is from a bot , stops the function
         if (!message.content.startsWith(prefix) || message.author.bot) return;
 
