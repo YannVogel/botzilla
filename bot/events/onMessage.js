@@ -10,11 +10,14 @@ const formatted = require('../../commands/dependencies/_getFormattedCooldown');
 const {getRandomInt} = require('../../commands/dependencies/_getRandomInt');
 
 const frenchSynonymForHello = [
-    'bonjour', 'salut', 'hello', 'yo', 'iop', 'coucou', 'kikou', 'hey', 'bijour', 'io', 'cc'
+    'bonjour', 'salut', 'hello', 'yo', 'iop', 'coucou', 'kikou', 'hey', 'bijour', 'io', 'cc', 'koukou', 'wesh',
+    'chalut', 'slt', 'yop'
 ];
 
 const emojiForHello = [
-    ':wave:', ':person_raising_hand:', ':yawning_face:', ':kissing:', ':wink:', ':blush:', ':smile:'
+    ':wave:', ':person_raising_hand:', ':yawning_face:', ':kissing:', ':wink:', ':blush:', ':smile:', ':grin:',
+    ':smiley:', ':laughing:', ':wink:', ':yum:', ':star_struck:', ':heart_eyes:', ':kissing_heart:',
+    ':smiling_face_with_3_hearts:'
 ];
 
 module.exports =
@@ -31,12 +34,12 @@ module.exports =
     botClient.on('message', message => {
         if(!message.author.bot){
             for(let i = 0; i < frenchSynonymForHello.length; i++) {
-                const regex = new RegExp(`( |^)${frenchSynonymForHello[i]}( |$)`, "gi");
+                const regex = new RegExp(`( |^)${frenchSynonymForHello[i]}( |$|!|.)`, "gi");
 
                 if(regex.test(message.toString())) {
-                    let helloArray = frenchSynonymForHello[i].split('');
-                    helloArray[0] = helloArray[0].toUpperCase();
-                    const stringAnswer = helloArray.join('');
+                    let arrayAnswer = frenchSynonymForHello[getRandomInt(frenchSynonymForHello.length)].split('');
+                    arrayAnswer[0] = arrayAnswer[0].toUpperCase();
+                    const stringAnswer = arrayAnswer.join('');
                     message.channel.send(`${stringAnswer} ${message.author.username} ! ${emojiForHello[getRandomInt(emojiForHello.length)]}`);
                     break;
                 }
