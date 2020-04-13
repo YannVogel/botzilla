@@ -10,11 +10,14 @@ const formatted = require('../../commands/dependencies/_getFormattedCooldown');
 const {getRandomInt} = require('../../commands/dependencies/_getRandomInt');
 
 const frenchSynonymForHello = [
-    'bonjour', 'salut', 'hello', 'yo', 'iop', 'coucou', 'kikou', 'hey', 'bijour', 'io', 'cc'
+    'bonjour', 'salut', 'hello', 'yo', 'iop', 'coucou', 'kikou', 'hey', 'bijour', 'io', 'cc', 'koukou', 'wesh',
+    'chalut', 'slt', 'yop'
 ];
 
 const emojiForHello = [
-    ':wave:', ':person_raising_hand:', ':yawning_face:', ':kissing:', ':wink:', ':blush:', ':smile:'
+    ':wave:', ':person_raising_hand:', ':yawning_face:', ':kissing:', ':wink:', ':blush:', ':smile:', ':grin:',
+    ':smiley:', ':laughing:', ':wink:', ':yum:', ':star_struck:', ':heart_eyes:', ':kissing_heart:',
+    ':smiling_face_with_3_hearts:'
 ];
 
 module.exports =
