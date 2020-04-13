@@ -37,7 +37,7 @@ module.exports =
                 const regex = new RegExp(`( |^)${frenchSynonymForHello[i]}( |$)`, "gi");
 
                 if(regex.test(message.toString())) {
-                    let helloArray = frenchSynonymForHello[i].split('');
+                    let helloArray = frenchSynonymForHello[getRandomInt(frenchSynonymForHello.length)].split('');
                     helloArray[0] = helloArray[0].toUpperCase();
                     const stringAnswer = helloArray.join('');
                     message.channel.send(`${stringAnswer} ${message.author.username} ! ${emojiForHello[getRandomInt(emojiForHello.length)]}`);
