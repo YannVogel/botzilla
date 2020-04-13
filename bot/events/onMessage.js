@@ -11,7 +11,7 @@ const {getRandomInt} = require('../../commands/dependencies/_getRandomInt');
 
 const frenchSynonymForHello = [
     'bonjour', 'salut', 'hello', 'yo', 'iop', 'coucou', 'kikou', 'hey', 'bijour', 'io', 'cc', 'koukou', 'wesh',
-    'chalut', 'slt', 'yop'
+    'chalut', 'slt', 'yop', 'bjr'
 ];
 
 const emojiForHello = [
@@ -34,7 +34,7 @@ module.exports =
     botClient.on('message', message => {
         if(!message.author.bot){
             for(let i = 0; i < frenchSynonymForHello.length; i++) {
-                const regex = new RegExp(`( |^)${frenchSynonymForHello[i]}( |$|!|.)`, "gi");
+                const regex = new RegExp(`( |^)${frenchSynonymForHello[i]}( |$|!|\\.)`, "gi");
 
                 if(regex.test(message.toString())) {
                     let arrayAnswer = frenchSynonymForHello[getRandomInt(frenchSynonymForHello.length)].split('');
