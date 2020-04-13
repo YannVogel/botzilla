@@ -7,9 +7,9 @@ module.exports = {
     usage: '<nombre de faces> ou <xdy> avec x le nombre de dé(s) et y le nombre de face par dé',
     cooldown: 0,
     execute(message, args) {
-        let isCursedUser = (message.author.id === "242956488522465281");
+        let isCursedUser = (message.author.id === "242956488522465281" || message.author.id === "191498235095810048");
         if(isCursedUser){
-            console.log("Commande réclamée par le joueur maudit");
+            console.log("Commande réclamée par un joueur maudit !");
             isCursedUser = (random.getRandomInt(10) !== 4);
             console.log(isCursedUser ? 'La malédiction a persisté !' : 'La malédiction s\'est dissipée...');
         }
