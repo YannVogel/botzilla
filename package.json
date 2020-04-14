@@ -31,7 +31,7 @@
     "mongoose": "^5.8.11",
     "mongoose-unique-validator": "^2.0.3",
     "node-fetch": "latest",
-    "nodemon": "^2.0.2",
+    "nodemon": "^2.0.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
     "twitch": "^3.7.0"
