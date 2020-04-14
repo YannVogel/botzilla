@@ -32,7 +32,6 @@
     "mongoose-unique-validator": "^2.0.3",
     "node-fetch": "latest",
     "nodemon": "^2.0.2",
-    "puppeteer": "^2.0.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
     "twitch": "^3.7.0"
