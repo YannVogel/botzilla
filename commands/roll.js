@@ -24,13 +24,17 @@ module.exports = {
             if(isNaN(diceNumber) || isNaN(faceNumber) || diceNumber === 0 || faceNumber === 0) {
                 return message.channel.send(`Désolé mais je n'ai pas reconnu la syntaxe \`${args[0]}\`...`);
             }
+            if(diceNumber === 1) {
+                return message.reply(`jette un dé ${faceNumber} et obtient \`${random.getRandomInt(isCursedUser ? Math.round(faceNumber/2) : faceNumber) + 1}\``);
+            }
+
             for(let i = 0; i < diceNumber; i++) {
                 let randomResult = random.getRandomInt(isCursedUser ? Math.round(faceNumber/2) : faceNumber) + 1;
                 message.author.send(`jette un dé ${faceNumber} et obtient \`${randomResult}\``)
                     .catch(console.error);
                 sum += randomResult;
             }
-            return message.reply(`Somme du lancer de ${diceNumber} dé${diceNumber > 1 ? 's' : ''} à ${faceNumber} face${faceNumber > 1 ? 's' : ''} : ${sum}`);
+            return message.reply(`Somme du lancer de ${diceNumber} dé${diceNumber > 1 ? 's' : ''} à ${faceNumber} face${faceNumber > 1 ? 's' : ''} : \`${sum}\``);
 
         }else if(args[0] && isNaN(args[0])) {
             return message.channel.send(`Désolé mais "${args[0]}" n'est pas un nombre...`);
