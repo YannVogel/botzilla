@@ -37,7 +37,7 @@ module.exports = {
                 if(message.toString().includes('+')) {
                     modifierSign = '+';
                 }else {
-                    modifierSign = '-'
+                    modifierSign = '-';
                 }
                 modifierValue = parseInt(message.toString().split(modifierSign)[1], 10);
             }
