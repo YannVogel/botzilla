@@ -7,7 +7,7 @@ function calculateModifier(message, tempResult, modifierSign, modifierValue) {
     }else {
         finalResult = tempResult - modifierValue;
     }
-    return message.reply(`Résultat final après avoir appliqué le modificateur \`${modifierSign}${modifierValue}\` : \`${finalResult}\``);
+    return message.reply(`Résultat final après avoir appliqué le modificateur \`${modifierSign}${modifierValue}\` : \`${finalResult}\`.`);
 }
 
 module.exports = {
@@ -46,7 +46,13 @@ module.exports = {
                 return message.channel.send(`Désolé mais je n'ai pas reconnu la syntaxe de \`${message.toString()}\`...`);
             }
             if(diceNumber === 1) {
-                return message.reply(`jette un dé ${faceNumber} et obtient \`${random.getRandomInt(isCursedUser ? Math.round(faceNumber/2) : faceNumber) + 1}\``);
+                const result = random.getRandomInt(isCursedUser ? Math.round(faceNumber/2) : faceNumber) + 1;
+                return message.reply(`jette un dé ${faceNumber} et obtient \`${result}\``)
+                    .then(() => {
+                        if(isThereAnyModifier) {
+                            calculateModifier(message, result, modifierSign, modifierValue);
+                        }
+                    });
             }
 
             let sum = 0;
