@@ -14,7 +14,7 @@ module.exports = (botClient, timeInMinutes, channelName, roleToMention) => {
                 //success!
                 const $ = cheerio.load(html);
                 const lastNew = $('h3._eYtD2XCVieq6emjKBH3m', html).eq(0).text().split(/^\[[\w*\s?]*] /).join('');
-                const newLink = 'https://www.reddit.com' + typeof $('a.SQnoC3ObvgnGjWt90zD9Z._2INHSNB8V5eaWp4P0rY_mE', html).eq(0)[0] !== 'undefined' ? $('a.SQnoC3ObvgnGjWt90zD9Z._2INHSNB8V5eaWp4P0rY_mE', html).eq(0)[0].attribs.href : '';
+                const newLink = typeof $('a.SQnoC3ObvgnGjWt90zD9Z._2INHSNB8V5eaWp4P0rY_mE', html).eq(0)[0] !== 'undefined' ? $('a.SQnoC3ObvgnGjWt90zD9Z._2INHSNB8V5eaWp4P0rY_mE', html).eq(0)[0].attribs.href : '';
                 if(typeof $('a.SQnoC3ObvgnGjWt90zD9Z._2INHSNB8V5eaWp4P0rY_mE', html).eq(0)[0] === 'undefined') {
                     console.error("Une erreur est survenue lors du fetching d'egsFetcher ligne 17");
                     return;
@@ -29,7 +29,7 @@ module.exports = (botClient, timeInMinutes, channelName, roleToMention) => {
 
                         const newEgsProms = new EgsProms({
                             title: lastNew,
-                            urlSource: newLink,
+                            urlSource: 'https://www.reddit.com' + newLink,
                             urlShop: gameLink,
                             image: imgThumb
                         });
