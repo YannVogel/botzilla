@@ -46,12 +46,12 @@ module.exports = (botClient, timeInMinutes, channelName, roleToMention) => {
                             }
                             // Si le channel existe on prépare un embed message à envoyer
                             const response = new Discord.MessageEmbed()
-                                .setTitle(lastNew)
-                                .setURL(gameLink)
+                                .setTitle(newEgsProms.title)
+                                .setURL(newEgsProms.urlShop)
                                 .setDescription("Epic propose régulièrement des promotions sur son client EGS, ainsi qu'un jeu offert tous les jeudis !")
                                 .setThumbnail(botAvatar)
-                                .addField('Source :', newLink)
-                                .setImage(imgThumb);
+                                .addField('Source :', newEgsProms.urlSource)
+                                .setImage(newEgsProms.image);
 
                             // Seeks for the role to mention
                             const role = guild.roles.cache.find(role => role.name === roleToMention);
