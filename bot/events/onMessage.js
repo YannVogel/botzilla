@@ -11,7 +11,7 @@ const {getRandomInt} = require('../../commands/dependencies/_getRandomInt');
 
 const frenchSynonymForHello = [
     'bonjour', 'salut', 'hello', 'yo', 'iop', 'coucou', 'kikou', 'hey', 'bijour', 'io', 'cc', 'koukou', 'wesh',
-    'chalut', 'slt', 'yop', 'bjr'
+    'chalut', 'slt', 'yop', 'bjr', 'plop', 'bonchour'
 ];
 
 const emojiForHello = [
