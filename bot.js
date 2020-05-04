@@ -5,10 +5,9 @@ const salesChannel = 'botzilla';
 const adminChannelName = 'botzilla-admin';
 const roleToMentionForGamesSales = 'DealSeeker';
 const roleToMentionForWolcenFeed = 'wolcen';
-const {wolcenId} = require('./gamesId');
+const {wolcenId, azurLaneId} = require('./gamesId');
 const wolcenChannel = "botzilla";
 const roleToMentionForAzurLaneFeed = "AzurLane";
-const {azurLaneId} = require('./gamesId');
 const azurLaneChannel = "botzilla";
 
 // Bot connexion
