@@ -28,6 +28,7 @@
     "axios": "^0.19.1",
     "cheerio": "^1.0.0-rc.3",
     "discord.js": "github:discordjs/discord.js",
+    "form-data": "^3.0.0",
     "mongoose": "^5.8.11",
     "mongoose-unique-validator": "^2.0.3",
     "node-fetch": "latest",
