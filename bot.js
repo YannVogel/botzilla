@@ -1,15 +1,14 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 const welcomeMessageAndStreamNotificationChannel = 'discussion';
-const salesChannel = 'annonce-botzilla';
+const salesChannel = 'botzilla';
 const adminChannelName = 'botzilla-admin';
 const roleToMentionForGamesSales = 'DealSeeker';
 const roleToMentionForWolcenFeed = 'wolcen';
-const {wolcenId} = require('./gamesId');
-const wolcenChannel = "wolcen";
+const {wolcenId, azurLaneId} = require('./gamesId');
+const wolcenChannel = "botzilla";
 const roleToMentionForAzurLaneFeed = "AzurLane";
-const {azurLaneId} = require('./gamesId');
-const azurLaneChannel = "azur-lane";
+const azurLaneChannel = "botzilla";
 
 // Bot connexion
 const login = require('./bot/login');
@@ -49,4 +48,4 @@ azurLaneFeed(bot, 11, azurLaneId, azurLaneChannel, roleToMentionForAzurLaneFeed)
 /*-------------------- 🢃 ADMIN FUNCTIONS 🢃 -------------------- */
 // Allows to leave all the non-creator guilds if check is on true
 const leaveAllGuild = require('./bot/leaveAllGuild');
-leaveAllGuild(bot, true, 10);
+leaveAllGuild(bot, false, 10);
