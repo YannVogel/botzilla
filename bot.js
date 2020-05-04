@@ -1,15 +1,15 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 const welcomeMessageAndStreamNotificationChannel = 'discussion';
-const salesChannel = 'annonce-botzilla';
+const salesChannel = 'botzilla';
 const adminChannelName = 'botzilla-admin';
 const roleToMentionForGamesSales = 'DealSeeker';
 const roleToMentionForWolcenFeed = 'wolcen';
 const {wolcenId} = require('./gamesId');
-const wolcenChannel = "wolcen";
+const wolcenChannel = "botzilla";
 const roleToMentionForAzurLaneFeed = "AzurLane";
 const {azurLaneId} = require('./gamesId');
-const azurLaneChannel = "azur-lane";
+const azurLaneChannel = "botzilla";
 
 // Bot connexion
 const login = require('./bot/login');
