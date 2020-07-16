@@ -45,7 +45,7 @@ module.exports = {
                 }
                 if(args.length !== 1) {
                     cd.deleteTimer(message.author.id, this.name);
-                    return message.reply(`Mauvaise utilisation de la commande ! Tu peux créer une mutation avec la commande \`${prefix}mutate\` suivi du nom de la mutation (lise des mutations disponibles avec la commande \`${prefix}craft\`.`)
+                    return message.reply(`Mauvaise utilisation de la commande ! Tu peux créer une mutation avec la commande \`${prefix}mutate\` suivi du nom de la mutation (lise des mutations disponibles avec la commande \`${prefix}mutations\`.`)
                 }
 
                 let isMutationAvailable = false;

@@ -13,7 +13,7 @@ const ruby = {
 
 module.exports = {
     getExtraRuby: function() {
-        return random.getRandomInt(oneChanceInToGetRuby) === 24;
+        return random.getRandomInt(oneChanceInToGetRuby) === 1;
     },
 
     getRubyValue: function () {
