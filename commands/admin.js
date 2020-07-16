@@ -160,7 +160,7 @@ module.exports = {
                 }
                 player.save()
                     .then(() => {
-                        message.reply(`J'ai bien ${method === "add" ? 'ajouté' : 'enlevé'} **${amount}** ${adminAnObject ? elementToAdmin.icon : ''}\`${adminAnObject ? elementToAdmin.name : formatOfTheNonObject}\` au joueur <@${player.playerId}> !`)
+                        message.reply(`J'ai bien ${method === "add" ? 'ajouté' : 'enlevé'} **${amount}** ${adminAnObject ? elementToAdmin.icon : ''}${adminAnObject ? elementToAdmin.name : formatOfTheNonObject} au joueur <@${player.playerId}> !`)
 
                     });
             });
