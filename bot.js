@@ -45,7 +45,3 @@ wolcenFeed(bot, 10, wolcenId, wolcenChannel, roleToMentionForWolcenFeed);
 // Azur Lane feed
 const azurLaneFeed = require('./bot/automated/steamFeed');
 azurLaneFeed(bot, 11, azurLaneId, azurLaneChannel, roleToMentionForAzurLaneFeed);
-/*-------------------- 🢃 ADMIN FUNCTIONS 🢃 -------------------- */
-// Allows to leave all the non-creator guilds if check is on true
-const leaveAllGuild = require('./bot/leaveAllGuild');
-leaveAllGuild(bot, false, 10);
