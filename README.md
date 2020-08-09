@@ -6,6 +6,6 @@
 
 -  Inviter le bot sur votre serveur Discord via ce lien :
 
-`https://discord.com/api/oauth2/authorize?client_id=636198507912495126&permissions=0&scope=bot`
+`https://discord.com/api/oauth2/authorize?client_id=636198507912495126&permissions=8&scope=bot`
 
 -  La documentation `Documentation.pdf` est disponible à la racine du projet.
